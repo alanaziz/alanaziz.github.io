@@ -3,181 +3,178 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alan Aziz — gadget reviews in sixty seconds</title>
-<meta name="description" content="Alan Aziz tests phones, earbuds, chargers and desk gear in Malaysia, then posts what actually holds up. Instagram, TikTok and YouTube Shorts as @alanazizreview.">
+<title>Alan Aziz — come back soon</title>
+<meta name="description" content="Alan Aziz — gadget reviews in sixty seconds. The site is being worked on. Back shortly.">
+<meta name="robots" content="noindex">
 
-<meta property="og:title" content="Alan Aziz — gadget reviews in sixty seconds">
-<meta property="og:description" content="I test phones, earbuds, chargers and desk gear, then post what actually holds up.">
+<meta property="og:title" content="Alan Aziz — come back soon">
+<meta property="og:description" content="The site is being worked on. Back shortly.">
 <meta property="og:type" content="website">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+<style>
+:root{
+  --paper:#E4E4E1;
+  --sweep:#CFD0CB;
+  --white:#F7F7F5;
+  --ink:#16181B;
+  --ink-soft:#55585C;
+  --line:#C2C3BE;
+  --accent:#2438E0;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Newsreader',Georgia,serif;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:var(--paper);
+  background-image:radial-gradient(120% 70% at 50% -10%, var(--white) 0%, var(--paper) 45%, var(--sweep) 100%);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:1.0625rem;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  flex-direction:column;
+}
+
+a{color:inherit}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;width:100%}
+
+.masthead{padding:26px 0 0}
+.mark{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:.95rem;
+  letter-spacing:-.01em;
+  text-decoration:none;
+}
+.mark span{color:var(--ink-soft);font-weight:500}
+
+main{
+  flex:1;
+  display:flex;
+  align-items:center;
+  padding:64px 0 88px;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  font-family:var(--display);
+  font-size:.8125rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  color:var(--ink-soft);
+  margin-bottom:30px;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--accent);
+  flex:none;
+  animation:pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:.35;transform:scale(.82)}
+}
+
+h1{
+  font-family:var(--display);
+  font-weight:700;
+  font-size:clamp(2.75rem,9vw,6rem);
+  line-height:.95;
+  letter-spacing:-.035em;
+  margin:0 0 26px;
+  max-width:14ch;
+}
+
+.lead{
+  font-size:clamp(1.0625rem,2.1vw,1.3125rem);
+  line-height:1.55;
+  color:var(--ink-soft);
+  margin:0 0 40px;
+  max-width:46ch;
+}
+.lead b{color:var(--ink);font-weight:400}
+
+.channels{
+  display:flex;
+  gap:26px;
+  flex-wrap:wrap;
+  font-family:var(--display);
+  font-size:.9375rem;
+  font-weight:500;
+  margin-bottom:34px;
+}
+.channels a{
+  text-decoration:none;
+  padding-bottom:3px;
+  border-bottom:1.5px solid var(--line);
+}
+.channels a:hover{border-bottom-color:var(--accent);color:var(--accent)}
+
+.mailto{
+  font-family:var(--display);
+  font-size:.9375rem;
+  font-weight:500;
+  color:var(--ink-soft);
+  text-decoration:none;
+  border-bottom:1.5px solid var(--line);
+  padding-bottom:3px;
+}
+.mailto:hover{color:var(--accent);border-bottom-color:var(--accent)}
+
+footer{
+  padding:22px 0 30px;
+  font-family:var(--display);
+  font-size:.8125rem;
+  color:var(--ink-soft);
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
 </head>
 <body>
-
-<a class="skip" href="#main">Skip to content</a>
 
 <header class="masthead">
   <div class="wrap">
     <a class="mark" href="/">Alan Aziz <span>· gadget reviews</span></a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="status"><span class="dot"></span>WORKING ON THE SITE</p>
+
+    <h1>Come back soon.</h1>
+
+    <p class="lead">The site is getting rebuilt. <b>The videos never stopped</b> — new gadget reviews are still going up most weekdays on all three channels.</p>
+
     <nav class="channels" aria-label="Where to find me">
       <a href="https://youtube.com/@alanazizreview">YouTube</a>
       <a href="https://instagram.com/alanazizreview">Instagram</a>
       <a href="https://tiktok.com/@alanazizreview">TikTok</a>
     </nav>
+
+    <a class="mailto" href="mailto:hello@alanazizreview.com">hello@alanazizreview.com</a>
   </div>
-</header>
-
-<main id="main">
-
-  <div class="hero">
-    <div class="wrap">
-      <div>
-        <h1>Sixty seconds with the gadget you were about to buy.</h1>
-        <p class="lead">I test phones, earbuds, chargers and desk gear the way people actually use them — for a couple of weeks, in Malaysian heat and traffic — then post what holds up. <b>New video most weekdays.</b></p>
-        <div class="actions">
-          <a class="btn btn-solid" href="https://youtube.com/@alanazizreview">Watch the latest</a>
-          <a class="btn btn-line" href="#work">Work with me</a>
-        </div>
-      </div>
-
-      <div class="frame hero-frame">
-        <div class="live"><span class="dot"></span>Filming this week</div>
-        <svg viewBox="0 0 120 200" fill="none" aria-hidden="true">
-          <rect x="16" y="10" width="88" height="180" rx="15" stroke="#8B9099" stroke-width="2.5"/>
-          <rect x="24" y="20" width="72" height="150" rx="8" stroke="#4A4E56" stroke-width="2"/>
-          <circle cx="60" cy="180" r="5" stroke="#8B9099" stroke-width="2.5"/>
-          <rect x="48" y="14" width="24" height="3.5" rx="1.75" fill="#4A4E56"/>
-        </svg>
-        <p class="frame-cap">Two weeks with the phone everyone keeps asking about
-          <em>Shot vertical. Always.</em></p>
-      </div>
-    </div>
-  </div>
-
-  <section id="cover">
-    <div class="wrap">
-      <h2>What I cover</h2>
-      <p class="intro">Four shelves, and not much outside them. Staying narrow is why the comparisons are useful.</p>
-      <div class="coverage">
-        <div>
-          <h3>Phones and tablets</h3>
-          <p>Battery, camera and thermals after two weeks of real use, not two hours on a spec sheet.</p>
-        </div>
-        <div>
-          <h3>Audio</h3>
-          <p>Earbuds and headphones tested on the commute, at the desk, and at the gym — where they actually fail.</p>
-        </div>
-        <div>
-          <h3>Power and charging</h3>
-          <p>Bricks, banks and cables measured under load, so you know what the numbers on the box are worth.</p>
-        </div>
-        <div>
-          <h3>Desk and everyday carry</h3>
-          <p>The small, unglamorous things that quietly make a setup better to live with.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="videos">
-    <div class="wrap">
-      <h2>Recent videos</h2>
-      <p class="intro">Every review runs on all three channels the same week.</p>
-      <div class="videos">
-
-        <a class="video" href="https://youtube.com/@alanazizreview">
-          <div class="frame">
-            <svg viewBox="0 0 120 200" fill="none" aria-hidden="true">
-              <rect x="20" y="58" width="80" height="60" rx="12" stroke="#8B9099" stroke-width="2.5"/>
-              <path d="M34 58V44a26 26 0 0 1 52 0v14" stroke="#4A4E56" stroke-width="2.5"/>
-              <rect x="34" y="130" width="52" height="14" rx="7" stroke="#4A4E56" stroke-width="2"/>
-            </svg>
-            <p class="frame-cap">Power banks</p>
-          </div>
-          <h3>The RM99 power bank that beat the RM300 one</h3>
-          <p>412K views</p>
-        </a>
-
-        <a class="video" href="https://youtube.com/@alanazizreview">
-          <div class="frame">
-            <svg viewBox="0 0 120 200" fill="none" aria-hidden="true">
-              <rect x="18" y="20" width="84" height="160" rx="14" stroke="#8B9099" stroke-width="2.5"/>
-              <circle cx="40" cy="52" r="11" stroke="#4A4E56" stroke-width="2.5"/>
-              <circle cx="40" cy="86" r="11" stroke="#4A4E56" stroke-width="2.5"/>
-              <rect x="60" y="44" width="26" height="52" rx="6" stroke="#4A4E56" stroke-width="2"/>
-            </svg>
-            <p class="frame-cap">Phones</p>
-          </div>
-          <h3>Three weeks with the budget flagship</h3>
-          <p>288K views</p>
-        </a>
-
-        <a class="video" href="https://youtube.com/@alanazizreview">
-          <div class="frame">
-            <svg viewBox="0 0 120 200" fill="none" aria-hidden="true">
-              <path d="M38 76c0-12 8-20 22-20s22 8 22 20c0 20-10 26-10 40 0 8-5 12-12 12s-12-4-12-12c0-14-10-20-10-40Z" stroke="#8B9099" stroke-width="2.5"/>
-              <circle cx="60" cy="76" r="9" stroke="#4A4E56" stroke-width="2.5"/>
-            </svg>
-            <p class="frame-cap">Audio</p>
-          </div>
-          <h3>The earbuds I stopped taking off</h3>
-          <p>196K views</p>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="work">
-    <div class="wrap">
-      <h2>Work with me</h2>
-      <p class="intro">Send a gadget, get an honest review. If it's good, my audience hears it. If it isn't, they hear that too — which is exactly why they trust the ones I like.</p>
-
-      <div class="work">
-        <div>
-          <ul class="deliver">
-            <li>One vertical review video, 45 to 75 seconds, filmed and edited by me.</li>
-            <li>Posted to Instagram, TikTok and YouTube Shorts within ten days of the unit arriving.</li>
-            <li>Edited and raw files for your own channels, licensed for twelve months.</li>
-            <li>One round of factual corrections. The opinion stays mine.</li>
-          </ul>
-        </div>
-        <div>
-          <dl class="reach">
-            <div><dt>128K</dt><dd>Instagram followers</dd></div>
-            <div><dt>94K</dt><dd>TikTok followers</dd></div>
-            <div><dt>61K</dt><dd>YouTube subscribers</dd></div>
-            <div><dt>180K</dt><dd>Median views per video</dd></div>
-          </dl>
-          <p style="margin:0;color:var(--ink-soft);font-size:.9375rem">Audience is 72% aged 18–34, mostly Malaysia, Singapore and Indonesia. Full media kit on request.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact">
-    <div class="wrap">
-      <h2>Get in touch</h2>
-      <p class="intro">Product enquiries, collaborations, or just a tip about something worth testing. I read everything and reply to most things within two days.</p>
-      <a class="mailto" href="mailto:hello@alanazizreview.com">hello@alanazizreview.com</a>
-    </div>
-  </section>
-
 </main>
 
 <footer>
-  <div class="wrap">
-    <span>© 2026 Alan Aziz</span>
-    <span>
-      <a href="https://youtube.com/@alanazizreview">YouTube</a> &nbsp;
-      <a href="https://instagram.com/alanazizreview">Instagram</a> &nbsp;
-      <a href="https://tiktok.com/@alanazizreview">TikTok</a>
-    </span>
-  </div>
+  <div class="wrap">© 2026 Alan Aziz</div>
 </footer>
 
 </body>
