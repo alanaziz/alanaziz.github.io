@@ -1,23 +1,30 @@
-# alanaziz-site
+# alanaziz.github.io
 
-Personal site for Alan Aziz — gadget reviews.
+Personal site for Alan Aziz — gadget reviews. Served by GitHub Pages at
+**https://alanaziz.com**.
 
-## Contents
+## Structure
 
-- `index.html` — the entire site. A single self-contained page: markup, styles
-  and scripts all live in this one file.
+```
+index.html      markup
+style.css       all styles
+assets/         images, icons, downloads
+CNAME           custom domain (alanaziz.com) — do not delete
+```
 
 ## External dependencies
 
-Fonts are loaded at runtime from Google Fonts (Archivo, Newsreader). Everything
-else is inline, so the page needs no build step and no local assets.
+Fonts load at runtime from Google Fonts (Archivo, Newsreader). No build step.
 
-## Working on it
-
-Open `index.html` in a browser, or serve the folder:
+## Local preview
 
 ```
 python3 -m http.server 8000
 ```
 
 Then visit http://localhost:8000
+
+## Deploying
+
+Pages publishes from `main`. Push to `main` and the live site updates within
+a minute or two.
