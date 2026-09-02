@@ -117,11 +117,6 @@ body{overflow-x:hidden}
 }
 .icon-btn:hover{color:var(--cream)}
 
-.head-rule{
-  width:1px;height:30px;
-  background:var(--line);
-}
-
 .btn{
   display:inline-flex;
   align-items:center;
@@ -145,12 +140,6 @@ body{overflow-x:hidden}
   color:#0A0A0B;
 }
 .btn--solid:hover{background:#fff;border-color:#fff}
-
-.btn--notes{
-  gap:0;
-  padding:11px 22px;
-  border-color:rgba(239,236,227,.55);
-}
 
 /* ---------- hero ---------- */
 
@@ -399,9 +388,8 @@ body{overflow-x:hidden}
 @media (max-width:560px){
   :root{--gutter:18px}
   .head{gap:12px;padding:20px 0}
-  .head-rule,.head .icon-btn{display:none}
+  .head .icon-btn{display:none}
   .wordmark{gap:10px;min-width:0}
-  .btn--notes{padding:11px 16px;font-size:11px;letter-spacing:.12em}
 
   .hero{padding:36px 18px 42px}
   .hero-name{flex-wrap:wrap}
