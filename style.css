@@ -36,6 +36,10 @@ body{
 
 a{color:inherit;text-decoration:none}
 
+/* iOS: no grey flash on tap, no accidental sideways scroll */
+a,button{-webkit-tap-highlight-color:transparent}
+body{overflow-x:hidden}
+
 :focus-visible{
   outline:2px solid var(--cream);
   outline-offset:3px;
@@ -44,7 +48,8 @@ a{color:inherit;text-decoration:none}
 .shell{
   max-width:1560px;
   margin:0 auto;
-  padding:0 var(--gutter);
+  padding-left:max(var(--gutter), env(safe-area-inset-left));
+  padding-right:max(var(--gutter), env(safe-area-inset-right));
 }
 
 .skip{
@@ -67,16 +72,16 @@ a{color:inherit;text-decoration:none}
   display:inline-flex;
   align-items:center;
   gap:16px;
-  font-size:15px;
+  font-size:clamp(10.5px,3.1vw,15px);
   font-weight:700;
-  letter-spacing:.24em;
+  letter-spacing:clamp(.10em,.62vw,.24em);
   white-space:nowrap;
   color:var(--cream);
 }
 .wordmark-text span{color:var(--muted-2);font-weight:400}
 
 .wordmark-mark{
-  height:28px;
+  height:clamp(22px,5.8vw,28px);
   width:auto;
   display:block;
   flex:none;
@@ -368,21 +373,62 @@ a{color:inherit;text-decoration:none}
 @media (max-width:980px){
   :root{--gutter:24px}
   .head{flex-wrap:wrap;gap:18px}
-  .nav{order:3;width:100%;margin:0;overflow-x:auto;padding-bottom:4px;gap:26px}
+  .nav{order:3;width:100%;margin:0;gap:26px}
   .head-tools{margin-left:auto}
   .hero{padding:48px 28px 52px}
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
 }
 
+/* phones: the nav wraps instead of scrolling items out of reach,
+   and every link clears the 44px touch minimum */
+@media (max-width:700px){
+  .nav{
+    flex-wrap:wrap;
+    row-gap:0;
+    column-gap:18px;
+    padding-bottom:0;
+    font-size:12px;
+  }
+  .nav a{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+  }
+}
+
 @media (max-width:560px){
+  :root{--gutter:18px}
+  .head{gap:12px;padding:20px 0}
   .head-rule,.head .icon-btn{display:none}
-  .wordmark{gap:12px}
-  .wordmark-mark{height:24px}
+  .wordmark{gap:10px;min-width:0}
+  .btn--notes{padding:11px 16px;font-size:11px;letter-spacing:.12em}
+
   .hero{padding:36px 18px 42px}
   .hero-name{flex-wrap:wrap}
   .hero h1{white-space:normal}
+  .hero-copy{font-size:13.5px;line-height:1.8}
   .hero-actions{gap:14px}
-  .hero-actions .btn{min-width:0;flex:1 1 100%}
+  .hero-actions .btn{min-width:0;flex:1 1 100%;gap:16px}
+
+  /* taller reel: a landscape box this narrow reads as a letterbox strip */
+  .highlight{aspect-ratio:4/3}
+  .hl-bar{height:22px}
+  .hl-foot{inset:auto 14px 14px}
+
+  /* clear the home indicator */
+  .foot{padding-bottom:max(40px, calc(24px + env(safe-area-inset-bottom)))}
+}
+
+/* phone held sideways: keep the two-up layout so the reel stays on screen */
+@media (orientation:landscape) and (max-height:560px){
+  .hero{padding:30px 24px 34px}
+  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px}
+  .hero-copy + .hero-copy{margin-top:12px}
+  .highlight{aspect-ratio:16/11}
+}
+
+@media (max-width:380px){
+  .nav{column-gap:14px;font-size:11.5px}
 }
 
 @media (prefers-reduced-motion:reduce){
