@@ -66,6 +66,27 @@ ffmpeg -ss 1 -i assets/video/highlight-0N.mp4 -frames:v 1 -q:v 6 assets/poster/h
 
 The label under each clip is the `data-label` attribute on its `<video>`.
 
+## Cache busting
+
+GitHub Pages serves assets with `cache-control: max-age=600`, so a deploy that
+changes `index.html` and `style.css` together can leave visitors on new markup
+with ten-minute-old CSS — which renders badly, not just unstyled. The stylesheet
+link therefore carries a content hash:
+
+```
+<link rel="stylesheet" href="style.css?v=ef6a43e6">
+```
+
+**Re-hash it whenever `style.css` changes**, before committing:
+
+```
+V=$(md5 -q style.css | cut -c1-8)
+sed -i '' "s|href="style.css[^"]*"|href="style.css?v=$V"|" index.html
+```
+
+Old HTML then keeps requesting old CSS and new HTML requests new CSS, so the two
+are never mismatched.
+
 ## Local preview
 
 ```
