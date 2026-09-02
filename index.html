@@ -20,18 +20,9 @@
 <body>
 
 <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-  <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 15V3m0 0L8 7m4-4 4 4"/>
-    <path d="M3 15v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/>
-  </symbol>
   <symbol id="i-arrow-ne" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
     <path d="M7 17 17 7M8 7h9v9"/>
-  </symbol>
-  <symbol id="i-arrow-e" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 12h16m-6-6 6 6-6 6"/>
   </symbol>
   <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
@@ -46,7 +37,7 @@
   <a class="wordmark" href="/"><span>[</span> ALAN AZIZ REVIEW <span>]</span></a>
 
   <nav class="nav" aria-label="Primary">
-    <a href="#reviews" aria-current="page">REVIEWS</a>
+    <a href="https://www.instagram.com/alanazireview/" rel="me noopener" target="_blank">REVIEWS</a>
     <a href="#gear">GEAR</a>
     <a href="#media-kit">MEDIA KIT</a>
     <a href="#about">ABOUT</a>
@@ -81,7 +72,7 @@
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn--solid" href="#reviews">
+          <a class="btn btn--solid" href="https://www.instagram.com/alanazireview/" rel="me noopener" target="_blank">
             LATEST REVIEWS
             <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
           </a>
@@ -92,124 +83,111 @@
         </div>
       </div>
 
-      <div class="slot">
-        <svg width="60" height="60" aria-hidden="true"><use href="#i-upload"/></svg>
-        <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
-        <span class="slot-hint">MP4, MOV OR JPG</span>
+      <div class="highlight" id="highlight">
+        <div class="hl-bars">
+          <button class="hl-bar is-active" type="button" data-go="0" aria-label="Clip 1 of 3"><i></i></button>
+          <button class="hl-bar" type="button" data-go="1" aria-label="Clip 2 of 3"><i></i></button>
+          <button class="hl-bar" type="button" data-go="2" aria-label="Clip 3 of 3"><i></i></button>
+        </div>
+
+        <video class="hl-video is-active" data-label="NO BATTERY"
+               poster="assets/poster/highlight-01.jpg"
+               src="assets/video/highlight-01.mp4"
+               muted playsinline preload="auto"></video>
+        <video class="hl-video" data-label="HOTO"
+               poster="assets/poster/highlight-02.jpg"
+               src="assets/video/highlight-02.mp4"
+               muted playsinline preload="none"></video>
+        <video class="hl-video" data-label="STUDIO"
+               poster="assets/poster/highlight-03.jpg"
+               src="assets/video/highlight-03.mp4"
+               muted playsinline preload="none"></video>
+
+        <button class="hl-zone hl-prev" type="button" aria-label="Previous clip"></button>
+        <button class="hl-zone hl-next" type="button" aria-label="Next clip"></button>
+
+        <div class="hl-foot">
+          <span class="hl-label">NO BATTERY</span>
+          <button class="hl-sound" type="button" aria-pressed="false">SOUND OFF</button>
+        </div>
       </div>
 
     </div>
   </section>
   </div>
 
-  <div class="shell">
-  <section class="section" id="reviews" aria-labelledby="reviews-title">
-    <div class="section-head">
-      <h2 id="reviews-title">LATEST REVIEWS</h2>
-      <a class="link-arrow" href="#reviews">
-        VIEW ALL
-        <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-e"/></svg>
-      </a>
-    </div>
-
-    <ol class="reviews">
-
-      <li class="review">
-        <span class="review-index" aria-hidden="true">01</span>
-
-        <div class="slot">
-          <svg width="26" height="26" aria-hidden="true"><use href="#i-upload"/></svg>
-          <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
-          <span class="slot-hint">MP4, MOV OR JPG</span>
-        </div>
-
-        <div class="review-body">
-          <h3 class="review-title">DJI OSMO POCKET 3</h3>
-          <p class="tag">[ CAMERA ]</p>
-          <p class="review-copy">Real-world review and test in various lighting and scenarios.</p>
-        </div>
-
-        <p class="review-meta"><time datetime="PT18M42S">18:42</time></p>
-
-        <div class="review-watch">
-          <a class="btn btn--solid" href="#reviews">
-            WATCH
-            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
-          </a>
-          <button class="kebab" type="button" aria-label="More options for DJI Osmo Pocket 3">
-            <i></i><i></i><i></i>
-          </button>
-        </div>
-      </li>
-
-      <li class="review">
-        <span class="review-index" aria-hidden="true">02</span>
-
-        <div class="slot">
-          <svg width="26" height="26" aria-hidden="true"><use href="#i-upload"/></svg>
-          <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
-          <span class="slot-hint">MP4, MOV OR JPG</span>
-        </div>
-
-        <div class="review-body">
-          <h3 class="review-title">RØDE WIRELESS PRO</h3>
-          <p class="tag">[ AUDIO ]</p>
-          <p class="review-copy">Range test, sound quality and real-world usage.</p>
-        </div>
-
-        <p class="review-meta"><time datetime="PT16M37S">16:37</time></p>
-
-        <div class="review-watch">
-          <a class="btn btn--solid" href="#reviews">
-            WATCH
-            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
-          </a>
-          <button class="kebab" type="button" aria-label="More options for RØDE Wireless Pro">
-            <i></i><i></i><i></i>
-          </button>
-        </div>
-      </li>
-
-      <li class="review">
-        <span class="review-index" aria-hidden="true">03</span>
-
-        <div class="slot">
-          <svg width="26" height="26" aria-hidden="true"><use href="#i-upload"/></svg>
-          <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
-          <span class="slot-hint">MP4, MOV OR JPG</span>
-        </div>
-
-        <div class="review-body">
-          <h3 class="review-title">HOLLYLAND LARK MAX 2</h3>
-          <p class="tag">[ AUDIO ]</p>
-          <p class="review-copy">Complete review of the new Lark Max 2 with noise test.</p>
-        </div>
-
-        <p class="review-meta"><time datetime="PT22M15S">22:15</time></p>
-
-        <div class="review-watch">
-          <a class="btn btn--solid" href="#reviews">
-            WATCH
-            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
-          </a>
-          <button class="kebab" type="button" aria-label="More options for Hollyland Lark Max 2">
-            <i></i><i></i><i></i>
-          </button>
-        </div>
-      </li>
-
-    </ol>
-  </section>
-  </div>
 
 </main>
 
 <div class="shell">
 <footer class="foot">
   <span>© 2026 ALAN AZIZ</span>
-  <span>GEAR. TECH. CREATOR.</span>
+  <a class="foot-ig" href="https://www.instagram.com/alanazireview/" rel="me noopener" target="_blank">@ALANAZIREVIEW</a>
 </footer>
 </div>
+
+<script>
+(function () {
+  var root = document.getElementById('highlight');
+  if (!root) return;
+
+  var vids  = [].slice.call(root.querySelectorAll('.hl-video'));
+  var bars  = [].slice.call(root.querySelectorAll('.hl-bar'));
+  var label = root.querySelector('.hl-label');
+  var sound = root.querySelector('.hl-sound');
+  var calm  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var i = 0, raf = 0, muted = true;
+
+  function paint() {
+    var v = vids[i];
+    var p = v.duration ? (v.currentTime / v.duration) * 100 : 0;
+    bars[i].querySelector('i').style.setProperty('--p', p + '%');
+    raf = requestAnimationFrame(paint);
+  }
+
+  function show(n, autoplay) {
+    cancelAnimationFrame(raf);
+    vids[i].pause();
+    i = (n + vids.length) % vids.length;
+
+    vids.forEach(function (v, k) {
+      v.classList.toggle('is-active', k === i);
+      if (k !== i) { v.pause(); v.currentTime = 0; }
+    });
+    bars.forEach(function (b, k) {
+      b.classList.toggle('is-done', k < i);
+      b.querySelector('i').style.setProperty('--p', k < i ? '100%' : '0%');
+    });
+
+    var v = vids[i];
+    v.preload = 'auto';
+    v.muted = muted;
+    label.textContent = v.dataset.label;
+    v.currentTime = 0;
+    if (autoplay) { var p = v.play(); if (p) p.catch(function () {}); }
+    paint();
+  }
+
+  vids.forEach(function (v) {
+    v.addEventListener('ended', function () { show(i + 1, true); });
+  });
+  bars.forEach(function (b) {
+    b.addEventListener('click', function () { show(+b.dataset.go, true); });
+  });
+  root.querySelector('.hl-prev').addEventListener('click', function () { show(i - 1, true); });
+  root.querySelector('.hl-next').addEventListener('click', function () { show(i + 1, true); });
+
+  sound.addEventListener('click', function () {
+    muted = !muted;
+    vids[i].muted = muted;
+    sound.textContent = muted ? 'SOUND OFF' : 'SOUND ON';
+    sound.setAttribute('aria-pressed', String(!muted));
+    if (!muted) { var p = vids[i].play(); if (p) p.catch(function () {}); }
+  });
+
+  show(0, !calm);
+})();
+</script>
 
 </body>
 </html>
