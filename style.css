@@ -229,13 +229,15 @@ a{color:inherit;text-decoration:none}
   color:var(--cream);
 }
 
+/* both paragraphs share one size, colour and measure so they read as one block */
 .hero-copy{
   margin:26px 0 0;
-  max-width:56ch;
+  max-width:52ch;
   font-size:14px;
   line-height:1.85;
   color:var(--muted);
 }
+.hero-copy + .hero-copy{margin-top:15px}
 
 .hero-actions{
   display:flex;
