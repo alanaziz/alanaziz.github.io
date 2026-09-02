@@ -14,7 +14,14 @@ CNAME           custom domain (alanaziz.com) — do not delete
 
 ## External dependencies
 
-Fonts load at runtime from Google Fonts (Archivo, Newsreader). No build step.
+Fonts load at runtime from Google Fonts (JetBrains Mono). No build step.
+
+## Media slots
+
+The `.slot` blocks (hero panel and each review thumbnail) are visual placeholders
+marking where artwork goes — they are not upload widgets, since Pages is static.
+To fill one, drop the file in `assets/` and replace the `<div class="slot">…</div>`
+with an `<img>` or `<video>`.
 
 ## Local preview
 

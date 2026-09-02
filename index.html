@@ -3,114 +3,213 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alan Aziz — come back soon</title>
-<meta name="description" content="The site is being worked on. Back shortly.">
-<meta name="robots" content="noindex">
+<title>Alan Aziz Review — Gear. Tech. Creator.</title>
+<meta name="description" content="In-depth reviews and real-world tests of the gear that helps creators make better work.">
 
-<meta property="og:title" content="Alan Aziz — come back soon">
-<meta property="og:description" content="The site is being worked on. Back shortly.">
+<meta property="og:title" content="Alan Aziz Review — Gear. Tech. Creator.">
+<meta property="og:description" content="In-depth reviews and real-world tests of the gear that helps creators make better work.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://alanaziz.com/">
+<meta name="theme-color" content="#0A0A0B">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --paper:#E4E4E1;
-  --sweep:#CFD0CB;
-  --white:#F7F7F5;
-  --ink:#16181B;
-  --ink-soft:#55585C;
-  --accent:#2438E0;
-  --display:'Archivo',system-ui,sans-serif;
-  --body:'Newsreader',Georgia,serif;
-}
-
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:var(--paper);
-  background-image:radial-gradient(120% 70% at 50% -10%, var(--white) 0%, var(--paper) 45%, var(--sweep) 100%);
-  background-attachment:fixed;
-  color:var(--ink);
-  font-family:var(--body);
-  font-size:1.0625rem;
-  line-height:1.62;
-  -webkit-font-smoothing:antialiased;
-  display:flex;
-  flex-direction:column;
-}
-
-:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:2px}
-
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px;width:100%}
-
-main{
-  flex:1;
-  display:flex;
-  align-items:center;
-  padding:64px 0 88px;
-}
-
-.status{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  font-family:var(--display);
-  font-size:.8125rem;
-  font-weight:500;
-  letter-spacing:.02em;
-  color:var(--ink-soft);
-  margin:0 0 30px;
-}
-.dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--accent);
-  flex:none;
-  animation:pulse 2.4s ease-in-out infinite;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:.35;transform:scale(.82)}
-}
-
-h1{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:clamp(2.75rem,9vw,6rem);
-  line-height:.95;
-  letter-spacing:-.035em;
-  margin:0;
-  max-width:14ch;
-}
-
-footer{
-  padding:22px 0 30px;
-  font-family:var(--display);
-  font-size:.8125rem;
-  color:var(--ink-soft);
-}
-
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<main>
-  <div class="wrap">
-    <p class="status"><span class="dot"></span>WORKING ON THE SITE</p>
-    <h1>Come back soon.</h1>
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 15V3m0 0L8 7m4-4 4 4"/>
+    <path d="M3 15v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4"/>
+  </symbol>
+  <symbol id="i-arrow-ne" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 17 17 7M8 7h9v9"/>
+  </symbol>
+  <symbol id="i-arrow-e" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 12h16m-6-6 6 6-6 6"/>
+  </symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+  </symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="shell">
+<header class="head">
+  <a class="wordmark" href="/"><span>[</span> ALAN AZIZ REVIEW <span>]</span></a>
+
+  <nav class="nav" aria-label="Primary">
+    <a href="#reviews" aria-current="page">REVIEWS</a>
+    <a href="#gear">GEAR</a>
+    <a href="#media-kit">MEDIA KIT</a>
+    <a href="#about">ABOUT</a>
+    <a href="#contact">CONTACT</a>
+  </nav>
+
+  <div class="head-tools">
+    <button class="icon-btn" type="button" aria-label="Search">
+      <svg width="20" height="20" aria-hidden="true"><use href="#i-search"/></svg>
+    </button>
+    <span class="head-rule" aria-hidden="true"></span>
+    <a class="btn btn--notes" href="#notes">NOTES</a>
   </div>
+</header>
+</div>
+
+<main id="main">
+
+  <div class="shell">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-grid">
+
+      <div>
+        <p class="eyebrow">01</p>
+
+        <h1 id="hero-title">ALAN AZIZ</h1>
+        <p class="hero-sub">GEAR. TECH. CREATOR.</p>
+
+        <p class="hero-copy">
+          In-depth reviews and real-world tests<br>
+          of the gear that helps creators make better work.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn--solid" href="#reviews">
+            LATEST REVIEWS
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
+          </a>
+          <a class="btn" href="#gear">
+            MY GEAR
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="slot">
+        <svg width="60" height="60" aria-hidden="true"><use href="#i-upload"/></svg>
+        <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
+        <span class="slot-hint">MP4, MOV OR JPG</span>
+      </div>
+
+    </div>
+  </section>
+  </div>
+
+  <div class="shell">
+  <section class="section" id="reviews" aria-labelledby="reviews-title">
+    <div class="section-head">
+      <h2 id="reviews-title">LATEST REVIEWS</h2>
+      <a class="link-arrow" href="#reviews">
+        VIEW ALL
+        <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-e"/></svg>
+      </a>
+    </div>
+
+    <ol class="reviews">
+
+      <li class="review">
+        <span class="review-index" aria-hidden="true">01</span>
+
+        <div class="slot">
+          <svg width="26" height="26" aria-hidden="true"><use href="#i-upload"/></svg>
+          <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
+          <span class="slot-hint">MP4, MOV OR JPG</span>
+        </div>
+
+        <div class="review-body">
+          <h3 class="review-title">DJI OSMO POCKET 3</h3>
+          <p class="tag">[ CAMERA ]</p>
+          <p class="review-copy">Real-world review and test in various lighting and scenarios.</p>
+        </div>
+
+        <p class="review-meta"><time datetime="PT18M42S">18:42</time></p>
+
+        <div class="review-watch">
+          <a class="btn btn--solid" href="#reviews">
+            WATCH
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
+          </a>
+          <button class="kebab" type="button" aria-label="More options for DJI Osmo Pocket 3">
+            <i></i><i></i><i></i>
+          </button>
+        </div>
+      </li>
+
+      <li class="review">
+        <span class="review-index" aria-hidden="true">02</span>
+
+        <div class="slot">
+          <svg width="26" height="26" aria-hidden="true"><use href="#i-upload"/></svg>
+          <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
+          <span class="slot-hint">MP4, MOV OR JPG</span>
+        </div>
+
+        <div class="review-body">
+          <h3 class="review-title">RØDE WIRELESS PRO</h3>
+          <p class="tag">[ AUDIO ]</p>
+          <p class="review-copy">Range test, sound quality and real-world usage.</p>
+        </div>
+
+        <p class="review-meta"><time datetime="PT16M37S">16:37</time></p>
+
+        <div class="review-watch">
+          <a class="btn btn--solid" href="#reviews">
+            WATCH
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
+          </a>
+          <button class="kebab" type="button" aria-label="More options for RØDE Wireless Pro">
+            <i></i><i></i><i></i>
+          </button>
+        </div>
+      </li>
+
+      <li class="review">
+        <span class="review-index" aria-hidden="true">03</span>
+
+        <div class="slot">
+          <svg width="26" height="26" aria-hidden="true"><use href="#i-upload"/></svg>
+          <span class="slot-label">UPLOAD VIDEO / IMAGE</span>
+          <span class="slot-hint">MP4, MOV OR JPG</span>
+        </div>
+
+        <div class="review-body">
+          <h3 class="review-title">HOLLYLAND LARK MAX 2</h3>
+          <p class="tag">[ AUDIO ]</p>
+          <p class="review-copy">Complete review of the new Lark Max 2 with noise test.</p>
+        </div>
+
+        <p class="review-meta"><time datetime="PT22M15S">22:15</time></p>
+
+        <div class="review-watch">
+          <a class="btn btn--solid" href="#reviews">
+            WATCH
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
+          </a>
+          <button class="kebab" type="button" aria-label="More options for Hollyland Lark Max 2">
+            <i></i><i></i><i></i>
+          </button>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+  </div>
+
 </main>
 
-<footer>
-  <div class="wrap">© 2026 Alan Aziz</div>
+<div class="shell">
+<footer class="foot">
+  <span>© 2026 ALAN AZIZ</span>
+  <span>GEAR. TECH. CREATOR.</span>
 </footer>
+</div>
 
 </body>
 </html>
