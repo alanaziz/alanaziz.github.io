@@ -8,6 +8,7 @@ Personal site for Alan Aziz — gadget reviews. Served by GitHub Pages at
 ```
 index.html      markup + highlight-reel script
 style.css       all styles
+assets/logo/    logo source + derived marks, icons, OG image
 assets/video/   highlight clips
 assets/poster/  first-frame posters for those clips
 CNAME           custom domain (alanaziz.com) — do not delete
@@ -16,6 +17,24 @@ CNAME           custom domain (alanaziz.com) — do not delete
 ## External dependencies
 
 Fonts load at runtime from Google Fonts (JetBrains Mono). No build step.
+
+## Logo
+
+`ALAN AZIZ LOGO-Black.jpeg` is the supplied source (white art on a black panel,
+no alpha). Everything else in `assets/logo/` is derived from it — the black is
+keyed out using the image's own luminance as the alpha channel, so edges stay
+antialiased and nothing shows a box on the dark page.
+
+| File | What it is |
+|------|------------|
+| `alan-aziz-mark.png` | A-mark only, white on transparent, 512px tall |
+| `alan-aziz-lockup.png` | mark + ALAN AZIZ wordmark, 900px wide |
+| `icon-32.png`, `icon-180.png` | favicon and apple-touch-icon |
+| `og-image.jpg` | 1200x630 lockup on `#0A0A0B` for link previews |
+
+The header pairs `alan-aziz-mark.png` with the text wordmark. Regenerate the
+derived files from the source with the crop boxes noted in git history if the
+logo is ever replaced.
 
 ## Highlight reel
 
