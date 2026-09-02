@@ -194,12 +194,30 @@ a{color:inherit;text-decoration:none}
   background:var(--muted-2);
 }
 
+/* the row sets the scale; the mark and gap track it in em */
+.hero-name{
+  display:flex;
+  align-items:center;
+  gap:.3em;
+  font-size:clamp(2.4rem,5.4vw,5.6rem);
+}
+
+.hero-mark{
+  height:.74em;
+  width:auto;
+  flex:none;
+  display:block;
+  /* nudge onto the cap-height centre rather than the line-box centre */
+  margin-top:-.05em;
+}
+
 .hero h1{
   margin:0;
-  font-size:clamp(2.6rem,7vw,6.6rem);
+  font-size:1em;
   font-weight:800;
   line-height:.92;
   letter-spacing:.01em;
+  white-space:nowrap;
   color:var(--cream);
 }
 
@@ -374,6 +392,8 @@ a{color:inherit;text-decoration:none}
   .wordmark{gap:12px}
   .wordmark-mark{height:24px}
   .hero{padding:36px 18px 42px}
+  .hero-name{flex-wrap:wrap}
+  .hero h1{white-space:normal}
   .hero-actions{gap:14px}
   .hero-actions .btn{min-width:0;flex:1 1 100%}
 }

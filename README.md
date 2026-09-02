@@ -32,9 +32,15 @@ antialiased and nothing shows a box on the dark page.
 | `icon-32.png`, `icon-180.png` | favicon and apple-touch-icon |
 | `og-image.jpg` | 1200x630 lockup on `#0A0A0B` for link previews |
 
-The header pairs `alan-aziz-mark.png` with the text wordmark. Regenerate the
-derived files from the source with the crop boxes noted in git history if the
-logo is ever replaced.
+`alan-aziz-mark.png` is used twice: in the header beside the text wordmark, and
+in the hero beside the `ALAN AZIZ` headline. The hero lockup is sized in `em` off
+`.hero-name`, so the mark and the gap scale with the headline — change
+`.hero-name`'s `font-size` clamp and everything tracks. That clamp is set so the
+name never wraps down to the 980px breakpoint; below 560px wrapping is allowed
+again as a fallback.
+
+Regenerate the derived files from the source with the crop boxes noted in git
+history if the logo is ever replaced.
 
 ## Highlight reel
 
