@@ -1,0 +1,5 @@
+# alanaziz.com
+User-agent: *
+Allow: /
+
+Sitemap: https://alanaziz.com/sitemap.xml
