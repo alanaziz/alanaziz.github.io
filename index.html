@@ -113,11 +113,6 @@
 
         <button class="hl-zone hl-prev" type="button" aria-label="Previous clip"></button>
         <button class="hl-zone hl-next" type="button" aria-label="Next clip"></button>
-
-        <div class="hl-foot">
-          <span class="hl-label">NO BATTERY</span>
-          <button class="hl-sound" type="button" aria-pressed="false">SOUND OFF</button>
-        </div>
       </div>
 
     </div>
@@ -141,8 +136,6 @@
 
   var vids  = [].slice.call(root.querySelectorAll('.hl-video'));
   var bars  = [].slice.call(root.querySelectorAll('.hl-bar'));
-  var label = root.querySelector('.hl-label');
-  var sound = root.querySelector('.hl-sound');
   var calm  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var i = 0, raf = 0, muted = true;
 
@@ -170,7 +163,6 @@
     var v = vids[i];
     v.preload = 'auto';
     v.muted = muted;
-    label.textContent = v.dataset.label;
     v.currentTime = 0;
     if (autoplay) { var p = v.play(); if (p) p.catch(function () {}); }
     paint();
@@ -184,14 +176,6 @@
   });
   root.querySelector('.hl-prev').addEventListener('click', function () { show(i - 1, true); });
   root.querySelector('.hl-next').addEventListener('click', function () { show(i + 1, true); });
-
-  sound.addEventListener('click', function () {
-    muted = !muted;
-    vids[i].muted = muted;
-    sound.textContent = muted ? 'SOUND OFF' : 'SOUND ON';
-    sound.setAttribute('aria-pressed', String(!muted));
-    if (!muted) { var p = vids[i].play(); if (p) p.catch(function () {}); }
-  });
 
   show(0, !calm);
 })();

@@ -263,6 +263,7 @@ body{overflow-x:hidden}
   z-index:3;
   display:flex;
   gap:5px;
+  opacity:.15;
 }
 .hl-bar{
   flex:1;
@@ -304,38 +305,6 @@ body{overflow-x:hidden}
 }
 .hl-prev{left:0}
 .hl-next{right:0}
-
-.hl-foot{
-  position:absolute;
-  inset:auto 18px 16px;
-  z-index:3;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  pointer-events:none;
-}
-.hl-label{
-  font-size:11.5px;
-  letter-spacing:.18em;
-  color:var(--cream);
-  text-shadow:0 1px 12px rgba(0,0,0,.7);
-}
-.hl-sound{
-  pointer-events:auto;
-  padding:7px 12px;
-  font:inherit;
-  font-size:10.5px;
-  letter-spacing:.14em;
-  color:var(--cream);
-  background:rgba(10,10,11,.55);
-  border:1px solid rgba(239,236,227,.28);
-  border-radius:999px;
-  cursor:pointer;
-  backdrop-filter:blur(6px);
-  transition:border-color .15s ease,background-color .15s ease;
-}
-.hl-sound:hover{border-color:var(--cream);background:rgba(10,10,11,.8)}
 
 /* ---------- gear ---------- */
 
@@ -611,7 +580,6 @@ body{overflow-x:hidden}
   /* taller reel: a landscape box this narrow reads as a letterbox strip */
   .highlight{aspect-ratio:4/3}
   .hl-bar{height:22px}
-  .hl-foot{inset:auto 14px 14px}
 
   .page-head{padding:32px 0 24px}
   /* two up on phones — a single column would blow the square up to full width */
