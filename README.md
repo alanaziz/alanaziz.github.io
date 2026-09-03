@@ -116,17 +116,17 @@ state for a category you have not filled yet, not a bug.
 
 ### Adding the photo
 
-Gear photos are **square and small** — `800x800` is plenty, since the largest the box
-ever renders is about 290px. They live in `assets/gear/` and are composited onto the
-panel colour `#131314` so they sit *in* the dark page rather than on it. A photo that
-arrives on a white studio background reads as a glowing rectangle and needs its
-background knocked out first — measure with mean luminance, which should land in the
-20–45 band the existing files occupy, not up at 110+.
+Gear photos are **square**, `800x800`, and live in `assets/gear/`. The product is cut
+out and composited onto the off-white `#EFECE3` (`--cream`), scaled to fill the frame
+with only a 3% margin — the cards read as bright tiles against the dark page. Mean
+luminance lands around 130–230; anything much darker means the cut-out failed and the
+old dark background came through.
 
-20 of the 21 are in — only the Sony ZV-E10 II is still a placeholder. Each card ships
-with an upload placeholder (`.slot`) until it has one; to put a photo in, drop the
-file at `assets/gear/<slug>.jpg` and replace the whole `<div class="slot">…</div>`
-with:
+Run `tools/gear-image.py` rather than doing this by hand — see below.
+
+All 21 items carry a photo. A card without one ships with an upload placeholder
+(`.slot`); to fill it, drop the source at `assets/gear/`, run the tool, and replace
+the whole `<div class="slot">…</div>` with:
 
 ```
 <img class="gear-media" src="../assets/gear/<slug>.jpg" alt="" width="800" height="800">
@@ -139,21 +139,39 @@ fills the box, but `object-fit:cover` will crop the long edge.
 Source files (the unprocessed `.png`/`.jpeg` drops) are gitignored in this folder;
 only the processed square JPGs are served.
 
-**Two traps when preparing one**, both of which bit during the first batch:
+### tools/gear-image.py
 
-- *A PNG in RGBA mode is not necessarily transparent.* Several supplier images carry
-  a fully-opaque alpha channel over a baked-in white background — testing `im.mode`
-  passes them straight through and they land on the page as glowing white blocks.
-  Test whether the alpha channel actually varies: `im.getchannel("A").getextrema()`,
-  and treat anything with a minimum of 255 as opaque.
-- *`Image.thumbnail()` refuses to enlarge.* A small source stays small and floats in
-  the middle of an 800px frame. Use `resize()` with an explicit scale factor so the
-  product fills the box either way.
+```
+python3 tools/gear-image.py "assets/gear/SOURCE.png" slug-name
+```
 
-To knock a background out, flood-fill inward from the border rather than testing every
-pixel, so a white highlight enclosed by the product survives. Watch for stray isolated
-elements too — a light stand in one Amaran shot survived as a hairline down the card
-until it was cropped out.
+Writes `assets/gear/<slug>.jpg` and leaves the source alone. Sources are gitignored.
+
+It exists because every batch hit the same traps, each of which is quietly
+destructive rather than loud:
+
+- *An RGBA-mode PNG is not necessarily transparent.* Many supplier images carry a
+  fully-opaque alpha over a baked-in white background. Testing `im.mode` passes them
+  through and they land as glowing white blocks. Test whether the alpha actually
+  varies — `im.getchannel("A").getextrema()`.
+- *Palette PNGs keep transparency in `info`, not an alpha channel.* Miss that and
+  `convert("RGB")` renders their transparent pixels **black**, so a flood seeded from
+  the corners eats a black product from the outside in and leaves a ghost. Every RØDE
+  image is mode `P`.
+- *`Image.thumbnail()` refuses to enlarge*, so a small source floats in the middle of
+  the frame. Scale with an explicit factor.
+
+Backgrounds are flooded inward from the border, never by testing every pixel, so a
+white highlight enclosed by the product survives; each corner contributes its own
+reference so a two-tone backdrop works. Isolated strays are dropped (a light stand
+in one Amaran shot survived as a hairline down the card), as are sparse ghost bands
+where a pale accessory lost its fill and left only its outline.
+
+For a source that is already a clean square on white, skip the tool and place it
+as-is — Amaran 60D is done that way.
+
+**Keep the source files.** Re-deriving a cut-out from an already-composited JPG
+degrades it, and a product with near-background blacks cannot be recovered at all.
 
 The cards are flex columns with `margin-bottom:auto` on `.gear-cat`, which pins every
 square to the bottom of its card. Squares therefore stay on one baseline across a row

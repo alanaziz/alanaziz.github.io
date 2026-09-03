@@ -491,6 +491,8 @@ body{overflow-x:hidden}
   display:flex;
   flex-direction:column;
   padding:20px;
+  /* this display beats the UA's [hidden]{display:none}, so the filter's
+     hidden cards would keep rendering without the rule below */
   background-repeat:no-repeat;
   background-image:
     linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
@@ -508,6 +510,8 @@ body{overflow-x:hidden}
     left bottom,left bottom,
     right bottom,right bottom;
 }
+
+.gear-item[hidden]{display:none}
 
 .gear-index{
   display:block;
