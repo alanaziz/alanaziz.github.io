@@ -90,7 +90,7 @@ body{overflow-x:hidden}
 .nav{
   display:flex;
   gap:36px;
-  margin:0 auto;
+  margin-left:auto;
   font-size:12.5px;
   letter-spacing:.16em;
   color:var(--muted);
@@ -98,24 +98,6 @@ body{overflow-x:hidden}
 .nav a{transition:color .15s ease}
 .nav a:hover,
 .nav a[aria-current="page"]{color:var(--cream)}
-
-.head-tools{
-  display:flex;
-  align-items:center;
-  gap:22px;
-  margin-left:auto;
-}
-
-.icon-btn{
-  display:grid;place-items:center;
-  width:34px;height:34px;
-  padding:0;
-  background:none;border:0;
-  color:var(--muted);
-  cursor:pointer;
-  transition:color .15s ease;
-}
-.icon-btn:hover{color:var(--cream)}
 
 .btn{
   display:inline-flex;
@@ -388,7 +370,6 @@ body{overflow-x:hidden}
 @media (max-width:560px){
   :root{--gutter:18px}
   .head{gap:12px;padding:20px 0}
-  .head .icon-btn{display:none}
   .wordmark{gap:10px;min-width:0}
 
   .hero{padding:36px 18px 42px}
