@@ -210,6 +210,30 @@ body{overflow-x:hidden}
 
 /* ---------- upload slots ---------- */
 
+.slot{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  text-align:center;
+  background:var(--panel);
+  border:1px solid var(--line-soft);
+  border-radius:10px;
+  color:var(--muted);
+}
+.slot svg{color:var(--muted-2);margin-bottom:10px}
+
+.slot-label{
+  font-size:14px;
+  letter-spacing:.1em;
+}
+.slot-hint{
+  font-size:12px;
+  letter-spacing:.1em;
+  color:var(--muted-2);
+}
+
 /* ---------- highlight reel ---------- */
 
 .highlight{
@@ -313,6 +337,237 @@ body{overflow-x:hidden}
 }
 .hl-sound:hover{border-color:var(--cream);background:rgba(10,10,11,.8)}
 
+/* ---------- gear ---------- */
+
+.page-head{
+  padding:56px 0 34px;
+}
+
+.page-head h1{
+  margin:0;
+  font-size:clamp(2rem,4.4vw,3.6rem);
+  font-weight:800;
+  line-height:.96;
+  letter-spacing:.02em;
+  color:var(--cream);
+}
+
+.page-sub{
+  margin:16px 0 0;
+  font-size:clamp(.8rem,1.1vw,.95rem);
+  letter-spacing:.2em;
+  color:var(--muted);
+}
+
+/* the active tab wears the brackets, like the wordmark does */
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 28px;
+  padding-bottom:30px;
+  border-bottom:1px solid var(--line-soft);
+}
+
+.filters button{
+  padding:0;
+  font:inherit;
+  font-size:12.5px;
+  letter-spacing:.16em;
+  background:none;
+  border:0;
+  color:var(--muted);
+  cursor:pointer;
+  transition:color .15s ease;
+}
+.filters button:hover{color:var(--cream)}
+
+/* brackets are always in the layout, only revealed on the active tab,
+   so switching filters never shifts the row sideways */
+/* margins, not spaces — the buttons become flex at 700px and would eat them */
+.filters button::before{content:"[";margin-right:.55em;color:transparent}
+.filters button::after{content:"]";margin-left:.55em;color:transparent}
+
+.filters button[aria-pressed="true"]{color:var(--cream)}
+.filters button[aria-pressed="true"]::before,
+.filters button[aria-pressed="true"]::after{color:var(--muted-2)}
+
+/* filters left, view toggle right, on one line */
+.gear-bar{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:24px 40px;
+  flex-wrap:wrap;
+  padding-bottom:30px;
+  border-bottom:1px solid var(--line-soft);
+}
+.gear-bar .filters{
+  padding-bottom:0;
+  border-bottom:0;
+}
+
+.views{
+  display:flex;
+  gap:8px 20px;
+  flex-shrink:0;
+}
+.views button{
+  padding:0;
+  font:inherit;
+  font-size:12.5px;
+  letter-spacing:.16em;
+  background:none;
+  border:0;
+  color:var(--muted-2);
+  cursor:pointer;
+  transition:color .15s ease;
+}
+.views button:hover{color:var(--cream)}
+.views button[aria-pressed="true"]{color:var(--cream)}
+
+.gear-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:24px;
+  padding:36px 0 8px;
+}
+
+/* ---------- gear: list view ---------- */
+
+/* one flat table of rows — brackets off, thumbnail shrunk, order re-flowed */
+.gear-grid.is-list{
+  grid-template-columns:minmax(0,1fr);
+  gap:0;
+  border:1px solid var(--line-soft);
+}
+
+.is-list .gear-item{
+  display:grid;
+  grid-template-columns:46px 60px minmax(0,1fr) 160px;
+  align-items:center;
+  gap:22px;
+  padding:14px 22px;
+  background-image:none;
+  border-bottom:1px solid var(--line-soft);
+  transition:background-color .16s ease;
+}
+.is-list .gear-item:last-child{border-bottom:0}
+.is-list .gear-item:hover{background:rgba(239,236,227,.025)}
+
+.is-list .gear-index{
+  order:1;
+  font-size:15px;
+  color:var(--muted);
+}
+.is-list .gear-index::after{display:none}
+
+.is-list .slot,
+.is-list .gear-media{
+  order:2;
+  margin-top:0;
+  width:60px;
+  border-radius:6px;
+}
+.is-list .slot svg{width:16px;height:16px;margin:0}
+.is-list .slot-label,
+.is-list .slot-hint{display:none}
+
+.is-list .gear-name{
+  order:3;
+  margin:0;
+  font-size:15px;
+}
+
+.is-list .gear-cat{
+  order:4;
+  margin:0;
+  text-align:right;
+}
+
+/* same eight-hairline corner frame as .hero, so the cards read as one system */
+/* column + auto margin under the category keeps every square on one baseline,
+   however many lines a name wraps to */
+.gear-item{
+  display:flex;
+  flex-direction:column;
+  padding:20px;
+  background-repeat:no-repeat;
+  background-image:
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line));
+  background-size:
+    var(--corner) 1px,1px var(--corner),
+    var(--corner) 1px,1px var(--corner),
+    var(--corner) 1px,1px var(--corner),
+    var(--corner) 1px,1px var(--corner);
+  background-position:
+    left top,left top,
+    right top,right top,
+    left bottom,left bottom,
+    right bottom,right bottom;
+}
+
+.gear-index{
+  display:block;
+  font-size:22px;
+  font-weight:500;
+  letter-spacing:.06em;
+  color:var(--cream);
+}
+.gear-index::after{
+  content:"";
+  display:block;
+  width:24px;height:1px;
+  margin-top:12px;
+  background:var(--muted-2);
+}
+
+.gear-name{
+  margin:16px 0 0;
+  font-size:17px;
+  font-weight:500;
+  letter-spacing:.04em;
+  line-height:1.35;
+  color:var(--cream);
+}
+
+.gear-cat{
+  margin:8px 0 auto;
+  font-size:11.5px;
+  letter-spacing:.14em;
+  color:var(--muted-2);
+}
+
+/* the slot and the photo that replaces it must occupy identical space */
+.gear-item .slot,
+.gear-media{
+  margin-top:18px;
+  aspect-ratio:1/1;
+  border-radius:10px;
+}
+.gear-item .slot svg{margin-bottom:6px}
+.gear-item .slot-label{font-size:11px}
+.gear-item .slot-hint{font-size:10px}
+
+.gear-media{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:cover;
+  border:1px solid var(--line-soft);
+}
+
+.gear-empty{
+  margin:0;
+  padding:56px 0 8px;
+  font-size:12.5px;
+  letter-spacing:.16em;
+  line-height:2;
+  color:var(--muted-2);
+}
+
 /* ---------- footer ---------- */
 
 .foot-ig{
@@ -347,6 +602,9 @@ body{overflow-x:hidden}
   .nav{order:3;width:100%;margin:0;gap:26px}
   .hero{padding:48px 28px 52px}
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
+
+  .page-head{padding:40px 0 28px}
+  .gear-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
 }
 
 /* phones: the nav wraps instead of scrolling items out of reach,
@@ -360,6 +618,14 @@ body{overflow-x:hidden}
     font-size:12px;
   }
   .nav a{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+  }
+
+  /* filters clear the same 44px touch minimum as the nav */
+  .filters{column-gap:20px;row-gap:0}
+  .filters button{
     display:inline-flex;
     align-items:center;
     min-height:44px;
@@ -382,6 +648,23 @@ body{overflow-x:hidden}
   .highlight{aspect-ratio:4/3}
   .hl-bar{height:22px}
   .hl-foot{inset:auto 14px 14px}
+
+  .page-head{padding:32px 0 24px}
+  /* two up on phones — a single column would blow the square up to full width */
+  .gear-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding-top:28px}
+
+  /* list rows lose the index and category columns before they get cramped */
+  .is-list .gear-item{grid-template-columns:46px minmax(0,1fr);gap:14px;padding:12px 14px}
+  .is-list .gear-index{display:none}
+  .is-list .slot,.is-list .gear-media{width:46px}
+  .is-list .gear-cat{display:none}
+  .is-list .gear-name{font-size:13px}
+  .gear-item{padding:16px}
+  .gear-index{font-size:18px}
+  .gear-name{font-size:14px}
+  .gear-cat{font-size:10.5px}
+  .gear-item .slot-label{font-size:9.5px}
+  .gear-item .slot-hint{display:none}
 
   /* clear the home indicator */
   .foot{padding-bottom:max(40px, calc(24px + env(safe-area-inset-bottom)))}
