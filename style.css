@@ -345,7 +345,6 @@ body{overflow-x:hidden}
   :root{--gutter:24px}
   .head{flex-wrap:wrap;gap:18px}
   .nav{order:3;width:100%;margin:0;gap:26px}
-  .head-tools{margin-left:auto}
   .hero{padding:48px 28px 52px}
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
 }
