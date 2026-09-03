@@ -436,11 +436,6 @@ body{overflow-x:hidden}
   letter-spacing:.22em;
   color:var(--cream);
 }
-.group-count{
-  font-size:11px;
-  letter-spacing:.14em;
-  color:var(--muted-2);
-}
 /* scrolled-to headings shouldn't hide under the top of the viewport */
 .gear-group{scroll-margin-top:24px}
 

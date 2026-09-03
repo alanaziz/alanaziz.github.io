@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6a260808">
+<link rel="stylesheet" href="style.css?v=bcf1d692">
 </head>
 <body>
 
@@ -28,6 +28,10 @@
   <symbol id="i-arrow-ne" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
     <path d="M7 17 17 7M8 7h9v9"/>
+  </symbol>
+  <symbol id="i-arrow-e" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 12h16m-6-6 6 6-6 6"/>
   </symbol>
 </svg>
 
@@ -75,6 +79,13 @@
           <a class="btn btn--solid" href="https://www.instagram.com/alanazizreview/" rel="me noopener" target="_blank">
             LATEST REVIEWS
             <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
+          </a>
+
+          <!-- an internal page, so it gets the east arrow rather than the
+               north-east one that reads as "opens somewhere else" -->
+          <a class="btn" href="/gear/">
+            MY GEAR
+            <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-e"/></svg>
           </a>
         </div>
       </div>
