@@ -368,28 +368,22 @@ body{overflow-x:hidden}
   border-bottom:1px solid var(--line-soft);
 }
 
-.filters button{
-  padding:0;
-  font:inherit;
+/* the categories are sections now, so these are jump links, not filters */
+.filters a{
   font-size:12.5px;
   letter-spacing:.16em;
-  background:none;
-  border:0;
   color:var(--muted);
-  cursor:pointer;
   transition:color .15s ease;
 }
-.filters button:hover{color:var(--cream)}
+.filters a:hover,
+.filters a:focus-visible{color:var(--cream)}
 
-/* brackets are always in the layout, only revealed on the active tab,
-   so switching filters never shifts the row sideways */
-/* margins, not spaces — the buttons become flex at 700px and would eat them */
-.filters button::before{content:"[";margin-right:.55em;color:transparent}
-.filters button::after{content:"]";margin-left:.55em;color:transparent}
-
-.filters button[aria-pressed="true"]{color:var(--cream)}
-.filters button[aria-pressed="true"]::before,
-.filters button[aria-pressed="true"]::after{color:var(--muted-2)}
+/* the section being pointed at wears the brackets; margins not spaces,
+   because the links become flex at 700px and would eat the whitespace */
+.filters a::before{content:"[";margin-right:.55em;color:transparent}
+.filters a::after{content:"]";margin-left:.55em;color:transparent}
+.filters a:hover::before,
+.filters a:hover::after{color:var(--muted-2)}
 
 /* filters left, view toggle right, on one line */
 .gear-bar{
@@ -425,11 +419,36 @@ body{overflow-x:hidden}
 .views button:hover{color:var(--cream)}
 .views button[aria-pressed="true"]{color:var(--cream)}
 
+/* ---------- gear: category sections ---------- */
+
+.gear-group{padding-top:46px}
+.gear-group:first-of-type{padding-top:36px}
+
+.group-head{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin:0;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line-soft);
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.22em;
+  color:var(--cream);
+}
+.group-count{
+  font-size:11px;
+  letter-spacing:.14em;
+  color:var(--muted-2);
+}
+/* scrolled-to headings shouldn't hide under the top of the viewport */
+.gear-group{scroll-margin-top:24px}
+
 .gear-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
   gap:24px;
-  padding:36px 0 8px;
+  padding:24px 0 8px;
 }
 
 /* ---------- gear: list view ---------- */
@@ -443,7 +462,7 @@ body{overflow-x:hidden}
 
 .is-list .gear-item{
   display:grid;
-  grid-template-columns:46px 60px minmax(0,1fr) 160px;
+  grid-template-columns:60px minmax(0,1fr);
   align-items:center;
   gap:22px;
   padding:14px 22px;
@@ -454,45 +473,24 @@ body{overflow-x:hidden}
 .is-list .gear-item:last-child{border-bottom:0}
 .is-list .gear-item:hover{background:rgba(239,236,227,.025)}
 
-.is-list .gear-index{
-  order:1;
-  font-size:15px;
-  color:var(--muted);
-}
-.is-list .gear-index::after{display:none}
-
-.is-list .slot,
 .is-list .gear-media{
-  order:2;
   margin-top:0;
   width:60px;
   border-radius:6px;
 }
-.is-list .slot svg{width:16px;height:16px;margin:0}
-.is-list .slot-label,
-.is-list .slot-hint{display:none}
 
 .is-list .gear-name{
-  order:3;
   margin:0;
   font-size:15px;
 }
 
-.is-list .gear-cat{
-  order:4;
-  margin:0;
-  text-align:right;
-}
-
-/* same eight-hairline corner frame as .hero, so the cards read as one system */
-/* column + auto margin under the category keeps every square on one baseline,
-   however many lines a name wraps to */
+/* same eight-hairline corner frame as .hero, so the cards read as one system.
+   Image first, name under it — the images align across a row on their own, with
+   no auto-margin needed however many lines a name wraps to. */
 .gear-item{
   display:flex;
   flex-direction:column;
   padding:20px;
-  /* this display beats the UA's [hidden]{display:none}, so the filter's
-     hidden cards would keep rendering without the rule below */
   background-repeat:no-repeat;
   background-image:
     linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
@@ -511,23 +509,6 @@ body{overflow-x:hidden}
     right bottom,right bottom;
 }
 
-.gear-item[hidden]{display:none}
-
-.gear-index{
-  display:block;
-  font-size:22px;
-  font-weight:500;
-  letter-spacing:.06em;
-  color:var(--cream);
-}
-.gear-index::after{
-  content:"";
-  display:block;
-  width:24px;height:1px;
-  margin-top:12px;
-  background:var(--muted-2);
-}
-
 .gear-name{
   margin:16px 0 0;
   font-size:17px;
@@ -537,17 +518,10 @@ body{overflow-x:hidden}
   color:var(--cream);
 }
 
-.gear-cat{
-  margin:8px 0 auto;
-  font-size:11.5px;
-  letter-spacing:.14em;
-  color:var(--muted-2);
-}
-
 /* the slot and the photo that replaces it must occupy identical space */
 .gear-item .slot,
 .gear-media{
-  margin-top:18px;
+  margin-top:0;
   aspect-ratio:1/1;
   border-radius:10px;
 }
@@ -561,15 +535,6 @@ body{overflow-x:hidden}
   height:auto;
   object-fit:cover;
   border:1px solid var(--line-soft);
-}
-
-.gear-empty{
-  margin:0;
-  padding:56px 0 8px;
-  font-size:12.5px;
-  letter-spacing:.16em;
-  line-height:2;
-  color:var(--muted-2);
 }
 
 /* ---------- footer ---------- */
@@ -629,7 +594,7 @@ body{overflow-x:hidden}
 
   /* filters clear the same 44px touch minimum as the nav */
   .filters{column-gap:20px;row-gap:0}
-  .filters button{
+  .filters a{
     display:inline-flex;
     align-items:center;
     min-height:44px;
@@ -659,16 +624,12 @@ body{overflow-x:hidden}
 
   /* list rows lose the index and category columns before they get cramped */
   .is-list .gear-item{grid-template-columns:46px minmax(0,1fr);gap:14px;padding:12px 14px}
-  .is-list .gear-index{display:none}
-  .is-list .slot,.is-list .gear-media{width:46px}
-  .is-list .gear-cat{display:none}
+  .is-list .gear-media{width:46px}
   .is-list .gear-name{font-size:13px}
   .gear-item{padding:16px}
-  .gear-index{font-size:18px}
   .gear-name{font-size:14px}
-  .gear-cat{font-size:10.5px}
-  .gear-item .slot-label{font-size:9.5px}
-  .gear-item .slot-hint{display:none}
+  .group-head{font-size:11.5px;letter-spacing:.18em}
+  .gear-group{padding-top:34px}
 
   /* clear the home indicator */
   .foot{padding-bottom:max(40px, calc(24px + env(safe-area-inset-bottom)))}

@@ -7,7 +7,7 @@ Personal site for Alan Aziz — gadget reviews. Served by GitHub Pages at
 
 ```
 index.html       homepage — markup + highlight-reel script
-gear/index.html  gear page — markup + category filter script
+gear/index.html  gear page — markup + grid/list toggle
 style.css        all styles, shared by both pages
 assets/logo/     logo source + derived marks, icons, OG image
 assets/video/    highlight clips
@@ -69,50 +69,48 @@ The label under each clip is the `data-label` attribute on its `<video>`.
 
 ## Gear page
 
-`gear/index.html` serves at **/gear/** — the kit list, filterable by category. It
+`gear/index.html` serves at **/gear/** — the kit list, grouped by category. It
 shares `style.css` with the homepage, so every asset path in it is `../`-relative.
 
-Categories are CAMERA, LENSES, AUDIO and LIGHTING. There is no COMPUTING tab: an
-empty category renders as the "nothing here yet" message, so a tab only earns its
-place once something sits in it.
+Items are grouped into `<section class="gear-group">` blocks, one per category —
+CAMERA, LENSES, AUDIO and LIGHTING — each with a heading and a count. Everything is
+on the page at once; the category links at the top are anchors that jump to a
+section, not filters, so there is no ALL button and no filtering script.
+
+Cards carry no index number and no category label: the section heading above them
+already says which category they are in.
 
 ### Grid and list views
 
-The GRID/LIST toggle sits opposite the filters. List view is the same cards with
-`.is-list` on the grid — brackets off, thumbnail down to 60px, and the children
-re-ordered with the CSS `order` property into `index / thumb / name / category`.
-Nothing is duplicated in the markup, so a new item gets both views for free.
+The GRID/LIST toggle sits opposite the category links. List view is the same cards
+with `.is-list` on the grid — brackets off, thumbnail down to 60px, laid out as
+`thumb / name`. Nothing is duplicated in the markup, so a new item gets both views
+for free. The toggle applies the class to *every* `.gear-grid`, one per section.
 
 The choice is kept in `localStorage` under `gear-view`. Every read and write is
 wrapped in try/catch — storage throws outright in some private-browsing modes, and
-an exception there would take the filters down with it.
+an exception there would take the toggle down with it.
 
 ### Adding an item
 
-A card carries a category and a name, nothing else. Duplicate one
-`<article class="gear-item">` block and set three things:
-
-| Field | Where |
-|-------|-------|
-| Category | `data-cat` on the `<article>` — must match a filter button's `data-filter` |
-| Name | `.gear-name` |
-| Category label | `.gear-cat`, the visible `[ CAMERA ]` line |
-
-`data-cat` drives the filtering and `.gear-cat` is what people read — they are written
-out separately, so change both together or an item will filter into the wrong tab.
-
-Index numbers (`01`, `02`) are stable identity, not position. They deliberately do
-**not** renumber when a filter is applied, so an item keeps the same number for good.
-
-A new category needs a matching button in `.filters`:
+Drop the `<article>` into the `.gear-grid` of the section it belongs to. It needs
+only an image and a name:
 
 ```
-<button type="button" data-filter="lighting" aria-pressed="false">LIGHTING</button>
+<article class="gear-item">
+  <img class="gear-media" src="../assets/gear/<slug>.jpg" alt=""
+       width="800" height="800" loading="lazy" decoding="async">
+  <h3 class="gear-name">SONY ZVE10 MARK 2</h3>
+</article>
 ```
 
-Filtering is `hidden` toggling in the inline script at the foot of the page. When a
-category has no items the `.gear-empty` message shows instead — that is the expected
-state for a category you have not filled yet, not a bug.
+Bump the `<span class="group-count">` on that section's heading to match.
+
+A new category needs a new `<section class="gear-group" id="...">` with its own
+heading and grid, plus a matching `<a href="#...">` in `.filters`.
+
+The image comes first and the name sits under it, so images align across a row on
+their own — no auto-margin trick needed however many lines a name wraps to.
 
 ### Adding the photo
 
@@ -124,17 +122,8 @@ old dark background came through.
 
 Run `tools/gear-image.py` rather than doing this by hand — see below.
 
-All 21 items carry a photo. A card without one ships with an upload placeholder
-(`.slot`); to fill it, drop the source at `assets/gear/`, run the tool, and replace
-the whole `<div class="slot">…</div>` with:
-
-```
-<img class="gear-media" src="../assets/gear/<slug>.jpg" alt="" width="800" height="800">
-```
-
-`.gear-media` and `.gear-item .slot` share the 1:1 ratio and radius, so the swap does
-not move anything else on the card. Shoot or crop square — a non-square file still
-fills the box, but `object-fit:cover` will crop the long edge.
+All 21 items carry a photo. Shoot or crop square — a non-square file still fills the
+box, but `object-fit:cover` crops the long edge.
 
 Source files (the unprocessed `.png`/`.jpeg` drops) are gitignored in this folder;
 only the processed square JPGs are served.
@@ -173,9 +162,6 @@ as-is — Amaran 60D is done that way.
 **Keep the source files.** Re-deriving a cut-out from an already-composited JPG
 degrades it, and a product with near-background blacks cannot be recovered at all.
 
-The cards are flex columns with `margin-bottom:auto` on `.gear-cat`, which pins every
-square to the bottom of its card. Squares therefore stay on one baseline across a row
-however many lines a name wraps to — worth keeping if you restyle the card.
 
 ## Cache busting
 

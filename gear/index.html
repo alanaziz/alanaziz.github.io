@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=a51a8a8e">
+<link rel="stylesheet" href="../style.css?v=6a260808">
 </head>
 <body>
 
@@ -59,13 +59,12 @@
   </div>
 
   <div class="gear-bar">
-    <div class="filters" role="group" aria-label="Filter gear by category">
-      <button type="button" data-filter="all" aria-pressed="true">ALL</button>
-      <button type="button" data-filter="camera" aria-pressed="false">CAMERA</button>
-      <button type="button" data-filter="lenses" aria-pressed="false">LENSES</button>
-      <button type="button" data-filter="audio" aria-pressed="false">AUDIO</button>
-      <button type="button" data-filter="lighting" aria-pressed="false">LIGHTING</button>
-    </div>
+    <nav class="filters" aria-label="Jump to a category">
+      <a href="#camera">CAMERA</a>
+      <a href="#lenses">LENSES</a>
+      <a href="#audio">AUDIO</a>
+      <a href="#lighting">LIGHTING</a>
+    </nav>
 
     <div class="views" role="group" aria-label="Change layout">
       <button type="button" data-view="grid" aria-pressed="true">GRID</button>
@@ -73,202 +72,151 @@
     </div>
   </div>
 
-  <div class="gear-grid" id="gear-grid">
+  <section class="gear-group" id="camera" aria-labelledby="camera-head">
+    <h2 class="group-head" id="camera-head">CAMERA<span class="group-count">03</span></h2>
+    <div class="gear-grid">
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/sony-zve10-mark-2.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">SONY ZVE10 MARK 2</h3>
+      </article>
 
-    <article class="gear-item" data-cat="camera">
-      <span class="gear-index" aria-hidden="true">01</span>
-      <h2 class="gear-name">SONY ZVE10 MARK 2</h2>
-      <p class="gear-cat">[ CAMERA ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/dji-osmo-pocket-3.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">DJI OSMO POCKET 3</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/sony-zve10-mark-2.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/gopro-mission-1-pro.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">GOPRO MISSION 1 PRO WITH GRIP</h3>
+      </article>
+    </div>
+  </section>
 
-    <article class="gear-item" data-cat="camera">
-      <span class="gear-index" aria-hidden="true">02</span>
-      <h2 class="gear-name">DJI OSMO POCKET 3</h2>
-      <p class="gear-cat">[ CAMERA ]</p>
+  <section class="gear-group" id="lenses" aria-labelledby="lenses-head">
+    <h2 class="group-head" id="lenses-head">LENSES<span class="group-count">03</span></h2>
+    <div class="gear-grid">
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/sony-fe-16-25.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">SONY FE 16-25mm F2.8 G</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/dji-osmo-pocket-3.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/sigma-18-50.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">SIGMA 18-50mm F2.8</h3>
+      </article>
 
-    <article class="gear-item" data-cat="camera">
-      <span class="gear-index" aria-hidden="true">03</span>
-      <h2 class="gear-name">GOPRO MISSION 1 PRO WITH GRIP</h2>
-      <p class="gear-cat">[ CAMERA ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/sirui-23mm-f12.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">SIRUI 23mm F1.2 AF</h3>
+      </article>
+    </div>
+  </section>
 
-      <img class="gear-media" src="../assets/gear/gopro-mission-1-pro.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+  <section class="gear-group" id="audio" aria-labelledby="audio-head">
+    <h2 class="group-head" id="audio-head">AUDIO<span class="group-count">09</span></h2>
+    <div class="gear-grid">
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/rode-wireless-pro.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">RØDE WIRELESS PRO</h3>
+      </article>
 
-    <article class="gear-item" data-cat="lenses">
-      <span class="gear-index" aria-hidden="true">04</span>
-      <h2 class="gear-name">SONY FE 16-25mm F2.8 G</h2>
-      <p class="gear-cat">[ LENSES ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/rode-wireless-micro.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">RØDE WIRELESS MICRO</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/sony-fe-16-25.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/rode-wireless-me.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">RØDE WIRELESS ME</h3>
+      </article>
 
-    <article class="gear-item" data-cat="lenses">
-      <span class="gear-index" aria-hidden="true">05</span>
-      <h2 class="gear-name">SIGMA 18-50mm F2.8</h2>
-      <p class="gear-cat">[ LENSES ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/rode-interview-pro.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">RØDE INTERVIEW PRO</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/sigma-18-50.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/rode-videomic-ntg.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">RØDE VIDEOMIC NTG</h3>
+      </article>
 
-    <article class="gear-item" data-cat="lenses">
-      <span class="gear-index" aria-hidden="true">06</span>
-      <h2 class="gear-name">SIRUI 23mm F1.2 AF</h2>
-      <p class="gear-cat">[ LENSES ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/rode-videomic-micro.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">RØDE VIDEOMIC MICRO</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/sirui-23mm-f12.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/hollyland-lark-m2.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">HOLLYLAND LARK M2</h3>
+      </article>
 
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">07</span>
-      <h2 class="gear-name">RØDE WIRELESS PRO</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/comica-vm40.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">COMICA VM40</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/rode-wireless-pro.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/rode-xdm100.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">RØDE XDM100</h3>
+      </article>
+    </div>
+  </section>
 
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">08</span>
-      <h2 class="gear-name">RØDE WIRELESS MICRO</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
+  <section class="gear-group" id="lighting" aria-labelledby="lighting-head">
+    <h2 class="group-head" id="lighting-head">LIGHTING<span class="group-count">06</span></h2>
+    <div class="gear-grid">
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/amaran-verge-max.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">AMARAN VERGE MAX</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/rode-wireless-micro.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/amaran-f22x.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">AMARAN F22X</h3>
+      </article>
 
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">09</span>
-      <h2 class="gear-name">RØDE WIRELESS ME</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/amaran-60d.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">AMARAN 60D</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/rode-wireless-me.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/nanlite-pavotube.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">NANLITE PAVOTUBE</h3>
+      </article>
 
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">10</span>
-      <h2 class="gear-name">RØDE INTERVIEW PRO</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/colbor-wonder-kit.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">COLBOR WONDER SERIES KIT</h3>
+      </article>
 
-      <img class="gear-media" src="../assets/gear/rode-interview-pro.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">11</span>
-      <h2 class="gear-name">RØDE VIDEOMIC NTG</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
-
-      <img class="gear-media" src="../assets/gear/rode-videomic-ntg.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">12</span>
-      <h2 class="gear-name">RØDE VIDEOMIC MICRO</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
-
-      <img class="gear-media" src="../assets/gear/rode-videomic-micro.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">13</span>
-      <h2 class="gear-name">HOLLYLAND LARK M2</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
-
-      <img class="gear-media" src="../assets/gear/hollyland-lark-m2.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">14</span>
-      <h2 class="gear-name">COMICA VM40</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
-
-      <img class="gear-media" src="../assets/gear/comica-vm40.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="audio">
-      <span class="gear-index" aria-hidden="true">15</span>
-      <h2 class="gear-name">RØDE XDM100</h2>
-      <p class="gear-cat">[ AUDIO ]</p>
-
-      <img class="gear-media" src="../assets/gear/rode-xdm100.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="lighting">
-      <span class="gear-index" aria-hidden="true">16</span>
-      <h2 class="gear-name">AMARAN VERGE MAX</h2>
-      <p class="gear-cat">[ LIGHTING ]</p>
-
-      <img class="gear-media" src="../assets/gear/amaran-verge-max.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="lighting">
-      <span class="gear-index" aria-hidden="true">17</span>
-      <h2 class="gear-name">AMARAN F22X</h2>
-      <p class="gear-cat">[ LIGHTING ]</p>
-
-      <img class="gear-media" src="../assets/gear/amaran-f22x.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="lighting">
-      <span class="gear-index" aria-hidden="true">18</span>
-      <h2 class="gear-name">AMARAN 60D</h2>
-      <p class="gear-cat">[ LIGHTING ]</p>
-
-      <img class="gear-media" src="../assets/gear/amaran-60d.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="lighting">
-      <span class="gear-index" aria-hidden="true">19</span>
-      <h2 class="gear-name">NANLITE PAVOTUBE</h2>
-      <p class="gear-cat">[ LIGHTING ]</p>
-
-      <img class="gear-media" src="../assets/gear/nanlite-pavotube.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="lighting">
-      <span class="gear-index" aria-hidden="true">20</span>
-      <h2 class="gear-name">COLBOR WONDER SERIES KIT</h2>
-      <p class="gear-cat">[ LIGHTING ]</p>
-
-      <img class="gear-media" src="../assets/gear/colbor-wonder-kit.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-    <article class="gear-item" data-cat="lighting">
-      <span class="gear-index" aria-hidden="true">21</span>
-      <h2 class="gear-name">ZHIYUN CX100</h2>
-      <p class="gear-cat">[ LIGHTING ]</p>
-
-      <img class="gear-media" src="../assets/gear/zhiyun-cx100.jpg" alt=""
-           width="800" height="800" loading="lazy" decoding="async">
-    </article>
-
-  </div>
-
-  <p class="gear-empty" id="gear-empty" role="status" hidden>
-    NOTHING HERE YET.<br>MORE GEAR SOON.
-  </p>
+      <article class="gear-item">
+        <img class="gear-media" src="../assets/gear/zhiyun-cx100.jpg" alt=""
+             width="800" height="800" loading="lazy" decoding="async">
+        <h3 class="gear-name">ZHIYUN CX100</h3>
+      </article>
+    </div>
+  </section>
 
   </div>
 
@@ -283,38 +231,13 @@
 
 <script>
 (function () {
-  var grid = document.getElementById('gear-grid');
-  if (!grid) return;
+  var grids = [].slice.call(document.querySelectorAll('.gear-grid'));
+  if (!grids.length) return;
 
-  var btns  = [].slice.call(document.querySelectorAll('.filters button'));
-  var items = [].slice.call(grid.querySelectorAll('.gear-item'));
-  var empty = document.getElementById('gear-empty');
-
-  function apply(cat) {
-    var shown = 0;
-
-    items.forEach(function (el) {
-      var hit = cat === 'all' || el.dataset.cat === cat;
-      el.hidden = !hit;
-      if (hit) shown++;
-    });
-
-    btns.forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.dataset.filter === cat));
-    });
-
-    empty.hidden = shown > 0;
-  }
-
-  btns.forEach(function (b) {
-    b.addEventListener('click', function () { apply(b.dataset.filter); });
-  });
-
-  // view toggle — remembered per visitor, storage may throw in private windows
   var views = [].slice.call(document.querySelectorAll('.views button'));
 
   function setView(v) {
-    grid.classList.toggle('is-list', v === 'list');
+    grids.forEach(function (g) { g.classList.toggle('is-list', v === 'list'); });
     views.forEach(function (b) {
       b.setAttribute('aria-pressed', String(b.dataset.view === v));
     });
