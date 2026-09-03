@@ -123,9 +123,10 @@ arrives on a white studio background reads as a glowing rectangle and needs its
 background knocked out first — measure with mean luminance, which should land in the
 20–45 band the existing files occupy, not up at 110+.
 
-11 of the 21 are in. Each card ships with an upload placeholder (`.slot`) until it
-has one; to put a photo in, drop the file at `assets/gear/<slug>.jpg` and replace the
-whole `<div class="slot">…</div>` with:
+20 of the 21 are in — only the Sony ZV-E10 II is still a placeholder. Each card ships
+with an upload placeholder (`.slot`) until it has one; to put a photo in, drop the
+file at `assets/gear/<slug>.jpg` and replace the whole `<div class="slot">…</div>`
+with:
 
 ```
 <img class="gear-media" src="../assets/gear/<slug>.jpg" alt="" width="800" height="800">
@@ -134,6 +135,25 @@ whole `<div class="slot">…</div>` with:
 `.gear-media` and `.gear-item .slot` share the 1:1 ratio and radius, so the swap does
 not move anything else on the card. Shoot or crop square — a non-square file still
 fills the box, but `object-fit:cover` will crop the long edge.
+
+Source files (the unprocessed `.png`/`.jpeg` drops) are gitignored in this folder;
+only the processed square JPGs are served.
+
+**Two traps when preparing one**, both of which bit during the first batch:
+
+- *A PNG in RGBA mode is not necessarily transparent.* Several supplier images carry
+  a fully-opaque alpha channel over a baked-in white background — testing `im.mode`
+  passes them straight through and they land on the page as glowing white blocks.
+  Test whether the alpha channel actually varies: `im.getchannel("A").getextrema()`,
+  and treat anything with a minimum of 255 as opaque.
+- *`Image.thumbnail()` refuses to enlarge.* A small source stays small and floats in
+  the middle of an 800px frame. Use `resize()` with an explicit scale factor so the
+  product fills the box either way.
+
+To knock a background out, flood-fill inward from the border rather than testing every
+pixel, so a white highlight enclosed by the product survives. Watch for stray isolated
+elements too — a light stand in one Amaran shot survived as a hairline down the card
+until it was cropped out.
 
 The cards are flex columns with `margin-bottom:auto` on `.gear-cat`, which pins every
 square to the bottom of its card. Squares therefore stay on one baseline across a row

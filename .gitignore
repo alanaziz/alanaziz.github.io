@@ -13,3 +13,7 @@
 *.log
 .env
 .env.*
+
+# Gear photo sources — only the processed square JPGs are served
+assets/gear/*.png
+assets/gear/*.jpeg
