@@ -55,10 +55,11 @@ pair and renumbering the `aria-label`s and `data-go` indices.
 
 | Slot | File | Source | Trim |
 |------|------|--------|------|
-| 01 | `highlight-01.mp4` | `KTM 390 launching event.mp4` | first 12s |
-| 02 | `highlight-02.mp4` | `HOTO_FINAL .mp4` | full clip |
-| 03 | `highlight-03.mp4` | `moist.mp4` | full clip |
-| 04 | `highlight-04.mp4` | `Alans WORBY - SD 480p.mov` | 20s–25s |
+| 01 | `highlight-01.mp4` | `HOTO_FINAL .mp4` | full clip |
+| 02 | `highlight-02.mp4` | `art of phyro 5.mp4` | full clip |
+| 03 | `highlight-03.mp4` | `Alans WORBY - SD 480p.mov` | 20s–25s |
+| 04 | `highlight-04.mp4` | `KTM 390 launching event.mp4` | first 5s |
+| 05 | `highlight-05.mp4` | `The Campus.mp4` | 4s–9s |
 
 Encoded 1280px wide, H.264, no audio track, `+faststart`. To swap one, re-encode
 to the same filename:
