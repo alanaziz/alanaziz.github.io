@@ -531,13 +531,22 @@ body{overflow-x:hidden}
   color:var(--muted);
 }
 
+.collab-cta-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
 .collab-note{
-  margin:28px 0 0;
+  margin:0;
   font-size:14px;
   line-height:1.85;
   color:var(--muted);
 }
-.collab-cta{margin-top:22px}
+.collab-cta{flex:none}
 
 /* ---------- footer ---------- */
 
