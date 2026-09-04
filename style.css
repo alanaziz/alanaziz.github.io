@@ -517,11 +517,39 @@ body{overflow-x:hidden}
   color:var(--cream);
 }
 
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+/* two identical copies run through .collab-track; each .collab-grid ends in
+   its own 12px padding-right, so the two copies are the exact same width and
+   translateX(-50%) loops from the end of copy 1 straight into copy 2 with no
+   seam. Speed holds regardless of how many logos are added or removed. */
+.collab-marquee{
+  margin-top:24px;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.collab-track{
+  display:flex;
+  width:max-content;
+  animation:collab-scroll 36s linear infinite;
+}
+.collab-marquee:hover .collab-track,
+.collab-marquee:focus-within .collab-track{animation-play-state:paused}
+
+@keyframes collab-scroll{
+  to{transform:translateX(-50%)}
+}
+
 .collab-grid{
   display:flex;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
+  flex:none;
   gap:12px;
-  padding:24px 0 0;
+  padding-right:12px;
 }
 
 /* brand marks keep their own colour, so they sit on a white chip rather
