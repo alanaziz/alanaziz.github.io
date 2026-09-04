@@ -501,6 +501,49 @@ body{overflow-x:hidden}
   border:1px solid var(--line-soft);
 }
 
+/* ---------- collaborations ---------- */
+
+.collab{padding:8px 0 64px}
+
+.collab-head{
+  margin:0;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line-soft);
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.22em;
+  color:var(--cream);
+}
+
+.collab-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  padding:24px 0 0;
+}
+
+.collab-tag{
+  padding:9px 16px;
+  border:1px solid var(--line-soft);
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.12em;
+  color:var(--muted);
+}
+
+.collab-note{
+  margin:28px 0 0;
+  font-size:14px;
+  line-height:1.85;
+  color:var(--muted);
+}
+.collab-note a{
+  color:var(--cream);
+  border-bottom:1px solid var(--line);
+  transition:border-color .15s ease;
+}
+.collab-note a:hover{border-color:var(--cream)}
+
 /* ---------- footer ---------- */
 
 .foot-ig{
@@ -508,6 +551,12 @@ body{overflow-x:hidden}
   transition:color .15s ease;
 }
 .foot-ig:hover{color:var(--cream)}
+
+.foot-social{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
 
 .foot{
   display:flex;
