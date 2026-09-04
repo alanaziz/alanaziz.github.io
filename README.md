@@ -56,7 +56,7 @@ pair and renumbering the `aria-label`s and `data-go` indices.
 | Slot | File | Source | Trim |
 |------|------|--------|------|
 | 01 | `highlight-01.mp4` | `KTM 390 launching event.mp4` | first 12s |
-| 02 | `highlight-02.mp4` | `Bersama Ahmad.mp4` | first 10s |
+| 02 | `highlight-02.mp4` | `Alans WORBY - SD 480p.mov` | 20s–25s |
 
 Encoded 1280px wide, H.264, no audio track, `+faststart`. To swap one, re-encode
 to the same filename:
