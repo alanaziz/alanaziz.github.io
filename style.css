@@ -537,12 +537,7 @@ body{overflow-x:hidden}
   line-height:1.85;
   color:var(--muted);
 }
-.collab-note a{
-  color:var(--cream);
-  border-bottom:1px solid var(--line);
-  transition:border-color .15s ease;
-}
-.collab-note a:hover{border-color:var(--cream)}
+.collab-cta{margin-top:22px}
 
 /* ---------- footer ---------- */
 
