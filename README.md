@@ -72,6 +72,16 @@ ffmpeg -ss 1 -i assets/video/highlight-0N.mp4 -frames:v 1 -q:v 6 assets/poster/h
 
 The label under each clip is the `data-label` attribute on its `<video>`.
 
+## Click sound
+
+`assets/click-sfx.js` plays `assets/sfx/click.mp3` on any real button — the
+`.btn` component, the highlight-reel controls, and the gear page's grid/list
+toggle — via one delegated click listener matching `.btn, .hl-bar, .hl-zone,
+[data-view]`. Plain nav and text links are left alone. Included with an
+absolute `/assets/...` path on both pages so the one file works from `/gear/`
+too. The audio element is cloned per click so a fast double-click doesn't cut
+the sound off mid-play.
+
 ## Gear page
 
 `gear/index.html` serves at **/gear/** — the kit list, grouped by category. It
