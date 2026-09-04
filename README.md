@@ -45,16 +45,18 @@ history if the logo is ever replaced.
 
 ## Highlight reel
 
-The hero panel plays three clips as an Instagram-style highlight: segment bars,
+The hero panel plays clips as an Instagram-style highlight: segment bars,
 click the left/right thirds to step, auto-advances and loops, muted by default
 with a SOUND toggle. Files live in `assets/video/` with matching posters in
-`assets/poster/`.
+`assets/poster/`. The bars and JS both size themselves off however many
+`.hl-video` elements are on the page, so adding or removing a slot is just
+adding/removing a matching `<button class="hl-bar">` / `<video class="hl-video">`
+pair and renumbering the `aria-label`s and `data-go` indices.
 
-| Slot | File | Source |
-|------|------|--------|
-| 01 | `highlight-01.mp4` | `no battery4.mp4` |
-| 02 | `highlight-02.mp4` | `HOTO_FINAL .mp4` |
-| 03 | `highlight-03.mp4` | `moist.mp4` |
+| Slot | File | Source | Trim |
+|------|------|--------|------|
+| 01 | `highlight-01.mp4` | `KTM 390 launching event.mp4` | first 12s |
+| 02 | `highlight-02.mp4` | `Bersama Ahmad.mp4` | first 10s |
 
 Encoded 1280px wide, H.264, no audio track, `+faststart`. To swap one, re-encode
 to the same filename:
