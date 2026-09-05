@@ -174,11 +174,13 @@
           <label class="sr-only" for="kit-ask">What are you looking to do?</label>
           <textarea class="term-input term-textarea" id="kit-ask" name="ask" rows="3" placeholder="a first-look review, a field test, an ongoing series..."></textarea>
 
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
           <div class="term-actions">
             <button class="term-submit" type="submit" id="kit-submit" disabled>REQUEST PDF</button>
             <button class="term-submit term-submit--ghost" type="submit" id="kit-send-message" disabled>SEND MESSAGE</button>
           </div>
-          <p class="kit-form-hint">Opens a pre-filled email to alanazizreview@gmail.com — nothing is sent automatically.</p>
+          <p class="kit-form-hint" id="kit-form-hint" role="status" aria-live="polite">Sends straight to me — you'll see a confirmation here.</p>
         </form>
       </div>
     </div>
@@ -207,11 +209,14 @@
   var form = document.getElementById('kit-request-form');
   if (!form) return;
 
+  var FORMSPREE_ENDPOINT = 'https://formspree.io/f/xqpklnlv';
+
   var nameInput = form.name;
   var emailInput = form.email;
   var brandInput = form.brand;
   var requestBtn = document.getElementById('kit-submit');
   var messageBtn = document.getElementById('kit-send-message');
+  var hint = document.getElementById('kit-form-hint');
 
   function updateSubmitState() {
     var ready = emailInput.value.trim() !== '' &&
@@ -224,6 +229,12 @@
   });
   updateSubmitState();
 
+  function setHint(text, state) {
+    hint.textContent = text;
+    if (state) { hint.setAttribute('data-state', state); }
+    else { hint.removeAttribute('data-state'); }
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = nameInput.value.trim();
@@ -232,17 +243,33 @@
     var ask = form.ask.value.trim();
     var wantsPdf = e.submitter ? e.submitter.id !== 'kit-send-message' : true;
 
-    var subject = (wantsPdf ? 'Media kit request — ' : 'Message from ') + (brand || name);
-    var body =
-      (name ? 'Name: ' + name + '\n' : '') +
-      'Email: ' + email + '\n' +
-      (brand ? 'Brand: ' + brand + '\n' : '') +
-      (wantsPdf ? '\nRequesting the PDF media kit.\n' : '') +
-      '\nWhat they are looking to do:\n' + ask;
+    var fd = new FormData(form);
+    fd.set('type', wantsPdf ? 'PDF request' : 'Message');
+    fd.set('_subject', (wantsPdf ? 'Media kit request — ' : 'Message from ') + (brand || name || email));
 
-    window.location.href = 'mailto:alanazizreview@gmail.com' +
-      '?subject=' + encodeURIComponent(subject) +
-      '&body=' + encodeURIComponent(body);
+    requestBtn.disabled = true;
+    messageBtn.disabled = true;
+    setHint('Sending…', null);
+
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: fd
+    }).then(function (res) {
+      if (res.ok) {
+        form.reset();
+        setHint("Sent — thanks, I'll reply personally.", 'ok');
+      } else {
+        return res.json().catch(function () { return null; }).then(function (data) {
+          var msg = data && data.errors && data.errors.map(function (err) { return err.message; }).join(', ');
+          throw new Error(msg || 'Request failed');
+        });
+      }
+    }).catch(function () {
+      setHint('Something went wrong — email me directly at alanazizreview@gmail.com', 'error');
+    }).finally(function () {
+      updateSubmitState();
+    });
   });
 })();
 </script>
