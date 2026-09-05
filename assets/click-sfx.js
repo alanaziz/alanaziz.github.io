@@ -11,7 +11,7 @@
    the click to be heard. External links (target=_blank) and mailto:
    don't unload the current tab, so they're left to navigate at once. */
 (function () {
-  var SELECTOR = '.btn, .hl-bar, .hl-zone, [data-view], .gear-item, .collab-logo';
+  var SELECTOR = '.btn, .term-submit, .hl-bar, .hl-zone, [data-view], .gear-item, .collab-logo';
   var src = '/assets/sfx/click.mp3';
   var NAV_DELAY = 150;
 
