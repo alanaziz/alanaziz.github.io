@@ -90,16 +90,29 @@ body{overflow-x:hidden}
 .nav{
   display:flex;
   align-items:center;
-  gap:36px;
+  gap:10px;
   margin-left:auto;
   font-size:12.5px;
   letter-spacing:.16em;
   color:var(--muted);
 }
-.nav a{transition:color .15s ease}
+.nav a{
+  padding:10px 18px;
+  border-radius:98px;
+  background:var(--panel-2);
+  box-shadow:
+    4px 4px 8px 0 rgba(0,0,0,.5),
+    -3px -3px 7px 0 rgba(239,236,227,.05);
+  transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
+}
 
 .nav a:hover,
-.nav a[aria-current="page"]{color:var(--cream)}
+.nav a[aria-current="page"]{
+  color:var(--cream);
+  box-shadow:
+    inset 3px 3px 6px 0 rgba(0,0,0,.55),
+    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+}
 
 /* every .btn is neumorphic by default now — raised panel-gray pill that
    presses inward on hover/active. .btn--newphoria is kept as an alias so
@@ -356,31 +369,35 @@ body{overflow-x:hidden}
   color:var(--muted);
 }
 
-/* the active tab wears the brackets, like the wordmark does */
 .filters{
   display:flex;
   flex-wrap:wrap;
-  gap:8px 28px;
+  gap:10px;
   padding-bottom:30px;
   border-bottom:1px solid var(--line-soft);
 }
 
-/* the categories are sections now, so these are jump links, not filters */
+/* the categories are sections now, so these are jump links, not filters —
+   neumorphic pills, same raised/inset language as the header nav */
 .filters a{
+  padding:10px 18px;
   font-size:12.5px;
   letter-spacing:.16em;
+  border-radius:98px;
+  background:var(--panel-2);
   color:var(--muted);
-  transition:color .15s ease;
+  box-shadow:
+    4px 4px 8px 0 rgba(0,0,0,.5),
+    -3px -3px 7px 0 rgba(239,236,227,.05);
+  transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
 }
 .filters a:hover,
-.filters a:focus-visible{color:var(--cream)}
-
-/* the section being pointed at wears the brackets; margins not spaces,
-   because the links become flex at 700px and would eat the whitespace */
-.filters a::before{content:"[";margin-right:.55em;color:transparent}
-.filters a::after{content:"]";margin-left:.55em;color:transparent}
-.filters a:hover::before,
-.filters a:hover::after{color:var(--muted-2)}
+.filters a:focus-visible{
+  color:var(--cream);
+  box-shadow:
+    inset 3px 3px 6px 0 rgba(0,0,0,.55),
+    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+}
 
 /* filters left, view toggle right, on one line */
 .gear-bar{
@@ -848,11 +865,6 @@ body{overflow-x:hidden}
 .kit-hero{
   padding:36px 40px 8px;
   margin:6px 0 8px;
-  border-radius:22px;
-  background:var(--panel-2);
-  box-shadow:
-    7px 6px 14px 0 rgba(0,0,0,.55),
-    -4px -4px 10px 0 rgba(239,236,227,.05);
 }
 .kit-hero .page-head{padding:20px 0 34px}
 
@@ -873,20 +885,7 @@ body{overflow-x:hidden}
   gap:24px;
   padding:24px 0 8px;
 }
-.kit-pillar{
-  position:relative;
-  padding:22px;
-  border-radius:14px;
-  background-color:var(--panel-2);
-  box-shadow:
-    7px 6px 14px 0 rgba(0,0,0,.55),
-    -4px -4px 10px 0 rgba(239,236,227,.05),
-    /* two cards peeking out behind, so the block reads as a stack */
-    5px 7px 0 -3px var(--panel),
-    5px 7px 0 -2px var(--line-soft),
-    9px 13px 0 -6px var(--panel),
-    9px 13px 0 -5px var(--line-soft);
-}
+.kit-pillar{padding:22px}
 .kit-pillar h3{
   margin:0 0 10px;
   font-size:15px;
@@ -942,26 +941,15 @@ body{overflow-x:hidden}
   color:var(--muted-2);
 }
 
-/* draggable, auto-scrolling strip (see the script at the foot of the media
-   kit page) — .kit-work-clip is duplicated once by that script for a
-   seamless loop, then dragged by hand or nudged along by an idle scroll
-   that briefly speeds up while the page itself is being scrolled */
+/* static grid — no auto-scroll, no drag */
 .kit-work{
-  display:flex;
-  flex-wrap:nowrap;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
   gap:20px;
   padding:24px 0 8px;
-  overflow-x:auto;
-  overscroll-behavior-x:contain;
-  cursor:grab;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
 }
-.kit-work::-webkit-scrollbar{display:none}
-.kit-work.is-dragging{cursor:grabbing;scroll-snap-type:none}
 .kit-work-clip{
   position:relative;
-  flex:0 0 220px;
   aspect-ratio:9/11;
   overflow:hidden;
   border-radius:14px;
@@ -971,9 +959,7 @@ body{overflow-x:hidden}
     7px 6px 14px 0 rgba(0,0,0,.55),
     -4px -4px 10px 0 rgba(239,236,227,.05);
   transition:box-shadow .4s cubic-bezier(.2,-0.2,1,1);
-  -webkit-user-drag:none;
 }
-.kit-work-clip img{-webkit-user-drag:none;user-select:none}
 .kit-work-clip:hover,
 .kit-work-clip:active{
   box-shadow:
@@ -1258,8 +1244,7 @@ body{overflow-x:hidden}
 
   .kit-pillars,.kit-stats{grid-template-columns:1fr 1fr;gap:14px}
   .kit-pillar,.stat-card{padding:16px}
-  .kit-work{gap:12px}
-  .kit-work-clip{flex-basis:160px}
+  .kit-work{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .kit-form{padding:18px}
   .term-row{grid-template-columns:1fr}
 }
