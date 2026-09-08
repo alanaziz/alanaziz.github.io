@@ -101,6 +101,9 @@ body{overflow-x:hidden}
 .nav a:hover,
 .nav a[aria-current="page"]{color:var(--cream)}
 
+/* every .btn is neumorphic by default now — raised panel-gray pill that
+   presses inward on hover/active. .btn--newphoria is kept as an alias so
+   older markup still matches. */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -110,41 +113,39 @@ body{overflow-x:hidden}
   font:inherit;
   font-size:12.5px;
   letter-spacing:.16em;
-  border:1px solid var(--line);
-  background:none;
-  color:var(--cream);
-  cursor:pointer;
-  transition:background-color .16s ease,border-color .16s ease,color .16s ease;
-}
-.btn:hover{border-color:var(--cream)}
-
-.btn--solid{
-  background:var(--cream);
-  border-color:var(--cream);
-  color:#0A0A0B;
-}
-.btn--solid:hover{background:#fff;border-color:#fff}
-
-/* Newphoria: neumorphic pill, re-derived from a Framer reference button
-   in this site's dark palette (raised panel-gray + inset press on hover) */
-.btn--newphoria{
   border:none;
   border-radius:98px;
   background:var(--panel-2);
   color:var(--cream);
+  cursor:pointer;
   box-shadow:
     7px 6px 14px 0 rgba(0,0,0,.55),
     -4px -4px 10px 0 rgba(239,236,227,.05);
-  transition:box-shadow .4s cubic-bezier(.2,-0.2,1,1),background-color .4s ease;
+  transition:box-shadow .4s cubic-bezier(.2,-0.2,1,1),background-color .4s ease,color .16s ease;
 }
-.btn--newphoria:hover,
-.btn--newphoria:active{
-  border-color:transparent;
-  background:var(--panel-2);
+.btn:hover,
+.btn:active{
   box-shadow:
     inset 3px 3px 6px 0 rgba(0,0,0,.55),
     inset -2px -2px 6px 0 rgba(239,236,227,.06);
 }
+
+.btn--solid{
+  background:var(--cream);
+  color:#0A0A0B;
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.4),
+    -4px -4px 10px 0 rgba(255,255,255,.5);
+}
+.btn--solid:hover,
+.btn--solid:active{
+  background:#fff;
+  box-shadow:
+    inset 3px 3px 6px 0 rgba(0,0,0,.18),
+    inset -2px -2px 6px 0 rgba(255,255,255,.6);
+}
+
+.btn--newphoria{border:none}
 
 /* ---------- hero ---------- */
 
@@ -267,6 +268,9 @@ body{overflow-x:hidden}
   border:1px solid var(--line-soft);
   background:var(--panel);
   isolation:isolate;
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.55),
+    -4px -4px 10px 0 rgba(239,236,227,.05);
 }
 
 .hl-video{
@@ -304,6 +308,7 @@ body{overflow-x:hidden}
   height:2px;
   border-radius:2px;
   background:rgba(239,236,227,.28);
+  box-shadow:inset 1px 1px 2px 0 rgba(0,0,0,.6);
   overflow:hidden;
 }
 .hl-bar i::after{
@@ -394,22 +399,29 @@ body{overflow-x:hidden}
 
 .views{
   display:flex;
-  gap:8px 20px;
+  gap:8px 10px;
   flex-shrink:0;
 }
 .views button{
-  padding:0;
+  padding:8px 16px;
   font:inherit;
   font-size:12.5px;
   letter-spacing:.16em;
   background:none;
   border:0;
+  border-radius:98px;
   color:var(--muted-2);
   cursor:pointer;
-  transition:color .15s ease;
+  transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
 }
 .views button:hover{color:var(--cream)}
-.views button[aria-pressed="true"]{color:var(--cream)}
+.views button[aria-pressed="true"]{
+  color:var(--cream);
+  background:var(--panel-2);
+  box-shadow:
+    inset 3px 3px 6px 0 rgba(0,0,0,.55),
+    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+}
 
 /* ---------- gear: category sections ---------- */
 
@@ -478,6 +490,11 @@ body{overflow-x:hidden}
   display:flex;
   flex-direction:column;
   padding:20px;
+  border-radius:14px;
+  background-color:var(--panel-2);
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.55),
+    -4px -4px 10px 0 rgba(239,236,227,.05);
   background-repeat:no-repeat;
   background-image:
     linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
@@ -526,10 +543,22 @@ body{overflow-x:hidden}
 
 /* the whole card is a trigger — cursor + a faint lift on hover/focus so it
    reads as clickable without touching the bracket-frame background */
-.gear-item{cursor:pointer;transition:transform .15s ease}
+.gear-item{cursor:pointer;transition:transform .15s ease,box-shadow .4s cubic-bezier(.2,-0.2,1,1)}
 .gear-item:hover,
-.gear-item:focus-visible{transform:translateY(-2px)}
+.gear-item:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:
+    9px 8px 18px 0 rgba(0,0,0,.6),
+    -5px -5px 12px 0 rgba(239,236,227,.06);
+}
+.gear-item:active{
+  transform:translateY(0);
+  box-shadow:
+    inset 3px 3px 6px 0 rgba(0,0,0,.55),
+    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+}
 .gear-item:focus-visible{outline:2px solid var(--cream);outline-offset:4px}
+.is-list .gear-item{background:none;box-shadow:none;border-radius:0}
 
 /* ---------- gear: detail popup ---------- */
 
@@ -594,14 +623,22 @@ body{overflow-x:hidden}
   justify-content:center;
   font:inherit;
   font-size:15px;
-  background:none;
-  border:1px solid var(--line);
+  background:var(--panel-2);
+  border:none;
   border-radius:50%;
   color:var(--muted);
   cursor:pointer;
-  transition:color .15s ease,border-color .15s ease;
+  box-shadow:
+    4px 4px 8px 0 rgba(0,0,0,.55),
+    -3px -3px 7px 0 rgba(239,236,227,.05);
+  transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
 }
-.gear-modal-close:hover{color:var(--cream);border-color:var(--cream)}
+.gear-modal-close:hover{color:var(--cream)}
+.gear-modal-close:active{
+  box-shadow:
+    inset 2px 2px 4px 0 rgba(0,0,0,.55),
+    inset -2px -2px 4px 0 rgba(239,236,227,.06);
+}
 
 .gear-modal-media{
   display:block;
@@ -836,7 +873,20 @@ body{overflow-x:hidden}
   gap:24px;
   padding:24px 0 8px;
 }
-.kit-pillar{padding:22px}
+.kit-pillar{
+  position:relative;
+  padding:22px;
+  border-radius:14px;
+  background-color:var(--panel-2);
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.55),
+    -4px -4px 10px 0 rgba(239,236,227,.05),
+    /* two cards peeking out behind, so the block reads as a stack */
+    5px 7px 0 -3px var(--panel),
+    5px 7px 0 -2px var(--line-soft),
+    9px 13px 0 -6px var(--panel),
+    9px 13px 0 -5px var(--line-soft);
+}
 .kit-pillar h3{
   margin:0 0 10px;
   font-size:15px;
@@ -858,10 +908,20 @@ body{overflow-x:hidden}
   padding:24px 0 8px;
 }
 .stat-card{
+  position:relative;
   padding:22px;
   display:flex;
   flex-direction:column;
   gap:6px;
+  border-radius:14px;
+  background-color:var(--panel-2);
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.55),
+    -4px -4px 10px 0 rgba(239,236,227,.05),
+    5px 7px 0 -3px var(--panel),
+    5px 7px 0 -2px var(--line-soft),
+    9px 13px 0 -6px var(--panel),
+    9px 13px 0 -5px var(--line-soft);
 }
 .stat-value{
   font-size:28px;
@@ -882,14 +942,26 @@ body{overflow-x:hidden}
   color:var(--muted-2);
 }
 
+/* draggable, auto-scrolling strip (see the script at the foot of the media
+   kit page) — .kit-work-clip is duplicated once by that script for a
+   seamless loop, then dragged by hand or nudged along by an idle scroll
+   that briefly speeds up while the page itself is being scrolled */
 .kit-work{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  display:flex;
+  flex-wrap:nowrap;
   gap:20px;
   padding:24px 0 8px;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  cursor:grab;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
 }
+.kit-work::-webkit-scrollbar{display:none}
+.kit-work.is-dragging{cursor:grabbing;scroll-snap-type:none}
 .kit-work-clip{
   position:relative;
+  flex:0 0 220px;
   aspect-ratio:9/11;
   overflow:hidden;
   border-radius:14px;
@@ -899,7 +971,9 @@ body{overflow-x:hidden}
     7px 6px 14px 0 rgba(0,0,0,.55),
     -4px -4px 10px 0 rgba(239,236,227,.05);
   transition:box-shadow .4s cubic-bezier(.2,-0.2,1,1);
+  -webkit-user-drag:none;
 }
+.kit-work-clip img{-webkit-user-drag:none;user-select:none}
 .kit-work-clip:hover,
 .kit-work-clip:active{
   box-shadow:
@@ -920,11 +994,28 @@ body{overflow-x:hidden}
   text-shadow:0 1px 6px rgba(0,0,0,.7);
 }
 
+/* same infinite-loop marquee as the homepage's .collab-marquee — two
+   identical .kit-brands-grid copies inside .kit-brands-track, so
+   translateX(-50%) loops seamlessly (reuses @keyframes collab-scroll) */
 .kit-brands{
+  margin-top:20px;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+          mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+}
+.kit-brands-track{
   display:flex;
-  flex-wrap:wrap;
+  width:max-content;
+  animation:collab-scroll 30s linear infinite;
+}
+.kit-brands:hover .kit-brands-track,
+.kit-brands:focus-within .kit-brands-track{animation-play-state:paused}
+.kit-brands-grid{
+  display:flex;
+  flex-wrap:nowrap;
+  flex:none;
   gap:12px;
-  padding:20px 0 8px;
+  padding-right:12px;
 }
 
 .kit-note{
@@ -1167,7 +1258,8 @@ body{overflow-x:hidden}
 
   .kit-pillars,.kit-stats{grid-template-columns:1fr 1fr;gap:14px}
   .kit-pillar,.stat-card{padding:16px}
-  .kit-work{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .kit-work{gap:12px}
+  .kit-work-clip{flex-basis:160px}
   .kit-form{padding:18px}
   .term-row{grid-template-columns:1fr}
 }
