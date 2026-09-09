@@ -4,15 +4,20 @@
    ============================================================ */
 
 :root{
-  --bg:#0A0A0B;
-  --panel:#131314;
-  --panel-2:#171718;
-  --cream:#EFECE3;
-  --ink:#EFECE3;
-  --muted:#8B8B86;
-  --muted-2:#6A6A66;
-  --line:rgba(239,236,227,.14);
-  --line-soft:rgba(239,236,227,.08);
+  /* Seven neutrals, one job each. #000 is the shadow, not the canvas —
+     neumorphism needs a mid-tone surface that can cast both a darker
+     shadow and a lighter highlight, so everything extrudes from #222. */
+  --bg:#222222;        /* the single surface: canvas and raised panels alike */
+  --panel:#222222;
+  --panel-2:#222222;
+  --shadow:#000000;    /* bottom-right recess */
+  --press:#313131;     /* pressed-state fill */
+  --ink-hi:#F7F7F7;    /* headings, gear names, emphasis */
+  --ink:#E5E7EB;       /* body copy — the conversational voice */
+  --muted:#E0E0E0;     /* eyebrows, nav, captions */
+  --muted-2:rgba(224,224,224,.5);
+  --line:rgba(255,255,255,.16);      /* hairline — every control carries one */
+  --line-soft:rgba(255,255,255,.09);
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 
   --gutter:40px;
@@ -41,7 +46,7 @@ a,button{-webkit-tap-highlight-color:transparent}
 body{overflow-x:hidden}
 
 :focus-visible{
-  outline:2px solid var(--cream);
+  outline:2px solid var(--ink-hi);
   outline-offset:3px;
 }
 
@@ -54,7 +59,7 @@ body{overflow-x:hidden}
 
 .skip{
   position:absolute;left:-9999px;top:0;
-  background:var(--cream);color:#0A0A0B;
+  background:var(--ink-hi);color:#0A0A0B;
   padding:10px 16px;z-index:10;
 }
 .skip:focus{left:var(--gutter);top:12px}
@@ -76,7 +81,7 @@ body{overflow-x:hidden}
   font-weight:700;
   letter-spacing:clamp(.10em,.62vw,.24em);
   white-space:nowrap;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 .wordmark-text span{color:var(--muted-2);font-weight:400}
 
@@ -99,19 +104,20 @@ body{overflow-x:hidden}
 .nav a{
   padding:10px 18px;
   border-radius:98px;
+  border:1px solid var(--line);
   background:var(--panel-2);
   box-shadow:
     4px 4px 8px 0 rgba(0,0,0,.5),
-    -3px -3px 7px 0 rgba(239,236,227,.05);
+    -3px -3px 7px 0 rgba(255,255,255,.06);
   transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
 }
 
 .nav a:hover,
 .nav a[aria-current="page"]{
-  color:var(--cream);
+  color:var(--ink-hi);
   box-shadow:
     inset 3px 3px 6px 0 rgba(0,0,0,.55),
-    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+    inset -2px -2px 6px 0 rgba(255,255,255,.07);
 }
 
 /* every .btn is neumorphic by default now — raised panel-gray pill that
@@ -126,26 +132,29 @@ body{overflow-x:hidden}
   font:inherit;
   font-size:12.5px;
   letter-spacing:.16em;
-  border:none;
+  /* the hairline is not decoration — affordance must never depend on the
+     shadow alone, which is the failure mode of this whole style */
+  border:1px solid var(--line);
   border-radius:98px;
   background:var(--panel-2);
-  color:var(--cream);
+  color:var(--ink-hi);
   cursor:pointer;
   box-shadow:
     7px 6px 14px 0 rgba(0,0,0,.55),
-    -4px -4px 10px 0 rgba(239,236,227,.05);
+    -4px -4px 10px 0 rgba(255,255,255,.06);
   transition:box-shadow .4s cubic-bezier(.2,-0.2,1,1),background-color .4s ease,color .16s ease;
 }
 .btn:hover,
 .btn:active{
   box-shadow:
     inset 3px 3px 6px 0 rgba(0,0,0,.55),
-    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+    inset -2px -2px 6px 0 rgba(255,255,255,.07);
 }
 
 .btn--solid{
-  background:var(--cream);
-  color:#0A0A0B;
+  background:var(--ink-hi);
+  color:#000000;
+  border-color:var(--ink-hi);
   box-shadow:
     7px 6px 14px 0 rgba(0,0,0,.4),
     -4px -4px 10px 0 rgba(255,255,255,.5);
@@ -158,7 +167,7 @@ body{overflow-x:hidden}
     inset -2px -2px 6px 0 rgba(255,255,255,.6);
 }
 
-.btn--newphoria{border:none}
+.btn--newphoria{border:1px solid var(--line)}
 
 /* ---------- hero ---------- */
 
@@ -216,7 +225,7 @@ body{overflow-x:hidden}
   line-height:.92;
   letter-spacing:.01em;
   white-space:nowrap;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 
 .hero-sub{
@@ -224,7 +233,7 @@ body{overflow-x:hidden}
   font-size:clamp(1rem,1.55vw,1.5rem);
   font-weight:500;
   letter-spacing:.2em;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 
 /* both paragraphs share one size, colour and measure so they read as one block */
@@ -278,12 +287,11 @@ body{overflow-x:hidden}
   aspect-ratio:16/11;
   overflow:hidden;
   border-radius:14px;
-  border:1px solid var(--line-soft);
+  /* flat: the reel frames the work, it isn't something you press. The
+     extrusion is spent on the scrubber inside it instead. */
+  border:1px solid var(--line);
   background:var(--panel);
   isolation:isolate;
-  box-shadow:
-    7px 6px 14px 0 rgba(0,0,0,.55),
-    -4px -4px 10px 0 rgba(239,236,227,.05);
 }
 
 .hl-video{
@@ -320,7 +328,7 @@ body{overflow-x:hidden}
   width:100%;
   height:2px;
   border-radius:2px;
-  background:rgba(239,236,227,.28);
+  background:rgba(255,255,255,.22);
   box-shadow:inset 1px 1px 2px 0 rgba(0,0,0,.6);
   overflow:hidden;
 }
@@ -329,7 +337,7 @@ body{overflow-x:hidden}
   display:block;
   height:100%;
   width:var(--p,0%);
-  background:var(--cream);
+  background:var(--ink-hi);
 }
 .hl-bar.is-done i::after{width:100%}
 
@@ -359,7 +367,7 @@ body{overflow-x:hidden}
   font-weight:800;
   line-height:.96;
   letter-spacing:.02em;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 
 .page-sub{
@@ -384,19 +392,20 @@ body{overflow-x:hidden}
   font-size:12.5px;
   letter-spacing:.16em;
   border-radius:98px;
+  border:1px solid var(--line);
   background:var(--panel-2);
   color:var(--muted);
   box-shadow:
     4px 4px 8px 0 rgba(0,0,0,.5),
-    -3px -3px 7px 0 rgba(239,236,227,.05);
+    -3px -3px 7px 0 rgba(255,255,255,.06);
   transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
 }
 .filters a:hover,
 .filters a:focus-visible{
-  color:var(--cream);
+  color:var(--ink-hi);
   box-shadow:
     inset 3px 3px 6px 0 rgba(0,0,0,.55),
-    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+    inset -2px -2px 6px 0 rgba(255,255,255,.07);
 }
 
 /* filters left, view toggle right, on one line */
@@ -425,19 +434,20 @@ body{overflow-x:hidden}
   font-size:12.5px;
   letter-spacing:.16em;
   background:none;
-  border:0;
+  border:1px solid transparent;
   border-radius:98px;
   color:var(--muted-2);
   cursor:pointer;
   transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
 }
-.views button:hover{color:var(--cream)}
+.views button:hover{color:var(--ink-hi)}
 .views button[aria-pressed="true"]{
-  color:var(--cream);
-  background:var(--panel-2);
+  color:var(--ink-hi);
+  background:var(--press);
+  border-color:var(--line);
   box-shadow:
     inset 3px 3px 6px 0 rgba(0,0,0,.55),
-    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+    inset -2px -2px 6px 0 rgba(255,255,255,.07);
 }
 
 /* ---------- gear: category sections ---------- */
@@ -455,7 +465,7 @@ body{overflow-x:hidden}
   font-size:13px;
   font-weight:500;
   letter-spacing:.22em;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 /* scrolled-to headings shouldn't hide under the top of the viewport */
 .gear-group{scroll-margin-top:24px}
@@ -487,7 +497,7 @@ body{overflow-x:hidden}
   transition:background-color .16s ease;
 }
 .is-list .gear-item:last-child{border-bottom:0}
-.is-list .gear-item:hover{background:rgba(239,236,227,.025)}
+.is-list .gear-item:hover{background:rgba(255,255,255,.04)}
 
 .is-list .gear-media{
   margin-top:0;
@@ -508,10 +518,10 @@ body{overflow-x:hidden}
   flex-direction:column;
   padding:20px;
   border-radius:14px;
+  /* flat too — a card is a surface to read, not a control. Its corner
+     bracket frame already separates it from the canvas. */
+  border:1px solid var(--line-soft);
   background-color:var(--panel-2);
-  box-shadow:
-    7px 6px 14px 0 rgba(0,0,0,.55),
-    -4px -4px 10px 0 rgba(239,236,227,.05);
   background-repeat:no-repeat;
   background-image:
     linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
@@ -536,7 +546,7 @@ body{overflow-x:hidden}
   font-weight:500;
   letter-spacing:.04em;
   line-height:1.35;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 
 /* the slot and the photo that replaces it must occupy identical space */
@@ -564,18 +574,14 @@ body{overflow-x:hidden}
 .gear-item:hover,
 .gear-item:focus-visible{
   transform:translateY(-2px);
-  box-shadow:
-    9px 8px 18px 0 rgba(0,0,0,.6),
-    -5px -5px 12px 0 rgba(239,236,227,.06);
+  border-color:var(--line);
 }
 .gear-item:active{
   transform:translateY(0);
-  box-shadow:
-    inset 3px 3px 6px 0 rgba(0,0,0,.55),
-    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+  background-color:var(--press);
 }
-.gear-item:focus-visible{outline:2px solid var(--cream);outline-offset:4px}
-.is-list .gear-item{background:none;box-shadow:none;border-radius:0}
+.gear-item:focus-visible{outline:2px solid var(--ink-hi);outline-offset:4px}
+.is-list .gear-item{background:none;box-shadow:none;border:0;border-radius:0}
 
 /* ---------- gear: detail popup ---------- */
 
@@ -593,7 +599,7 @@ body{overflow-x:hidden}
 .gear-modal-backdrop{
   position:absolute;
   inset:0;
-  background:rgba(10,10,11,.78);
+  background:rgba(0,0,0,.8);
   backdrop-filter:blur(3px);
   animation:gear-fade .18s ease;
 }
@@ -641,20 +647,20 @@ body{overflow-x:hidden}
   font:inherit;
   font-size:15px;
   background:var(--panel-2);
-  border:none;
+  border:1px solid var(--line);
   border-radius:50%;
   color:var(--muted);
   cursor:pointer;
   box-shadow:
     4px 4px 8px 0 rgba(0,0,0,.55),
-    -3px -3px 7px 0 rgba(239,236,227,.05);
+    -3px -3px 7px 0 rgba(255,255,255,.06);
   transition:color .15s ease,box-shadow .3s cubic-bezier(.2,-0.2,1,1);
 }
-.gear-modal-close:hover{color:var(--cream)}
+.gear-modal-close:hover{color:var(--ink-hi)}
 .gear-modal-close:active{
   box-shadow:
     inset 2px 2px 4px 0 rgba(0,0,0,.55),
-    inset -2px -2px 4px 0 rgba(239,236,227,.06);
+    inset -2px -2px 4px 0 rgba(255,255,255,.07);
 }
 
 .gear-modal-media{
@@ -672,7 +678,7 @@ body{overflow-x:hidden}
   font-weight:500;
   letter-spacing:.04em;
   line-height:1.35;
-  color:var(--cream);
+  color:var(--ink-hi);
   padding-right:28px;
 }
 
@@ -727,7 +733,7 @@ body{overflow-x:hidden}
   font-size:13px;
   font-weight:500;
   letter-spacing:.22em;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 
 .sr-only{
@@ -773,7 +779,7 @@ body{overflow-x:hidden}
   justify-content:center;
   height:60px;
   padding:0 18px;
-  background:#fff;
+  background:var(--ink-hi);
   border-radius:8px;
 }
 .collab-logo img,
@@ -811,7 +817,7 @@ body{overflow-x:hidden}
   color:var(--muted);
   transition:color .15s ease;
 }
-.foot-ig:hover{color:var(--cream)}
+.foot-ig:hover{color:var(--ink-hi)}
 .foot-ig img{
   display:block;
   opacity:.7;
@@ -891,7 +897,7 @@ body{overflow-x:hidden}
   font-size:15px;
   font-weight:500;
   letter-spacing:.04em;
-  color:var(--cream);
+  color:var(--ink-hi);
 }
 .kit-pillar p{
   margin:0;
@@ -914,9 +920,10 @@ body{overflow-x:hidden}
   gap:6px;
   border-radius:14px;
   background-color:var(--panel-2);
+  border:1px solid var(--line-soft);
+  /* depth here comes from the stacked offsets, not from an extrusion —
+     a stat card is read, not pressed */
   box-shadow:
-    7px 6px 14px 0 rgba(0,0,0,.55),
-    -4px -4px 10px 0 rgba(239,236,227,.05),
     5px 7px 0 -3px var(--panel),
     5px 7px 0 -2px var(--line-soft),
     9px 13px 0 -6px var(--panel),
@@ -928,7 +935,7 @@ body{overflow-x:hidden}
   color:var(--muted-2);
   letter-spacing:.02em;
 }
-.stat-value.is-set{color:var(--cream)}
+.stat-value.is-set{color:var(--ink-hi)}
 .stat-label{
   font-size:11.5px;
   letter-spacing:.14em;
@@ -953,18 +960,13 @@ body{overflow-x:hidden}
   aspect-ratio:9/11;
   overflow:hidden;
   border-radius:14px;
-  border:none;
+  border:1px solid var(--line-soft);
   background:var(--panel-2);
-  box-shadow:
-    7px 6px 14px 0 rgba(0,0,0,.55),
-    -4px -4px 10px 0 rgba(239,236,227,.05);
-  transition:box-shadow .4s cubic-bezier(.2,-0.2,1,1);
+  transition:border-color .3s ease;
 }
 .kit-work-clip:hover,
 .kit-work-clip:active{
-  box-shadow:
-    inset 3px 3px 6px 0 rgba(0,0,0,.55),
-    inset -2px -2px 6px 0 rgba(239,236,227,.06);
+  border-color:var(--ink-hi);
 }
 .kit-work-clip video{
   position:absolute;inset:0;
@@ -976,7 +978,7 @@ body{overflow-x:hidden}
   left:12px;bottom:12px;
   font-size:11px;
   letter-spacing:.1em;
-  color:var(--cream);
+  color:var(--ink-hi);
   text-shadow:0 1px 6px rgba(0,0,0,.7);
 }
 
@@ -1043,7 +1045,7 @@ body{overflow-x:hidden}
 }
 .kit-field input:focus-visible,
 .kit-field textarea:focus-visible{
-  outline:2px solid var(--cream);
+  outline:2px solid var(--ink-hi);
   outline-offset:2px;
 }
 .kit-form .btn{
