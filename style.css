@@ -364,18 +364,19 @@ body{overflow-x:hidden}
 
 .page-head h1{
   margin:0;
-  font-size:clamp(2rem,4.4vw,3.6rem);
+  font-size:clamp(2.4rem,5.4vw,5.6rem);
   font-weight:800;
-  line-height:.96;
-  letter-spacing:.02em;
+  line-height:.92;
+  letter-spacing:.01em;
   color:var(--ink-hi);
 }
 
 .page-sub{
-  margin:16px 0 0;
-  font-size:clamp(.8rem,1.1vw,.95rem);
+  margin:20px 0 0;
+  font-size:clamp(1rem,1.55vw,1.5rem);
+  font-weight:500;
   letter-spacing:.2em;
-  color:var(--muted);
+  color:var(--ink-hi);
 }
 
 .filters{
@@ -902,7 +903,15 @@ body{overflow-x:hidden}
   gap:24px;
   padding:24px 0 8px;
 }
-.kit-pillar{padding:22px}
+.kit-pillar{
+  padding:22px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel-2);
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.55),
+    -4px -4px 10px 0 rgba(255,255,255,.06);
+}
 .kit-pillar h3{
   margin:0 0 10px;
   font-size:15px;
