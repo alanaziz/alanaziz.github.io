@@ -1081,111 +1081,6 @@ body{overflow-x:hidden}
 .kit-form-hint[data-state="ok"]{color:#28C840;opacity:.85}
 .kit-form-hint[data-state="error"]{color:#FF5F57;opacity:.85}
 
-.term-window{
-  margin-top:20px;
-  max-width:640px;
-  border-radius:8px;
-  overflow:hidden;
-  border:1px solid var(--line);
-  background:#1e1e1e;
-  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-}
-.term-titlebar{
-  position:relative;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 14px;
-  background:#3a3a3c;
-  border-bottom:1px solid var(--line);
-}
-.term-dot{
-  width:11px;height:11px;
-  border-radius:50%;
-}
-.term-dot--red{background:#FF5F57}
-.term-dot--yellow{background:#FEBC2E}
-.term-dot--green{background:#28C840}
-.term-title{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:12px;
-  font-weight:600;
-  color:var(--muted);
-}
-.term-body{padding:16px 18px 20px}
-
-.term-comment{
-  margin:0 0 10px;
-  font-size:12.5px;
-  color:#6a9955;
-}
-.term-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0 14px;
-}
-.term-input{
-  display:block;
-  width:100%;
-  margin:0 0 16px;
-  padding:0 0 10px;
-  font:inherit;
-  font-size:13px;
-  background:transparent;
-  border:0;
-  border-bottom:1px solid rgba(255,255,255,.16);
-  border-radius:0;
-  color:#f2f2f2;
-  resize:vertical;
-}
-.term-input::placeholder{color:#5a5a5a}
-.term-input:focus-visible{
-  outline:0;
-  border-bottom-color:#28C840;
-}
-.term-textarea{padding-bottom:8px}
-
-.term-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:4px;
-}
-.term-submit{
-  font:inherit;
-  font-size:12.5px;
-  font-weight:600;
-  letter-spacing:.08em;
-  padding:11px 24px;
-  background:#28C840;
-  border:0;
-  border-radius:6px;
-  color:#0A0A0B;
-  cursor:pointer;
-}
-.term-submit:hover:not(:disabled),
-.term-submit:focus-visible:not(:disabled){background:#f2f2f2}
-.term-submit:disabled{
-  background:rgba(255,255,255,.1);
-  color:#6a6a66;
-  cursor:not-allowed;
-}
-.term-submit--ghost{
-  background:transparent;
-  border:1px solid rgba(255,255,255,.24);
-  color:#f2f2f2;
-}
-.term-submit--ghost:hover:not(:disabled),
-.term-submit--ghost:focus-visible:not(:disabled){
-  background:rgba(255,255,255,.08);
-  border-color:rgba(255,255,255,.4);
-}
-.term-submit--ghost:disabled{
-  background:transparent;
-  border-color:rgba(255,255,255,.1);
-}
 
 /* ---------- responsive ---------- */
 
@@ -1268,7 +1163,6 @@ body{overflow-x:hidden}
   .kit-pillar,.stat-card{padding:16px}
   .kit-work{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .kit-form{padding:18px}
-  .term-row{grid-template-columns:1fr}
 }
 
 /* phone held sideways: keep the two-up layout so the reel stays on screen */
