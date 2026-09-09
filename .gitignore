@@ -14,6 +14,10 @@
 .env
 .env.*
 
-# Gear photo sources — only the processed square JPGs are served
+# Gear photo sources — only the processed square WebPs are served
 assets/gear/*.png
 assets/gear/*.jpeg
+assets/gear/*.jpg
+
+# Saved Instagram insights exports — private analytics, never published
+assets/gear/Account insights*

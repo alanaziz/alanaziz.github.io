@@ -472,15 +472,19 @@ body{overflow-x:hidden}
 
 .gear-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:24px;
+  grid-template-columns:repeat(auto-fill,minmax(196px,1fr));
+  gap:16px;
   padding:24px 0 8px;
+  /* bound the track count: on a 1560px shell an unbounded auto-fill opens
+     seven columns, so a three-item category reads as a half-empty row */
+  max-width:1180px;
 }
 
 /* ---------- gear: list view ---------- */
 
 /* one flat table of rows — brackets off, thumbnail shrunk, order re-flowed */
 .gear-grid.is-list{
+  max-width:none;
   grid-template-columns:minmax(0,1fr);
   gap:0;
   border:1px solid var(--line-soft);
@@ -516,8 +520,10 @@ body{overflow-x:hidden}
 .gear-item{
   display:flex;
   flex-direction:column;
-  padding:20px;
-  border-radius:14px;
+  /* smaller card, so the bracket frame shrinks with it */
+  --corner:16px;
+  padding:14px;
+  border-radius:10px;
   /* flat too — a card is a surface to read, not a control. Its corner
      bracket frame already separates it from the canvas. */
   border:1px solid var(--line-soft);
@@ -541,8 +547,8 @@ body{overflow-x:hidden}
 }
 
 .gear-name{
-  margin:16px 0 0;
-  font-size:17px;
+  margin:10px 0 0;
+  font-size:13.5px;
   font-weight:500;
   letter-spacing:.04em;
   line-height:1.35;
@@ -554,7 +560,7 @@ body{overflow-x:hidden}
 .gear-media{
   margin-top:0;
   aspect-ratio:1/1;
-  border-radius:10px;
+  border-radius:8px;
 }
 .gear-item .slot svg{margin-bottom:6px}
 .gear-item .slot-label{font-size:11px}
@@ -1181,7 +1187,7 @@ body{overflow-x:hidden}
   .hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}
 
   .page-head{padding:40px 0 28px}
-  .gear-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+  .gear-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px}
 }
 
 /* phones: the nav wraps instead of scrolling items out of reach,
@@ -1227,7 +1233,7 @@ body{overflow-x:hidden}
 
   .page-head{padding:32px 0 24px}
   /* two up on phones — a single column would blow the square up to full width */
-  .gear-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding-top:28px}
+  .gear-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding-top:28px}
 
   /* list rows lose the index and category columns before they get cramped */
   .is-list .gear-item{grid-template-columns:46px minmax(0,1fr);gap:14px;padding:12px 14px}
