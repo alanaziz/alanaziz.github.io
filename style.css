@@ -830,12 +830,12 @@ body{overflow-x:hidden}
   transition:color .15s ease;
 }
 .foot-ig:hover{color:var(--ink-hi)}
-.foot-ig img{
+.foot-ig svg{
   display:block;
   opacity:.7;
   transition:opacity .15s ease;
 }
-.foot-ig:hover img{opacity:1}
+.foot-ig:hover svg{opacity:1}
 
 .foot-social{
   display:flex;
