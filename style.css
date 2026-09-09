@@ -16,6 +16,7 @@
   --ink:#E5E7EB;       /* body copy — the conversational voice */
   --muted:#E0E0E0;     /* eyebrows, nav, captions */
   --muted-2:rgba(224,224,224,.5);
+  --plate:#E5E7EB;     /* light plates: product backdrops, brand-logo tiles */
   --line:rgba(255,255,255,.16);      /* hairline — every control carries one */
   --line-soft:rgba(255,255,255,.09);
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
@@ -561,6 +562,10 @@ body{overflow-x:hidden}
   margin-top:0;
   aspect-ratio:1/1;
   border-radius:8px;
+  background-color:var(--plate);
+  box-shadow:
+    inset 2px 2px 5px 0 rgba(0,0,0,.28),
+    inset -1px -1px 3px 0 rgba(255,255,255,.5);
 }
 .gear-item .slot svg{margin-bottom:6px}
 .gear-item .slot-label{font-size:11px}
@@ -785,7 +790,7 @@ body{overflow-x:hidden}
   justify-content:center;
   height:60px;
   padding:0 18px;
-  background:var(--ink-hi);
+  background:var(--plate);
   border-radius:8px;
 }
 .collab-logo img,
