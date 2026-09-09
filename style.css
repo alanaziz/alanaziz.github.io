@@ -1034,52 +1034,6 @@ body{overflow-x:hidden}
   color:var(--muted);
 }
 
-.kit-form{
-  max-width:480px;
-  margin-top:24px;
-  padding:28px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-.kit-field{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-}
-.kit-field label{
-  font-size:11px;
-  letter-spacing:.14em;
-  color:var(--muted);
-}
-.kit-field input,
-.kit-field textarea{
-  font:inherit;
-  font-size:13.5px;
-  padding:12px 14px;
-  background:var(--bg);
-  border:1px solid var(--line);
-  border-radius:6px;
-  color:var(--ink);
-  resize:vertical;
-}
-.kit-field input:focus-visible,
-.kit-field textarea:focus-visible{
-  outline:2px solid var(--ink-hi);
-  outline-offset:2px;
-}
-.kit-form .btn{
-  align-self:flex-start;
-  border:0;
-}
-.kit-form-hint{
-  margin:0;
-  font-size:12px;
-  line-height:1.7;
-  color:var(--muted-2);
-}
-.kit-form-hint[data-state="ok"]{color:#28C840;opacity:.85}
-.kit-form-hint[data-state="error"]{color:#FF5F57;opacity:.85}
 
 
 /* ---------- responsive ---------- */
@@ -1162,7 +1116,6 @@ body{overflow-x:hidden}
   .kit-pillars,.kit-stats{grid-template-columns:1fr 1fr;gap:14px}
   .kit-pillar,.stat-card{padding:16px}
   .kit-work{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-  .kit-form{padding:18px}
 }
 
 /* phone held sideways: keep the two-up layout so the reel stays on screen */
