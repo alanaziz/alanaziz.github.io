@@ -58,10 +58,27 @@ body{overflow-x:hidden}
   padding-right:max(var(--gutter), env(safe-area-inset-right));
 }
 
+/* The header bar is frozen to the top of every page. The page background
+   is painted edge to edge behind it (the 100vmax shadow, clipped to the
+   bar's height) so content scrolls cleanly underneath even past the
+   shell's 1560px max-width. Stacks above page content (kit cards, reel
+   controls) but below the gear modal (50). */
+.head-bar{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:var(--bg);
+  box-shadow:0 0 0 100vmax var(--bg);
+  clip-path:inset(0 -100vmax);
+}
+/* in-page jumps (#main, the gear category links) stop below the bar;
+   --head-h is measured by assets/head-bar.js as the bar wraps */
+html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
+
 .skip{
   position:absolute;left:-9999px;top:0;
   background:var(--ink-hi);color:#0A0A0B;
-  padding:10px 16px;z-index:10;
+  padding:10px 16px;z-index:60;
 }
 .skip:focus{left:var(--gutter);top:12px}
 
