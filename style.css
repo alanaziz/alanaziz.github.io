@@ -904,12 +904,14 @@ body{overflow-x:hidden}
 }
 .kit-hero .page-head{padding:20px 0 34px}
 
-/* hero splits: title + lede on the left, the photo stack on the right */
+/* hero splits: title + lede on the left, the photo stack fills the empty
+   space to its right — top-aligned with the title and no taller than the
+   text block, so the hero keeps its height */
 .kit-hero{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(240px,340px);
-  gap:56px;
-  align-items:center;
+  grid-template-columns:minmax(0,auto) minmax(0,1fr);
+  column-gap:40px;
+  align-items:start;
 }
 
 /* Photo stack — three cards fanned, the top one flicks off to the left and
@@ -919,10 +921,10 @@ body{overflow-x:hidden}
 .kit-stack{
   position:relative;
   width:100%;
-  max-width:340px;
+  max-width:236px;
   aspect-ratio:4/5;
-  margin:44px 44px 16px 0;
-  justify-self:end;
+  margin:50px 44px 0 0;
+  justify-self:center;
   cursor:pointer;
 }
 .kit-card{
