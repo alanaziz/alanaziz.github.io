@@ -33,7 +33,25 @@ antialiased and nothing shows a box on the dark page.
 | `icon-32.png`, `icon-180.png` | favicon and apple-touch-icon |
 | `og-image.jpg` | 1200x630 lockup on `#0A0A0B` for link previews |
 
-`alan-aziz-mark.png` is used twice: in the header beside the text wordmark, and
+The header (all pages) and the hero no longer use the static mark — they play
+the logo sting from `~/Documents/alanaziz-logo-motion/out/alanaziz-logo-sting-transparent.mov`
+(ProRes 4444, 1080x1920). It's cut down for the web to frames 0–66 (spin-in to
+the resting logo, 2.2s), cropped 1068x830 at 29,477 after a 10px side pad, with
+the ALANAZIZREVIEW wordmark masked out below y=1235, then scaled to 402x312:
+
+| File | What it is |
+|------|------------|
+| `logo-sting.mov` | HEVC with alpha (`hevc_videotoolbox`, tag `hvc1`) — Safari |
+| `logo-sting.webm` | VP9 with alpha — Chrome, Firefox |
+| `logo-sting-end.webp` | frame 66 still — reduced motion, blocked autoplay, load error |
+
+`assets/logo-sting.js` plays it once and swaps in the still when motion isn't
+wanted or the video can't play. The mark sits 23.53% inside the clip on every
+side (so spinning layers aren't clipped); `.logo-sting` keeps the old 659:512
+footprint and the video bleeds out past it. The sting's A is solid — the stencil
+cut in the static mark was filled in the motion project on purpose.
+
+The static mark was used the same way: in the header beside the text wordmark, and
 in the hero beside the `ALAN AZIZ` headline. The hero lockup is sized in `em` off
 `.hero-name`, so the mark and the gap scale with the headline — change
 `.hero-name`'s `font-size` clamp and everything tracks. That clamp is set so the

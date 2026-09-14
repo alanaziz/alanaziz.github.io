@@ -93,6 +93,24 @@ body{overflow-x:hidden}
   flex:none;
 }
 
+/* the animated mark: the box is the logo's own footprint, and the video
+   bleeds 23.53% past it on every side — the clip is padded so the layers
+   aren't cut off mid-spin, and the resting logo lands exactly in the box */
+.logo-sting{
+  position:relative;
+  aspect-ratio:659/512;
+}
+.logo-sting video,
+.logo-sting img{
+  position:absolute;
+  inset:-23.53%;
+  width:147.06%;
+  height:147.06%;
+  display:block;
+  pointer-events:none;
+}
+.logo-sting [hidden]{display:none}
+
 .nav{
   display:flex;
   align-items:center;
