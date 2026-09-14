@@ -11,6 +11,10 @@
   }
 
   sync();
+
+  // iOS Safari only applies :active on tap when a touch listener exists,
+  // which the white pressed state on buttons depends on
+  document.addEventListener('touchstart', function () {}, { passive: true });
   if ('ResizeObserver' in window) new ResizeObserver(sync).observe(bar);
   else window.addEventListener('resize', sync);
 })();

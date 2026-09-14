@@ -876,6 +876,11 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   color:var(--muted);
 }
 .collab-cta{flex:none}
+.collab-ctas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+}
 
 /* ---------- footer ---------- */
 
@@ -1280,4 +1285,23 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
 .collab-head.hand{
   font-size:clamp(15px,1.3vw,18px);
   letter-spacing:.06em;
+}
+
+/* Selected / pressed = white. A neumorphic button turns solid white with
+   dark ink while it's pressed, and stays white while it's the selected
+   one: the current page in the header, the active GRID/LIST view. Kept at
+   the end of the file so it wins over the inset hover states above. */
+.nav a[aria-current="page"],
+.head-home[aria-current="page"],
+.nav a:active,
+.head-home:active,
+.btn:active,
+.filters a:active,
+.views button[aria-pressed="true"]{
+  background:#FFFFFF;
+  color:#111111;
+  border-color:#FFFFFF;
+  box-shadow:
+    inset 2px 2px 5px 0 rgba(0,0,0,.18),
+    inset -2px -2px 5px 0 rgba(255,255,255,.6);
 }
