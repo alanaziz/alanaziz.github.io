@@ -1151,3 +1151,19 @@ body{overflow-x:hidden}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
+
+/* Handwritten accent — Gloria Hallelujah on the taglines and section
+   heads. It ships in one weight, so weight is reset to 400 (500 would be
+   faux-bolded), and the wide mono tracking is pulled in: spaced-out script
+   letters stop reading as words. The 13px section heads step up in size,
+   since a handwriting face at 13px is hard to read. */
+.hand{
+  font-family:'Gloria Hallelujah',var(--mono);
+  font-weight:400;
+  letter-spacing:.04em;
+}
+.group-head.hand,
+.collab-head.hand{
+  font-size:clamp(15px,1.3vw,18px);
+  letter-spacing:.06em;
+}
