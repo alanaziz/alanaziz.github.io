@@ -35,17 +35,17 @@ antialiased and nothing shows a box on the dark page.
 
 The header (all pages) and the hero no longer use the static mark — they play
 the logo sting from `~/Documents/alanaziz-logo-motion/out/alanaziz-logo-sting-transparent.mov`
-(ProRes 4444, 1080x1920). It's cut down for the web to frames 0–66 (spin-in to
-the resting logo, 2.2s), cropped 1068x830 at 29,477 after a 10px side pad, with
-the ALANAZIZREVIEW wordmark masked out below y=1235, then scaled to 402x312:
+(ProRes 4444, 1080x1920). The full 5.9s clip loops (spin-in, hold, spin-out); for
+the web it's cropped 1068x830 at 29,477 after a 10px side pad, with the
+ALANAZIZREVIEW wordmark masked out below y=1290 from frame 28, then scaled to 402x312:
 
 | File | What it is |
 |------|------------|
 | `logo-sting.mov` | HEVC with alpha (`hevc_videotoolbox`, tag `hvc1`) — Safari |
 | `logo-sting.webm` | VP9 with alpha — Chrome, Firefox |
-| `logo-sting-end.webp` | frame 66 still — reduced motion, blocked autoplay, load error |
+| `logo-sting-end.webp` | frame 66 still (resting logo) — reduced motion, blocked autoplay, load error |
 
-`assets/logo-sting.js` plays it once and swaps in the still when motion isn't
+`assets/logo-sting.js` starts the loop and swaps in the still when motion isn't
 wanted or the video can't play. The mark sits 23.53% inside the clip on every
 side (so spinning layers aren't clipped); `.logo-sting` keeps the old 659:512
 footprint and the video bleeds out past it. The sting's A is solid — the stencil

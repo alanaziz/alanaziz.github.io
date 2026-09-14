@@ -1,7 +1,8 @@
 /* Logo sting — the spinning mark in the header (and the homepage hero)
-   plays once on load and stops on its last frame, which is the resting
-   logo. Safari takes the HEVC-with-alpha .mov; Chrome and Firefox don't
-   claim video/quicktime, so they fall through to the VP9-alpha .webm.
+   loops: spin-in, hold, spin-out, repeat. The clip starts and ends on an
+   empty frame, so the loop point doesn't pop. Safari takes the
+   HEVC-with-alpha .mov; Chrome and Firefox don't claim video/quicktime,
+   so they fall through to the VP9-alpha .webm.
    Reduced motion, a refused autoplay (iOS Low Power Mode) or a failed
    load all swap in the still frame, so the logo is never left blank. */
 (function () {
