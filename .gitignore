@@ -21,3 +21,6 @@ assets/gear/*.jpg
 
 # Saved Instagram insights exports — private analytics, never published
 assets/gear/Account insights*
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
