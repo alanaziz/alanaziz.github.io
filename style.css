@@ -1149,6 +1149,87 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
 }
 
 
+/* ---------- journal ---------- */
+
+/* one card per entry, newest first. Reuses the media kit's lede, stat
+   cards and section heads; only the entry itself is new. The column is
+   capped so body copy stays at a readable measure on wide screens. */
+.jr-stats{max-width:900px;padding:0 0 22px}
+.jr-stats .stat-value{white-space:nowrap}
+
+.jr-list{
+  display:grid;
+  gap:28px;
+  max-width:900px;
+  padding:24px 0 8px;
+}
+
+.jr-entry{
+  padding:28px 30px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel-2);
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.55),
+    -4px -4px 10px 0 rgba(255,255,255,.06);
+}
+
+.jr-meta{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  font-size:11.5px;
+  letter-spacing:.16em;
+  color:var(--muted-2);
+}
+.jr-day{font-weight:700;color:var(--ink-hi)}
+
+.jr-title{
+  margin:14px 0 0;
+  font-size:clamp(17px,1.6vw,21px);
+  font-weight:700;
+  letter-spacing:.02em;
+  color:var(--ink-hi);
+}
+
+.jr-body{max-width:68ch}
+.jr-body p{
+  margin:14px 0 0;
+  font-size:14px;
+  line-height:1.85;
+  color:var(--muted);
+}
+
+.jr-log{
+  display:grid;
+  gap:10px;
+  margin:24px 0 0;
+  padding-top:18px;
+  border-top:1px solid var(--line-soft);
+}
+.jr-log div{
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr);
+  gap:16px;
+}
+.jr-log dt{
+  font-size:11px;
+  letter-spacing:.16em;
+  line-height:2.1;
+  color:var(--muted-2);
+}
+.jr-log dd{
+  margin:0;
+  font-size:13.5px;
+  line-height:1.7;
+  color:var(--ink);
+}
+
+.jr-follow{max-width:900px;margin-top:40px}
+
+
 
 /* ---------- responsive ---------- */
 
@@ -1243,6 +1324,13 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   .kit-stack{max-width:250px}
   .kit-pillar,.stat-card{padding:16px}
   .kit-work{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+
+  .jr-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .jr-stats .stat-card{padding:14px}
+  .jr-stats .stat-value{font-size:19px}
+  .jr-stats .stat-label{font-size:10px;letter-spacing:.1em}
+  .jr-entry{padding:20px}
+  .jr-log div{grid-template-columns:1fr;gap:0}
 }
 
 /* phone held sideways: keep the two-up layout so the reel stays on screen */

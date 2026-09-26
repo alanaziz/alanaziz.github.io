@@ -8,6 +8,7 @@ Personal site for Alan Aziz — gadget reviews. Served by GitHub Pages at
 ```
 index.html       homepage — markup + highlight-reel script
 gear/index.html  gear page — markup + grid/list toggle
+journal/index.html  comeback journal — dated entries, newest first
 style.css        all styles, shared by both pages
 assets/logo/     logo source + derived marks, icons, OG image
 assets/video/    highlight clips
@@ -196,6 +197,21 @@ as-is — Amaran 60D is done that way.
 degrades it, and a product with near-background blacks cannot be recovered at all.
 
 
+## Journal
+
+`journal/index.html` serves at **/journal/** — a running log of the comeback,
+one `<article class="jr-entry">` per entry, newest first. The copy-paste
+template for a new entry sits in an HTML comment just above `.jr-list`: bump the
+`id` and `DAY` number, set the `<time datetime>`, and drop any of the SHIPPED /
+LEARNED / NEXT rows that don't apply.
+
+The three stat cards fill themselves in: DAY counts from `data-start` on
+`#jr-stats` (the date of entry 001), ENTRIES counts the articles, and LAST
+ENTRY reads the `<time>` of the first one. The numbers written in the markup
+are only the no-JS fallback, so they can go stale without hurting anything.
+
+Add a `<lastmod>` bump in `sitemap.xml` when you post.
+
 ## Cache busting
 
 GitHub Pages serves assets with `cache-control: max-age=600`, so a deploy that
@@ -208,14 +224,16 @@ current one out of `index.html`):
 <link rel="stylesheet" href="style.css?v=ef6a43e6">
 ```
 
-**Re-hash it whenever `style.css` changes**, before committing. Both pages reference
-the stylesheet, and both must move in the same commit or `/gear/` renders against
-stale CSS:
+**Re-hash it whenever `style.css` changes**, before committing. Every page references
+the stylesheet, and all of them must move in the same commit or the subpages render
+against stale CSS:
 
 ```
 V=$(md5 -q style.css | cut -c1-8)
 sed -i '' "s|href=\"style.css[^\"]*\"|href=\"style.css?v=$V\"|" index.html
-sed -i '' "s|href=\"../style.css[^\"]*\"|href=\"../style.css?v=$V\"|" gear/index.html
+for p in gear media-kit tools journal; do
+  sed -i '' "s|href=\"../style.css[^\"]*\"|href=\"../style.css?v=$V\"|" $p/index.html
+done
 ```
 
 Old HTML then keeps requesting old CSS and new HTML requests new CSS, so the two
