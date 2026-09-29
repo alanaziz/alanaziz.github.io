@@ -1305,3 +1305,520 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
     inset 2px 2px 5px 0 rgba(0,0,0,.18),
     inset -2px -2px 5px 0 rgba(255,255,255,.6);
 }
+
+/* ============================================================
+   Motion — assets/motion.js drives everything below. Every
+   "hidden until revealed" state is scoped to html.motion, which the
+   inline gate in <head> sets only when reduced motion is off (and
+   takes back off if motion.js never loads), so no-JS and calm
+   visitors always get the finished page.
+   ============================================================ */
+
+:root{
+  --rec:#FF3B30;                         /* the one signal colour: a camera's tally light */
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+}
+
+@keyframes rec-blink{50%{opacity:.2}}
+
+/* ---------- boot intro (homepage, once per session) ---------- */
+
+.boot{display:none}
+html.boot-on{overflow:hidden}
+.boot-on .boot{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:grid;
+  place-items:center;
+  background:#0D0D0D;
+  color:var(--ink-hi);
+  font-size:11.5px;
+  letter-spacing:.2em;
+  cursor:pointer;
+  clip-path:inset(0 0 0 0);
+  transition:clip-path .7s var(--ease-io);
+}
+/* the shutter: the frame closes to a slit across the middle, then it's gone */
+.boot.is-out{clip-path:inset(50% 0 50% 0)}
+
+.boot-corner{
+  position:absolute;
+  width:44px;
+  height:44px;
+  border:0 solid rgba(255,255,255,.75);
+  animation:boot-corner .8s var(--ease-out) both;
+}
+.boot-corner:nth-child(1){top:28px;left:28px;border-width:1px 0 0 1px;--dx:1;--dy:1}
+.boot-corner:nth-child(2){top:28px;right:28px;border-width:1px 1px 0 0;--dx:-1;--dy:1}
+.boot-corner:nth-child(3){bottom:28px;left:28px;border-width:0 0 1px 1px;--dx:1;--dy:-1}
+.boot-corner:nth-child(4){bottom:28px;right:28px;border-width:0 1px 1px 0;--dx:-1;--dy:-1}
+@keyframes boot-corner{
+  from{opacity:0;transform:translate(calc(var(--dx) * 22vw),calc(var(--dy) * 22vh))}
+}
+
+.boot-rec,
+.vf-rec{display:flex;align-items:center;gap:8px}
+.boot-rec i,
+.vf-rec i{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--rec);
+  animation:rec-blink 1s steps(1) infinite;
+}
+.boot-rec{position:absolute;top:40px;left:92px}
+.boot-tc{position:absolute;top:40px;right:92px;font-variant-numeric:tabular-nums}
+.boot-meta{position:absolute;bottom:40px;left:92px;color:var(--muted-2)}
+.boot-skip{position:absolute;bottom:40px;right:92px;color:var(--muted-2)}
+
+.boot-core{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:26px;
+}
+.boot-mark{height:clamp(70px,11vw,120px);width:auto;display:block}
+.boot-line{
+  font-size:12.5px;
+  letter-spacing:.32em;
+  white-space:nowrap;
+  clip-path:inset(0 100% 0 0);
+  animation:type-on .9s steps(26) .45s forwards;
+}
+.boot-line em{font-style:normal;color:var(--rec)}
+@keyframes type-on{to{clip-path:inset(0 0 0 0)}}
+
+/* ---------- hero entrance ---------- */
+
+/* corner brackets draw outward from each corner */
+.motion .hero{
+  background-size:0 1px,1px 0,0 1px,1px 0,0 1px,1px 0,0 1px,1px 0;
+  transition:background-size 1s var(--ease-out) .2s;
+}
+.motion .hero.is-in{
+  background-size:
+    var(--corner) 1px,1px var(--corner),
+    var(--corner) 1px,1px var(--corner),
+    var(--corner) 1px,1px var(--corner),
+    var(--corner) 1px,1px var(--corner);
+}
+
+/* each word is a mask; its letters rise out of it, staggered */
+.motion .hero h1 .w{
+  display:inline-block;
+  overflow:hidden;
+  vertical-align:top;
+  padding-bottom:.08em;
+  margin-bottom:-.08em;
+}
+.motion .hero h1 .ch{
+  display:inline-block;
+  transform:translateY(110%);
+  transition:transform .95s var(--ease-out);
+  transition-delay:calc(var(--i) * 45ms + 180ms);
+}
+.motion .hero.is-in h1 .ch{transform:none}
+
+.motion .hero-mark{
+  opacity:0;
+  transform:scale(.4) rotate(-120deg);
+  transition:transform 1.1s var(--ease-out) .1s,opacity .5s ease .1s;
+}
+.motion .hero.is-in .hero-mark{opacity:1;transform:none}
+
+/* the handwritten tagline is "written" left to right */
+.motion .hero-sub{
+  clip-path:inset(-10% 100% -10% 0);
+  transition:clip-path 1.2s cubic-bezier(.45,.05,.3,1) .75s;
+}
+.motion .hero.is-in .hero-sub{clip-path:inset(-10% -4% -10% 0)}
+
+/* the copy brightens from a near-black ink rather than fading from opacity 0:
+   it reads the same, but the browser counts it as painted from the first frame,
+   so the entrance doesn't hold back Largest Contentful Paint */
+.motion .hero-copy{
+  color:rgba(224,224,224,.06);
+  transform:translateY(18px);
+  transition:color .9s ease .95s,transform .9s var(--ease-out) .95s;
+}
+.motion .hero-copy + .hero-copy{transition-delay:1.05s}
+.motion .hero-actions{
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .8s ease 1.2s,transform .9s var(--ease-out) 1.2s;
+}
+.motion .hero.is-in .hero-copy{color:var(--muted);transform:none}
+.motion .hero.is-in .hero-actions{opacity:1;transform:none}
+
+/* the reel opens like a shutter, then leans toward the cursor */
+.motion .hero .highlight{
+  clip-path:inset(50% 0 50% 0 round 14px);
+  transform:perspective(1400px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition:clip-path 1.1s var(--ease-io) .35s,transform .7s var(--ease-out);
+}
+.motion .hero.is-in .highlight{clip-path:inset(0 0 0 0 round 14px)}
+
+/* ---------- viewfinder overlay on the highlight reel ---------- */
+
+.vf{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  font-size:10.5px;
+  letter-spacing:.16em;
+  color:#FFFFFF;
+  text-shadow:0 1px 4px rgba(0,0,0,.7);
+}
+.vf-rec{position:absolute;top:40px;left:18px}
+.vf-tc{position:absolute;top:40px;right:18px;font-variant-numeric:tabular-nums}
+.vf-label{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.2em;
+}
+.vf-label::after{content:"_";animation:rec-blink .8s steps(1) infinite}
+.vf-meta{position:absolute;right:18px;bottom:70px;color:rgba(255,255,255,.75)}
+.vf-histo{
+  position:absolute;
+  right:18px;
+  bottom:18px;
+  width:120px;
+  height:44px;
+  border:1px solid rgba(255,255,255,.3);
+  border-radius:3px;
+  background:rgba(0,0,0,.28);
+}
+/* rule-of-thirds grid, four hairlines */
+.vf-thirds{
+  position:absolute;
+  inset:0;
+  --g:rgba(255,255,255,.13);
+  background:
+    linear-gradient(90deg,transparent calc(33.333% - .5px),var(--g) 0 calc(33.333% + .5px),transparent 0 calc(66.666% - .5px),var(--g) 0 calc(66.666% + .5px),transparent 0),
+    linear-gradient(180deg,transparent calc(33.333% - .5px),var(--g) 0 calc(33.333% + .5px),transparent 0 calc(66.666% - .5px),var(--g) 0 calc(66.666% + .5px),transparent 0);
+}
+/* focus box: the site's bracket frame in miniature; hunts, then locks */
+.vf-focus{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:72px;
+  height:52px;
+  margin:-26px 0 0 -36px;
+  --corner:12px;
+  --line:rgba(255,255,255,.9);
+  transform:translate(var(--fx,0px),var(--fy,0px));
+  transition:transform .6s var(--ease-out);
+  background-repeat:no-repeat;
+  background-image:
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
+    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line));
+  background-size:
+    var(--corner) 1.5px,1.5px var(--corner),
+    var(--corner) 1.5px,1.5px var(--corner),
+    var(--corner) 1.5px,1.5px var(--corner),
+    var(--corner) 1.5px,1.5px var(--corner);
+  background-position:left top,left top,right top,right top,left bottom,left bottom,right bottom,right bottom;
+}
+.vf-focus.is-hunting{animation:focus-hunt .7s var(--ease-out)}
+@keyframes focus-hunt{
+  0%{opacity:0;scale:1.7}
+  45%{opacity:1;scale:.9}
+  70%{scale:1.06}
+  100%{scale:1}
+}
+
+/* ---------- showreel ---------- */
+
+.reel{--p:1;position:relative;margin:40px 0 20px}
+.reel-sticky{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:18px;
+}
+.reel-frame{
+  position:relative;
+  width:min(100vw,calc((100svh - var(--head-h,92px) - 90px) * 16 / 9));
+  aspect-ratio:16/9;
+  margin:0 auto;
+  overflow:hidden;
+  background:#000;
+  border:1px solid var(--line);
+  border-radius:calc(22px * (1 - var(--p)));
+  transform:scale(calc(.6 + .4 * var(--p)));
+  will-change:transform;
+}
+.reel-video{display:block;width:100%;height:100%;object-fit:cover}
+
+/* sound toggle: bottom-left of the frame, opposite the reel's own HUD label.
+   Four equaliser bars lie flat while muted and dance when the sound is on. */
+.reel-sound{
+  position:absolute;
+  left:clamp(12px,2.2vw,28px);
+  bottom:clamp(12px,2.2vw,28px);
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  min-height:40px;
+  padding:0 16px;
+  font:inherit;
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--ink-hi);
+  background:rgba(17,17,17,.62);
+  border:1px solid var(--line);
+  border-radius:98px;
+  cursor:pointer;
+  -webkit-backdrop-filter:blur(6px);
+          backdrop-filter:blur(6px);
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease;
+}
+.reel-sound:hover{border-color:var(--ink-hi)}
+.reel-sound[aria-pressed="true"]{background:#FFFFFF;color:#111111;border-color:#FFFFFF}
+.reel-eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.reel-eq i{
+  width:2px;
+  height:100%;
+  background:currentColor;
+  transform:scaleY(.2);
+  transform-origin:bottom;
+}
+.reel-sound[aria-pressed="true"] .reel-eq i{animation:eq .9s ease-in-out infinite alternate}
+.reel-eq i:nth-child(2){animation-delay:-.3s!important}
+.reel-eq i:nth-child(3){animation-delay:-.6s!important}
+.reel-eq i:nth-child(4){animation-delay:-.15s!important}
+@keyframes eq{0%{transform:scaleY(.2)}50%{transform:scaleY(1)}100%{transform:scaleY(.45)}}
+@media (max-width:560px){.reel-sound{min-height:44px;padding:0 14px}}
+/* above the frame: pinned at the bottom it would sit under the reveal cut-off */
+.reel-caption{
+  order:-1;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:20px;
+}
+.reel-title{margin:0;font-size:clamp(17px,1.6vw,22px);color:var(--ink-hi)}
+.reel-count{font-size:11px;letter-spacing:.22em;color:var(--muted-2);white-space:nowrap}
+
+/* pinned: the section is tall, the frame holds still and grows */
+.motion .reel{height:230vh;margin:0}
+.motion .reel-sticky{
+  position:sticky;
+  top:var(--head-h,92px);
+  height:calc(100svh - var(--head-h,92px));
+  overflow:hidden;
+}
+
+/* ---------- gear wall ---------- */
+
+.wall{position:relative}
+.wall-sticky{padding:40px 0 30px}
+.wall-head{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:20px;
+  flex-wrap:wrap;
+}
+.wall-head .collab-head{flex:1;padding:0;border:0}
+.wall-track{
+  position:relative;
+  display:flex;
+  gap:18px;
+  padding:30px max(var(--gutter),calc((100vw - 1560px) / 2 + var(--gutter)));
+  overflow-x:auto;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+}
+.wall-track::-webkit-scrollbar{display:none}
+.wall-card{
+  flex:none;
+  width:clamp(190px,21vw,290px);
+  overflow:hidden;
+  border:1px solid var(--line-soft);
+  border-radius:14px;
+  background:var(--bg);
+  scroll-snap-align:start;
+  transition:border-color .3s ease,transform .5s var(--ease-out);
+}
+.wall-card:hover,
+.wall-card:focus-visible{border-color:var(--ink-hi);transform:translateY(-6px)}
+.wall-card img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  background:var(--plate);
+  /* --px: per-card parallax from motion.js, the product drifts against the card */
+  transform:translateX(var(--px,0px)) scale(1.12);
+  transition:scale .6s var(--ease-out);
+}
+.wall-card:hover img{scale:1.06}
+/* sits over the image's parallax overflow */
+.wall-name{
+  position:relative;
+  background:var(--bg);
+  display:flex;
+  gap:12px;
+  padding:13px 15px;
+  font-size:11.5px;
+  letter-spacing:.12em;
+  color:var(--ink-hi);
+  border-top:1px solid var(--line-soft);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.wall-name b{font-weight:400;color:var(--muted-2)}
+.wall-progress{height:1px;background:var(--line-soft);max-width:1560px}
+.wall-progress i{
+  display:block;
+  height:100%;
+  background:var(--ink-hi);
+  transform:scaleX(0);
+  transform-origin:left;
+}
+
+.wall.is-pinned .wall-sticky{
+  position:sticky;
+  top:var(--head-h,92px);
+  height:calc(100svh - var(--head-h,92px));
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  overflow:hidden;
+  padding:0;
+}
+.wall.is-pinned .wall-track{
+  width:max-content;
+  overflow:visible;
+  scroll-snap-type:none;
+  will-change:transform;
+}
+.wall.is-pinned .wall-progress{width:calc(100% - 2 * var(--gutter));margin:0 auto;padding:0}
+
+/* ---------- brand marquee: skews with scroll velocity ---------- */
+
+.collab-marquee{transform:skewX(var(--skew,0deg))}
+
+/* ---------- reveals ---------- */
+
+/* film-strip wipe: a bar sweeps across the heading, the text is there when it leaves */
+.motion [data-reveal="wipe"]{color:transparent}
+.motion [data-reveal="wipe"].is-in{color:var(--ink-hi);transition:color 0s linear .42s}
+.wipe-in{position:relative;display:inline-block}
+.motion [data-reveal="wipe"] .wipe-in::after{
+  content:"";
+  position:absolute;
+  inset:-2px -6px;
+  background:var(--ink-hi);
+  transform:scaleX(0);
+  transform-origin:left;
+}
+.motion [data-reveal="wipe"].is-in .wipe-in::after{animation:wipe-bar .9s var(--ease-io) forwards}
+@keyframes wipe-bar{
+  0%{transform:scaleX(0);transform-origin:left}
+  46%{transform:scaleX(1);transform-origin:left}
+  54%{transform:scaleX(1);transform-origin:right}
+  100%{transform:scaleX(0);transform-origin:right}
+}
+
+.motion [data-reveal="up"]{
+  opacity:0;
+  transform:translateY(26px);
+  transition:
+    opacity .7s ease calc(var(--i,0) * 60ms),
+    transform .9s var(--ease-out) calc(var(--i,0) * 60ms);
+}
+.motion [data-reveal="up"].is-in{opacity:1;transform:none}
+
+/* ---------- kinetic sign-off ---------- */
+
+@property --fill{syntax:'<percentage>';inherits:false;initial-value:0%}
+
+.cta{padding:96px 0 64px;border-top:1px solid var(--line-soft)}
+.cta-kicker{margin:0 0 18px;font-size:clamp(15px,1.3vw,18px);color:var(--muted)}
+.cta-title{
+  margin:0;
+  font-size:clamp(2.9rem,10.4vw,10rem);
+  font-weight:800;
+  line-height:.92;
+  letter-spacing:-.01em;
+}
+.cta-title a{display:inline-block}
+/* outline type that fills left to right: --f (0→1) comes from scroll, the
+   second line starts once the first is half full; hover fills both */
+.cta-line{
+  display:block;
+  white-space:nowrap;
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--ink-hi);
+  --fill:clamp(0%,calc(var(--f,0) * 140%),100%);
+  background:linear-gradient(90deg,var(--ink-hi) var(--fill),transparent var(--fill));
+  -webkit-background-clip:text;
+          background-clip:text;
+  transition:--fill .7s var(--ease-out);
+}
+.cta-line + .cta-line{--fill:clamp(0%,calc((var(--f,0) - .28) * 140%),100%)}
+.cta-title a:hover .cta-line,
+.cta-title a:focus-visible .cta-line,
+html:not(.motion) .cta-line{--fill:100%}
+.cta-arrow{
+  width:.62em;
+  height:.62em;
+  vertical-align:.02em;
+  color:var(--ink-hi);
+  stroke-width:2;
+  transition:transform .5s var(--ease-out);
+}
+.cta-title a:hover .cta-arrow{transform:translate(.08em,-.08em)}
+.cta .collab-ctas{margin-top:44px}
+
+/* ---------- page transitions (all pages) ---------- */
+
+/* same-origin navigations cross-fade: the frozen header stays put, the
+   page underneath lifts away and the next one wipes down into place */
+@view-transition{navigation:auto}
+.head-bar{view-transition-name:head-bar}
+::view-transition-old(root){animation:vt-out .32s var(--ease-io) both}
+::view-transition-new(root){animation:vt-in .6s var(--ease-out) both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-22px)}}
+@keyframes vt-in{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* ---------- motion: small screens + calm ---------- */
+
+@media (max-width:560px){
+  .boot-rec,.boot-meta{left:48px}
+  .boot-tc,.boot-skip{right:48px}
+  .boot-meta{display:none}
+  .boot-line{font-size:10.5px;letter-spacing:.22em}
+  .vf-meta,.vf-thirds{display:none}
+  .vf-rec,.vf-tc{top:34px}
+  .vf-histo{width:84px;height:32px}
+  .wall-card{width:62vw}
+  /* a 16:9 frame in a portrait viewport grows less, so it needs a shorter pin */
+  .motion .reel{height:165vh}
+  .cta{padding:70px 0 48px}
+  .cta-line{-webkit-text-stroke-width:1px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*){animation:none!important}
+}

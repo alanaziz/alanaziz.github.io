@@ -196,6 +196,75 @@ as-is — Amaran 60D is done that way.
 degrades it, and a product with near-background blacks cannot be recovered at all.
 
 
+## Motion
+
+`assets/motion.js` is the site's one choreography file, loaded on every page.
+No library, no build step.
+
+**The gate.** Each page's `<head>` carries a tiny inline script that adds
+`html.motion` unless the visitor prefers reduced motion. CSS only hides reveal
+targets under `.motion`, and the script takes the class back off after 3s if
+`motion.js` never marked `html.motion-live` — so no-JS, blocked-script and
+reduced-motion visitors always get the finished page. Calm visitors also get
+the showreel with controls instead of autoplay, the gear wall as a plain
+swipeable row and the sign-off already filled.
+
+**Homepage sequence**
+
+| Piece | What it does |
+|------|------|
+| Boot intro (`.boot`) | Once per session (`sessionStorage` key `boot-seen`): timecode rolls, REC blinks, brackets fly in, logo sting plays, then a shutter closes onto the page. Click or any key skips. |
+| Hero | Name splits into letters rising out of word masks, tagline is "written" with a clip-path, copy and buttons fade up, the reel opens like a shutter and tilts toward the cursor. |
+| Viewfinder (`.vf`) | Camera-monitor overlay on the highlight reel: timecode off the playing clip, label retyped per clip, focus box that hunts and re-locks, rule-of-thirds grid and a live luma histogram. The histogram starts 2.5s after load, samples ~6×/s and turns itself off on any device where one sample takes over 24ms — pixel readback from video is slow on some machines. |
+| Showreel (`[data-reel]`) | Pinned section; `--p` (0→1) scales the frame from an inset card to full size. Plays only while on screen. |
+| Gear wall (`[data-wall]`) | Pinned; vertical scroll drives the track sideways (~1.5px per px), with per-card parallax and a progress hairline. Links to `/gear/`. |
+| Brand marquee | Same CSS loop, but its playback rate and skew follow scroll velocity. |
+| Sign-off (`[data-cta]`) | Outline type that fills left to right as it scrolls in (`--f`), fully on hover. |
+
+**Every page:** headings with `data-reveal="wipe"` get a film-strip wipe; gear
+cards, media-kit panels and stats rise in, staggered (`motion.js` tags them —
+no markup needed). Same-origin navigation uses cross-document View Transitions
+(`@view-transition` in `style.css`): the header stays, the page wipes in.
+Browsers without support just navigate.
+
+### Showreel video
+
+Rendered in Remotion from `~/Documents/alanaziz-logo-motion`, composition
+`Showreel` (`src/Showreel.tsx`, 1920×1080, 30fps, 17.6s). It cuts 4K gear B-roll
+from the booth sessions (`~/Desktop/ds3_2`, `~/Desktop/untitled folder`, trimmed
+to 1080p segments), the highlight clips, kinetic type, a camera HUD and the logo
+end card. All sources live in that project's `public/clips/`. To re-render and re-encode:
+
+```
+cd ~/Documents/alanaziz-logo-motion
+npx remotion render Showreel out/showreel.mp4 --codec=h264 --crf=16 --pixel-format=yuv420p
+ffmpeg -i out/showreel.mp4 -an -vf scale=1280:-2 -c:v libx264 -pix_fmt yuv420p -crf 26 \
+  -preset slow -movflags +faststart assets/video/showreel.mp4
+ffmpeg -i out/showreel.mp4 -an -vf scale=1280:-2 -c:v libvpx-vp9 -b:v 0 -crf 38 -row-mt 1 \
+  assets/video/showreel.webm
+```
+
+(Run the two `ffmpeg` lines from this repo, pointing `-i` at the Remotion output.
+They keep the audio: AAC 128k in the MP4, Opus 96k in the WebM — add
+`-c:a aac -b:a 128k` / `-c:a libopus -b:a 96k` if your ffmpeg defaults differ.)
+
+**Sound.** The reel is cut to a 150 BPM grid — one beat is exactly 12 frames —
+and every scene change lands on a beat. `tools/score.py` in the Remotion project
+synthesises the original score (numpy only: drums, bass and pads ducked under the
+kick, a build under the brand roll, a final chord that is silent by the loop
+point) and lays SFX from Alan's library (`~/Movies/Alan's_Projects/Quick Edits/The
+Common Use`) on the cuts: shutter on the GEAR slit, whoosh on the TECH wipe, focus
+beep on the CREATOR iris, a glitch or shutter on each montage cut, a tick for
+every brand name that rolls past, a digital hit on the logo. Both mixes are
+normalised to -14 LUFS. It also writes `showreel-audio-alt.wav` — the same SFX
+over "Tweet and Delete (Dylan Sitts Remix)"; point `AUDIO` in `Showreel.tsx` at it
+to render that version instead. Run `python3 tools/score.py` before rendering.
+
+On the page the reel still autoplays **muted** — browsers block sound without a
+user gesture — and the SOUND OFF/ON pill on the frame unmutes it and restarts the
+score from its first beat.
+The poster `assets/poster/showreel.webp` is the frame at 2.3s (GEAR. over the RØDE arm).
+
 ## Cache busting
 
 GitHub Pages serves assets with `cache-control: max-age=600`, so a deploy that
@@ -208,14 +277,16 @@ current one out of `index.html`):
 <link rel="stylesheet" href="style.css?v=ef6a43e6">
 ```
 
-**Re-hash it whenever `style.css` changes**, before committing. Both pages reference
-the stylesheet, and both must move in the same commit or `/gear/` renders against
-stale CSS:
+**Re-hash it whenever `style.css` changes**, before committing. Every page references
+the stylesheet, and all of them must move in the same commit or an inner page renders
+against stale CSS:
 
 ```
 V=$(md5 -q style.css | cut -c1-8)
 sed -i '' "s|href=\"style.css[^\"]*\"|href=\"style.css?v=$V\"|" index.html
-sed -i '' "s|href=\"../style.css[^\"]*\"|href=\"../style.css?v=$V\"|" gear/index.html
+for f in gear media-kit tools; do
+  sed -i '' "s|href=\"../style.css[^\"]*\"|href=\"../style.css?v=$V\"|" $f/index.html
+done
 ```
 
 Old HTML then keeps requesting old CSS and new HTML requests new CSS, so the two

@@ -26,7 +26,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=94d73f90">
+<link rel="stylesheet" href="../style.css?v=7a1194a2">
+<!-- motion gate: see the note in /index.html -->
+<script>
+(function (d) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  d.classList.add('motion');
+  setTimeout(function () { if (!d.classList.contains('motion-live')) d.classList.remove('motion'); }, 3000);
+})(document.documentElement);
+</script>
 </head>
 <body>
 
@@ -210,6 +218,7 @@
 <script src="/assets/head-bar.js"></script>
 <script src="/assets/logo-sting.js"></script>
 <script src="/assets/click-sfx.js"></script>
+<script src="/assets/motion.js"></script>
 
 </body>
 </html>

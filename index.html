@@ -26,7 +26,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=94d73f90">
+<link rel="stylesheet" href="style.css?v=7a1194a2">
+<!-- motion gate: .motion hides reveal targets until assets/motion.js shows
+     them; if that script never arrives, the timeout takes the class back off
+     so nothing stays invisible. .boot-on runs the intro once per session. -->
+<script>
+(function (d) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  d.classList.add('motion');
+  try { if (!sessionStorage.getItem('boot-seen')) d.classList.add('boot-on'); } catch (e) {}
+  setTimeout(function () { if (!d.classList.contains('motion-live')) d.classList.remove('motion', 'boot-on'); }, 3000);
+})(document.documentElement);
+</script>
 </head>
 <body>
 
@@ -48,6 +59,28 @@
 </svg>
 
 <a class="skip" href="#main">Skip to content</a>
+
+<!-- boot intro: camera powers on, timecode rolls, the logo sting plays, then
+     a shutter closes onto the page. Only shown when <html> has .boot-on;
+     assets/motion.js runs it and removes it. Click or any key skips. -->
+<div class="boot" aria-hidden="true">
+  <span class="boot-corner"></span><span class="boot-corner"></span>
+  <span class="boot-corner"></span><span class="boot-corner"></span>
+  <span class="boot-rec"><i></i>REC</span>
+  <span class="boot-tc">00:00:00:00</span>
+  <div class="boot-core">
+    <span class="boot-mark logo-sting">
+      <video muted playsinline preload="auto">
+        <source src="assets/logo/logo-sting.mov" type='video/quicktime; codecs="hvc1"'>
+        <source src="assets/logo/logo-sting.webm" type="video/webm">
+      </video>
+      <img src="assets/logo/logo-sting-end.webp" width="402" height="312" alt="" hidden>
+    </span>
+    <span class="boot-line">ALAN AZIZ REVIEW <em>— ROLLING</em></span>
+  </div>
+  <span class="boot-meta">4K · 25P · ISO 800 · 1/50 · F2.8</span>
+  <span class="boot-skip">CLICK TO SKIP</span>
+</div>
 
 <div class="shell head-bar">
 <header class="head head--full">
@@ -82,7 +115,7 @@
 <main id="main">
 
   <div class="shell">
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero" aria-labelledby="hero-title" data-hero>
     <div class="hero-grid">
 
       <div>
@@ -153,15 +186,161 @@
                src="assets/video/highlight-05.mp4"
                muted playsinline preload="none"></video>
 
+        <!-- camera-monitor overlay, driven by assets/motion.js: timecode off
+             the playing clip, a live luma histogram, focus box re-locking per clip -->
+        <div class="vf" aria-hidden="true">
+          <span class="vf-rec"><i></i>REC</span>
+          <span class="vf-tc">00:00:00:00</span>
+          <span class="vf-label"></span>
+          <span class="vf-meta">25P · ISO 800 · 1/50</span>
+          <span class="vf-thirds"></span>
+          <span class="vf-focus"></span>
+          <canvas class="vf-histo" width="120" height="44"></canvas>
+        </div>
+
         <button class="hl-zone hl-prev" type="button" aria-label="Previous clip"></button>
         <button class="hl-zone hl-next" type="button" aria-label="Next clip"></button>
       </div>
 
     </div>
   </section>
+  </div>
 
+  <!-- showreel: pinned while you scroll; the frame grows from an inset card
+       to full-bleed (assets/motion.js drives --p). Rendered in Remotion from
+       ~/Documents/alanaziz-logo-motion (composition "Showreel"). -->
+  <section class="reel" aria-labelledby="reel-title" data-reel>
+    <div class="reel-sticky">
+      <div class="reel-frame">
+        <video class="reel-video" muted playsinline loop preload="none"
+               poster="assets/poster/showreel.webp"
+               aria-label="Alan Aziz Review showreel, 17 seconds, with music">
+          <source src="assets/video/showreel.webm" type="video/webm">
+          <source src="assets/video/showreel.mp4" type="video/mp4">
+        </video>
+        <!-- the reel autoplays muted (browsers refuse sound without a click);
+             this turns the score and SFX on -->
+        <button class="reel-sound" type="button" aria-pressed="false">
+          <span class="reel-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="reel-sound-label">SOUND OFF</span>
+        </button>
+      </div>
+      <div class="shell reel-caption">
+        <h2 class="reel-title hand" id="reel-title" data-reveal="wipe">This is what I do</h2>
+        <span class="reel-count" aria-hidden="true">01 — 17 S</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- gear wall: vertical scroll drives the track sideways while the section
+       is pinned. Without JS (or with reduced motion) it's a plain
+       horizontally scrollable row. -->
+  <section class="wall" aria-labelledby="wall-title" data-wall>
+    <div class="wall-sticky">
+      <div class="shell wall-head">
+        <h2 class="collab-head hand" id="wall-title" data-reveal="wipe">The kit behind every review</h2>
+        <a class="btn" href="/gear/">
+          ALL GEAR
+          <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-e"/></svg>
+        </a>
+      </div>
+      <div class="wall-track">
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/sony-zve10-mark-2.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>01</b>SONY ZV-E10 II</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/dji-osmo-pocket-3.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>02</b>DJI OSMO POCKET 3</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/gopro-mission-1-pro.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>03</b>GOPRO MISSION 1 PRO</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/sony-fe-16-25.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>04</b>SONY FE 16-25mm F2.8 G</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/sony-fe-16.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>05</b>SONY FE 16mm F1.8 G</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/sigma-18-50.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>06</b>SIGMA 18-50mm F2.8</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/sirui-23mm-f12.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>07</b>SIRUI 23mm F1.2 AF</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/rode-wireless-pro.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>08</b>RØDE WIRELESS PRO</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/rode-wireless-micro.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>09</b>RØDE WIRELESS MICRO</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/rode-wireless-me.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>10</b>RØDE WIRELESS ME</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/rode-interview-pro.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>11</b>RØDE INTERVIEW PRO</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/rode-videomic-ntg.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>12</b>RØDE VIDEOMIC NTG</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/rode-videomic-micro.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>13</b>RØDE VIDEOMIC MICRO</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/hollyland-lark-m2.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>14</b>HOLLYLAND LARK M2</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/comica-vm40.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>15</b>COMICA VM40</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/rode-xdm100.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>16</b>RØDE XDM100</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/amaran-verge-max.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>17</b>AMARAN VERGE MAX</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/amaran-f22x.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>18</b>AMARAN F22X</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/amaran-60d.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>19</b>AMARAN 60D</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/nanlite-pavotube.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>20</b>NANLITE PAVOTUBE</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/colbor-wonder-kit.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>21</b>COLBOR WONDER KIT</span>
+        </a>
+        <a class="wall-card" href="/gear/">
+          <img src="assets/gear/zhiyun-cx100.webp" alt="" width="800" height="800" loading="lazy" decoding="async">
+          <span class="wall-name"><b>22</b>ZHIYUN CX100</span>
+        </a>
+      </div>
+      <div class="shell wall-progress" aria-hidden="true"><i></i></div>
+    </div>
+  </section>
+
+  <div class="shell">
   <section class="collab" aria-labelledby="collab-title">
-    <h2 class="collab-head hand" id="collab-title">Brands I've worked with</h2>
+    <h2 class="collab-head hand" id="collab-title" data-reveal="wipe">Brands I've worked with</h2>
 
     <!-- the moving strip below is decorative (aria-hidden) — this list is
          the one screen readers actually see -->
@@ -213,18 +392,27 @@
       </div>
     </div>
 
-    <div class="collab-cta-row">
-      <p class="collab-note">Open for collaboration</p>
-      <div class="collab-ctas">
-        <a class="btn collab-cta" href="/media-kit/">
-          MEDIA KIT
-          <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-e"/></svg>
-        </a>
-        <a class="btn collab-cta" href="mailto:alanazizreview@gmail.com">
-          GET IN TOUCH
-          <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
-        </a>
-      </div>
+  </section>
+
+  <!-- kinetic sign-off: outline type that fills left to right as it scrolls
+       into view (--fill, set by assets/motion.js), and fully on hover -->
+  <section class="cta" aria-labelledby="cta-title" data-cta>
+    <p class="cta-kicker hand">Open for collaboration</p>
+    <h2 class="cta-title" id="cta-title">
+      <a href="mailto:alanazizreview@gmail.com">
+        <span class="cta-line">LET'S WORK</span>
+        <span class="cta-line">TOGETHER <svg class="cta-arrow" width="1em" height="1em" aria-hidden="true"><use href="#i-arrow-ne"/></svg></span>
+      </a>
+    </h2>
+    <div class="collab-ctas">
+      <a class="btn collab-cta" href="/media-kit/">
+        MEDIA KIT
+        <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-e"/></svg>
+      </a>
+      <a class="btn collab-cta" href="mailto:alanazizreview@gmail.com">
+        GET IN TOUCH
+        <svg width="16" height="16" aria-hidden="true"><use href="#i-arrow-ne"/></svg>
+      </a>
     </div>
   </section>
   </div>
@@ -300,6 +488,7 @@
 <script src="/assets/head-bar.js"></script>
 <script src="/assets/logo-sting.js"></script>
 <script src="/assets/click-sfx.js"></script>
+<script src="/assets/motion.js"></script>
 
 </body>
 </html>
