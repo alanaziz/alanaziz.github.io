@@ -905,6 +905,12 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   gap:20px;
 }
 
+/* RUANGKOTAK animated wordmark: the white-on-transparent SVG loops on its own
+   (and holds still under reduced motion); dimmed until hovered like the socials */
+.foot-rk{display:inline-flex;opacity:.7;transition:opacity .2s}
+.foot-rk:hover,.foot-rk:focus-visible{opacity:1}
+.foot-rk img{display:block;width:120px;height:auto}
+
 .foot{
   display:flex;
   align-items:center;
