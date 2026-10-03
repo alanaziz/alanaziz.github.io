@@ -1,7 +1,7 @@
 # alanaziz.github.io
 
-Personal site for Alan Aziz — gadget reviews. Served by GitHub Pages at
-**https://alanaziz.com**.
+Personal site for Alan Aziz — gadget reviews. Hosted on Vercel at
+**https://alanaziz.com** (www redirects to the apex). Pushing to `main` deploys to production.
 
 ## Structure
 
@@ -13,7 +13,6 @@ assets/logo/     logo source + derived marks, icons, OG image
 assets/video/    highlight clips
 assets/poster/   first-frame posters for those clips
 assets/gear/     gear photos (see Gear page)
-CNAME            custom domain (alanaziz.com) — do not delete
 ```
 
 ## External dependencies
@@ -267,9 +266,9 @@ The poster `assets/poster/showreel.webp` is the frame at 2.3s (GEAR. over the R�
 
 ## Cache busting
 
-GitHub Pages serves assets with `cache-control: max-age=600`, so a deploy that
+Browsers and CDNs can cache assets for a while, so a deploy that
 changes `index.html` and `style.css` together can leave visitors on new markup
-with ten-minute-old CSS — which renders badly, not just unstyled. The stylesheet
+with stale CSS — which renders badly, not just unstyled. The stylesheet
 link therefore carries a content hash (the value below is only an example — read the
 current one out of `index.html`):
 
