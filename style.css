@@ -1826,8 +1826,11 @@ html:not(.motion) .cta-line{--fill:100%}
   .vf-rec,.vf-tc{top:34px}
   .vf-histo{width:84px;height:32px}
   .wall-card{width:62vw}
-  /* a 16:9 frame in a portrait viewport grows less, so it needs a shorter pin */
-  .motion .reel{height:165vh}
+  /* a 16:9 frame in a portrait viewport is only ~200px tall, so any pin just leaves
+     empty bands around it: skip the pin and grow-on-scroll, the reel sits in flow */
+  .motion .reel{height:auto;margin:40px 0 20px}
+  .motion .reel-sticky{position:static;height:auto;overflow:visible}
+  .motion .reel-frame{width:100%;transform:none;border-radius:14px}
   .cta{padding:70px 0 48px}
   .cta-line{-webkit-text-stroke-width:1px}
 }
