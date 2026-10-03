@@ -1206,6 +1206,11 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
 
 @media (max-width:560px){
   :root{--gutter:18px}
+  /* the nav wraps to three rows here, and a bar that tall pinned to the top
+     covered about a quarter of the screen — so on phones it scrolls away with
+     the page. head-bar.js reports --head-h as 0 while the bar isn't sticky, so
+     the pinned reel and wall use the whole screen. */
+  .head-bar{position:static}
   .head{gap:12px;padding:20px 0}
   .wordmark{gap:10px;min-width:0}
 
@@ -1599,7 +1604,18 @@ html.boot-on{overflow:hidden}
 .reel-eq i:nth-child(3){animation-delay:-.6s!important}
 .reel-eq i:nth-child(4){animation-delay:-.15s!important}
 @keyframes eq{0%{transform:scaleY(.2)}50%{transform:scaleY(1)}100%{transform:scaleY(.45)}}
-@media (max-width:560px){.reel-sound{min-height:44px;padding:0 14px}}
+/* phones: the video's own title sits bottom-left, where the button would cover
+   it, so the button parks top-centre between the REC and timecode labels */
+@media (max-width:560px){
+  .reel-sound{
+    min-height:44px;
+    padding:0 14px;
+    top:clamp(12px,2.2vw,28px);
+    bottom:auto;
+    left:50%;
+    transform:translateX(-50%);
+  }
+}
 /* above the frame: pinned at the bottom it would sit under the reveal cut-off */
 .reel-caption{
   order:-1;

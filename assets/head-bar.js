@@ -6,11 +6,16 @@
   if (!bar) return;
   var root = document.documentElement;
 
+  // 0 while the bar scrolls with the page (phones), so the pinned sections
+  // and scroll-padding don't leave room for a header that isn't there
   function sync() {
-    root.style.setProperty('--head-h', bar.offsetHeight + 'px');
+    var pinned = getComputedStyle(bar).position === 'sticky';
+    root.style.setProperty('--head-h', (pinned ? bar.offsetHeight : 0) + 'px');
   }
 
   sync();
+  // the bar's size doesn't always change when it stops being sticky
+  window.addEventListener('resize', sync);
 
   // iOS Safari only applies :active on tap when a touch listener exists,
   // which the white pressed state on buttons depends on
