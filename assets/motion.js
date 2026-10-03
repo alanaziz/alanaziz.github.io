@@ -286,7 +286,9 @@
   /* ---------- gear wall ---------- */
 
   var wall = $('[data-wall]');
-  if (wall && !calm) {
+  // phones swipe the strip natively (overflow-x + snap); a full-height pin would
+  // only leave empty bands around a ~290px strip
+  if (wall && !calm && !matchMedia('(max-width:560px)').matches) {
     var track = $('.wall-track', wall);
     var cards = $$('.wall-card', wall);
     var bar = $('.wall-progress i', wall);
