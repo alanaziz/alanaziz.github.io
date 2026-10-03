@@ -910,6 +910,12 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
 .foot-rk{display:inline-flex;opacity:.7;transition:opacity .2s}
 .foot-rk:hover,.foot-rk:focus-visible{opacity:1}
 .foot-rk img{display:block;width:120px;height:auto}
+/* phones: copyright + logo + icons only just overflow one row, so tighten them */
+@media (max-width:560px){
+  footer.foot{gap:14px}
+  .foot-rk img{width:92px}
+  .foot-social{gap:14px}
+}
 
 .foot{
   display:flex;
