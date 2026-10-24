@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=c214996f">
+<link rel="stylesheet" href="../style.css?v=a6952511">
 <!-- motion gate: see the note in /index.html -->
 <script>
 (function (d) {
@@ -136,19 +136,33 @@
 
   <section class="kit-section" aria-labelledby="work-head">
     <h2 class="group-head hand" id="work-head">SELECTED WORK</h2>
+    <!-- each review plays right here (assets/kit-work.js); the link under it
+         opens the original post. TODO: swap the profile link for each post's URL -->
     <div class="kit-work">
-      <a class="kit-work-clip" href="https://www.tiktok.com/@alanazizreview" rel="me noopener" target="_blank">
-        <img src="../assets/poster/work-amaran-verge-max.webp" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <span>AMARAN VERGE MAX</span>
-      </a>
-      <a class="kit-work-clip" href="https://www.tiktok.com/@alanazizreview" rel="me noopener" target="_blank">
-        <img src="../assets/poster/work-rode-wireless-micro.webp" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <span>RØDE WIRELESS MICRO</span>
-      </a>
-      <a class="kit-work-clip" href="https://www.tiktok.com/@alanazizreview" rel="me noopener" target="_blank">
-        <img src="../assets/poster/work-comica-vm40.webp" alt="" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <span>COMICA VM40</span>
-      </a>
+      <figure class="kit-work-item">
+        <div class="kit-work-clip">
+          <video src="../assets/video/work/amaran-verge-max.mp4" poster="../assets/poster/work-amaran-verge-max.webp"
+                 preload="none" playsinline controls></video>
+          <button class="kit-work-play" type="button" aria-label="Play the Amaran Verge Max review" hidden><span>AMARAN VERGE MAX</span></button>
+        </div>
+        <a class="kit-work-link" href="https://www.instagram.com/alanazizreview/" rel="me noopener" target="_blank">VIEW ON INSTAGRAM <span aria-hidden="true">↗</span></a>
+      </figure>
+      <figure class="kit-work-item">
+        <div class="kit-work-clip">
+          <video src="../assets/video/work/rode-wireless-micro.mp4" poster="../assets/poster/work-rode-wireless-micro.webp"
+                 preload="none" playsinline controls></video>
+          <button class="kit-work-play" type="button" aria-label="Play the RØDE Wireless Micro review" hidden><span>RØDE WIRELESS MICRO</span></button>
+        </div>
+        <a class="kit-work-link" href="https://www.instagram.com/alanazizreview/" rel="me noopener" target="_blank">VIEW ON INSTAGRAM <span aria-hidden="true">↗</span></a>
+      </figure>
+      <figure class="kit-work-item">
+        <div class="kit-work-clip">
+          <video src="../assets/video/work/comica-vm40.mp4" poster="../assets/poster/work-comica-vm40.webp"
+                 preload="none" playsinline controls></video>
+          <button class="kit-work-play" type="button" aria-label="Play the Comica VM40 review" hidden><span>COMICA VM40</span></button>
+        </div>
+        <a class="kit-work-link" href="https://www.instagram.com/alanazizreview/" rel="me noopener" target="_blank">VIEW ON INSTAGRAM <span aria-hidden="true">↗</span></a>
+      </figure>
     </div>
   </section>
 
@@ -268,6 +282,7 @@
 
 <script src="/assets/kit-stack.js"></script>
 <script src="/assets/kit-form.js"></script>
+<script src="/assets/kit-work.js"></script>
 <script src="/assets/head-bar.js"></script>
 <script src="/assets/logo-sting.js"></script>
 <script src="/assets/click-sfx.js"></script>
