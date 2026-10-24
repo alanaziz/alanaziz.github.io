@@ -9,7 +9,7 @@ const STATS_AS_OF = '25 Oct 2026';
 const STATS = [
   ['39.8K', 'Followers · Instagram & TikTok'],
   ['552.5K', 'TikTok likes'],
-  ['18', 'Brands reviewed'],
+  ['20', 'Brands reviewed'],
 ];
 const RATE = { label: 'One video · Instagram & TikTok', amount: 'RM500', extra: '+ review unit' };
 const INCLUDES = [
@@ -19,7 +19,7 @@ const INCLUDES = [
   'Brand tag and paid-partnership label',
 ];
 const ADD_ONS = 'Raw footage and usage rights are quoted per brief.';
-const BRANDS = ['RØDE', 'Hollyland', 'Saramonic', 'Comica', 'Maono', 'Amaran', 'Colbor', 'Ulanzi', 'Ugreen',
+const BRANDS = ['RØDE', 'DJI', 'Insta360', 'Hollyland', 'Saramonic', 'Comica', 'Maono', 'Amaran', 'Colbor', 'Ulanzi', 'Ugreen',
   'Xiaomi', 'Redmi', 'Vivo', 'Realme', 'Infinix', 'Trapo', 'MR★K.A.R', 'Homan', 'Pixel Distribution'];
 
 function page(title, body) {
