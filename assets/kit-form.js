@@ -48,7 +48,7 @@
         }
         form.reset();
         form.elements.t.value = String(Date.now());
-        say('Sent. Check your inbox for my full media kit — it can take a minute to arrive.', 'ok');
+        say('Got it! My full media kit is on its way to your inbox. No fluff and talk soon, ya.', 'ok');
       })
       .catch(function (err) {
         say(err.message && err.message !== 'Failed to fetch' ? err.message : 'Couldn’t reach the server. Please email inquiry@alanaziz.com instead.', 'error');
