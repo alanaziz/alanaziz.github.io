@@ -7,18 +7,18 @@ const { verifyToken, esc, fmtDate } = require('./_lib/shared');
 
 const STATS_AS_OF = '25 Oct 2026';
 const STATS = [
-  ['37.1K', 'TikTok followers'],
+  ['39.8K', 'Followers · Instagram & TikTok'],
   ['552.5K', 'TikTok likes'],
   ['18', 'Brands reviewed'],
 ];
-const RATE = { label: 'One TikTok video', amount: 'RM500', extra: '+ review unit' };
+const RATE = { label: 'One video · Instagram & TikTok', amount: 'RM500', extra: '+ review unit' };
 const INCLUDES = [
-  'One dedicated video on TikTok, 60–90 seconds, vertical 9:16',
+  'One dedicated video, posted on Instagram & TikTok, 60–90 seconds, vertical 9:16',
   'Unboxing, setup and real use on camera, filmed in my studio',
   'Your key features and specs covered',
   'Brand tag and paid-partnership label',
 ];
-const ADD_ONS = 'Instagram Reels cross-post, raw footage and usage rights are quoted per brief.';
+const ADD_ONS = 'Raw footage and usage rights are quoted per brief.';
 const BRANDS = ['RØDE', 'Hollyland', 'Saramonic', 'Comica', 'Maono', 'Amaran', 'Colbor', 'Ulanzi', 'Ugreen',
   'Xiaomi', 'Redmi', 'Vivo', 'Realme', 'Infinix', 'Trapo', 'MR★K.A.R', 'Homan', 'Pixel Distribution'];
 
@@ -80,7 +80,7 @@ function fullKit(email, expires) {
 <section>
   <h2>NUMBERS</h2>
   <div class="stats">${STATS.map(([v, l]) => `<div><b>${v}</b><span class="label">${l}</span></div>`).join('')}</div>
-  <p class="note">As of ${STATS_AS_OF}. Current TikTok and Instagram Insights screenshots on request.</p>
+  <p class="note">As of ${STATS_AS_OF}: Instagram about 2.7K and TikTok 37.1K followers, both @alanazizreview. Current Instagram &amp; TikTok Insights screenshots on request.</p>
 </section>
 <section>
   <h2>RATE CARD</h2>
