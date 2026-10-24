@@ -1159,6 +1159,91 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   line-height:1.8;
   color:var(--muted);
 }
+.kit-note a,
+.kit-lede a{text-decoration:underline;text-underline-offset:3px;color:var(--ink-hi)}
+
+/* ---------- media kit: the request form ----------
+   Every field is a bracket frame — [ NAME ] — the site's own motif, drawn
+   with ::before/::after so the input itself stays a plain hairline row.
+   Topic tabs are radios styled as tabs; the checked one gets the tally-light
+   underline. Posted by assets/kit-form.js to api/kit-request.js. */
+.kit-form{
+  display:grid;
+  gap:22px;
+  max-width:880px;
+  padding:28px 0 8px;
+}
+.kf-tabs{display:flex;gap:28px;flex-wrap:wrap}
+.kf-tab{position:relative;cursor:pointer}
+.kf-tab input{position:absolute;opacity:0;pointer-events:none}
+.kf-tab span{
+  display:block;
+  padding:4px 0 8px;
+  font-size:12px;
+  letter-spacing:.18em;
+  color:var(--muted-2);
+  border-bottom:2px solid transparent;
+  transition:color .2s ease,border-color .2s ease;
+}
+.kf-tab:hover span{color:var(--muted)}
+.kf-tab input:checked + span{color:var(--ink-hi);border-color:var(--rec)}
+.kf-tab input:focus-visible + span{outline:2px solid var(--ink-hi);outline-offset:3px}
+
+.kf-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.kf-field{
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  min-width:0;
+  border-bottom:1px solid var(--line);
+  transition:border-color .2s ease;
+}
+.kf-field::before,
+.kf-field::after{
+  font-size:clamp(20px,2.2vw,26px);
+  line-height:1.6;
+  color:var(--muted);
+}
+.kf-field::before{content:"["}
+.kf-field::after{content:"]"}
+.kf-field:focus-within{border-color:var(--ink-hi)}
+.kf-field:focus-within::before,
+.kf-field:focus-within::after{color:var(--ink-hi)}
+.kf-field input,
+.kf-field textarea{
+  flex:1;
+  min-width:0;
+  padding:4px 0 10px;
+  border:0;
+  background:transparent;
+  color:var(--ink-hi);
+  font:inherit;
+  font-size:clamp(15px,1.6vw,20px);
+  letter-spacing:.06em;
+  line-height:1.6;
+  outline:none;
+}
+.kf-field textarea{resize:vertical;min-height:7.5em;font-size:14px;line-height:1.8;padding-top:6px}
+.kf-field input::placeholder,
+.kf-field textarea::placeholder{color:var(--muted-2);letter-spacing:.1em}
+.kf-field:has([aria-invalid="true"]){border-color:var(--rec)}
+
+/* the honeypot: off-screen rather than display:none, which some bots skip */
+.kf-trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.kf-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.kf-privacy{margin:0;font-size:11.5px;letter-spacing:.06em;color:var(--muted-2);max-width:48ch}
+.kf-send{min-width:150px}
+.kf-send:disabled{opacity:.5;cursor:progress}
+.kf-status{margin:0;min-height:1.6em;font-size:13px;color:var(--muted)}
+.kf-status[data-kind="ok"]{color:var(--ink-hi)}
+.kf-status[data-kind="error"]{color:var(--rec)}
+
+@media (max-width:620px){
+  .kf-row{grid-template-columns:1fr}
+  .kf-send{flex:1 1 100%}
+}
 
 
 

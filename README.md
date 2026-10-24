@@ -291,6 +291,41 @@ done
 Old HTML then keeps requesting old CSS and new HTML requests new CSS, so the two
 are never mismatched.
 
+## Media kit form and the full kit
+
+`/media-kit/` is public. Its form (`#contact`, script `assets/kit-form.js`) posts
+to **`api/kit-request.js`**, a Vercel function, which sends two emails through
+Resend's REST API (no SDK, so still no build step):
+
+1. **To Alan** (`KIT_NOTIFY`): the enquiry, with `reply_to` set to the sender.
+   The subject is tagged `[Partnership]` or `[Inquiry]`, plus `[free email]` when
+   the address is Gmail, Yahoo, Outlook and the like, so those get a look first.
+2. **To the sender**: a "got it" reply carrying a signed link to the full kit.
+   It never echoes their message, so the form can't relay text to a stranger.
+
+The full kit, rate card included, is **`api/kit.js`**, reached at
+`/media-kit/full/?t=TOKEN` (rewrite in `vercel.json`). The token is an HMAC over
+the email and an expiry 14 days out, so only the inbox owner gets a working link
+and nothing static holds the rates. Bad token → 404, expired → 410 with a way back
+to the form. **Rates, stats and the brand list live at the top of `api/kit.js`**;
+update them there.
+
+Bots: a hidden `website` field and a page-load timestamp (`t`, under 3s is a bot).
+Both get a fake success, so they learn nothing. There is no per-sender rate limit;
+add a Vercel Firewall rule on `/api/kit-request` if spam gets through.
+
+Environment variables (Vercel → Settings → Environment Variables):
+
+| Name | What |
+|------|------|
+| `RESEND_API_KEY` | Resend key with sending access |
+| `KIT_SECRET` | 32+ random characters; signs the links. Changing it kills every link already sent |
+| `KIT_FROM` | sender, default `Alan Aziz <kit@alanaziz.com>` — the domain must be verified in Resend |
+| `KIT_NOTIFY` | where enquiries go, default `inquiry@alanaziz.com` |
+
+Local preview of the functions needs `vercel dev`; `python3 -m http.server`
+serves the page but not `/api`.
+
 ## Local preview
 
 ```
