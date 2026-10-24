@@ -39,7 +39,11 @@ module.exports = async (req, res) => {
 
   const domain = email.split('@')[1];
   const free = FREE_DOMAINS.has(domain);
-  const link = `https://alanaziz.com/media-kit/full/?t=${signToken(email)}`;
+  // previews link back to their own deployment, so a test runs end to end
+  const origin = process.env.VERCEL_ENV === 'production' || !process.env.VERCEL_URL
+    ? 'https://alanaziz.com'
+    : `https://${process.env.VERCEL_URL}`;
+  const link = `${origin}/media-kit/full/?t=${signToken(email)}`;
   const expires = fmtDate(Date.now() + KIT_DAYS * 864e5);
   const notify = process.env.KIT_NOTIFY || 'inquiry@alanaziz.com';
 
