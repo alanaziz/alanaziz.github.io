@@ -72,16 +72,15 @@ module.exports = async (req, res) => {
     await sendEmail({
       to: email,
       reply_to: notify,
-      subject: 'Got it — here’s my full media kit',
+      subject: 'Creator’s Media Kit - @alanazizreview',
       html: `<div style="font-family:Menlo,Consolas,monospace;font-size:14px;line-height:1.7;color:#222">
 <p>Hi ${esc(name)},</p>
-<p>Got it, thanks for reaching out. I read every message myself and I’ll get back to you soon.</p>
-<p>In the meantime, here’s my full media kit, rate card included:</p>
+<p>Thanks for reaching out. Here’s my media kit:</p>
 <p><a href="${link}" style="color:#000;font-weight:bold">Open the full media kit →</a></p>
 <p style="color:#666;font-size:12px">This link is for you and works until ${expires}.</p>
 <p>Alan Aziz<br>alanaziz.com · @alanazizreview</p>
 </div>`,
-      text: `Hi ${name},\n\nGot it, thanks for reaching out. I read every message myself and I'll get back to you soon.\n\nIn the meantime, here's my full media kit, rate card included:\n${link}\n\nThis link is for you and works until ${expires}.\n\nAlan Aziz\nalanaziz.com · @alanazizreview`,
+      text: `Hi ${name},\n\nThanks for reaching out. Here's my media kit:\n${link}\n\nThis link is for you and works until ${expires}.\n\nAlan Aziz\nalanaziz.com · @alanazizreview`,
     });
   } catch (err) {
     console.error('kit-request failed', err);
