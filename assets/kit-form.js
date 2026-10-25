@@ -1,14 +1,15 @@
 // Media-kit form: posts to /api/kit-request without leaving the page.
-// Without JS the form still posts (the function answers with JSON), so
-// nothing is lost — it just isn't pretty.
+// Without JS the form still posts, but t stays empty, so the function
+// takes it for a bot and drops it.
 (function () {
   var form = document.getElementById('kit-form');
   if (!form) return;
 
   var status = document.getElementById('kf-status');
   var send = form.querySelector('.kf-send');
-  // when the page loaded; the function treats a sub-3s fill as a bot
-  form.elements.t.value = String(Date.now());
+  // when the form opened; t sends the time since, measured on this device's
+  // clock alone, and the function treats a sub-3s fill as a bot
+  var started = Date.now();
 
   function say(text, kind) {
     status.textContent = text;
@@ -27,6 +28,7 @@
       return say(bad === 'email' ? 'Add a valid work email.' : bad === 'name' ? 'Add your name.' : 'Tell me a little about your brand and what you’re looking to do.', 'error');
     }
 
+    form.elements.t.value = String(Date.now() - started);
     var data = {};
     new FormData(form).forEach(function (v, k) { data[k] = v; });
 
@@ -37,17 +39,18 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-      .then(function (r) { return r.json().then(function (body) { return { ok: r.ok, body: body }; }); })
+      // a crashed or timed-out function answers with an HTML/text page, not JSON
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (body) { return { ok: r.ok, body: body }; }); })
       .then(function (r) {
         if (!r.ok) {
           if (r.body.field && form.elements[r.body.field]) {
             form.elements[r.body.field].setAttribute('aria-invalid', 'true');
             form.elements[r.body.field].focus();
           }
-          throw new Error(r.body.error || 'Your message didn’t go through.');
+          throw new Error(r.body.error || 'Your message didn’t go through. Please email inquiry@alanaziz.com instead.');
         }
         form.reset();
-        form.elements.t.value = String(Date.now());
+        started = Date.now();
         say('Got it! My full media kit is on its way to your inbox. No fluff and talk soon, ya.', 'ok');
       })
       .catch(function (err) {

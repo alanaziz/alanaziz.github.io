@@ -21,9 +21,10 @@ module.exports = async (req, res) => {
 
   const b = req.body || {};
 
-  // Bots: the honeypot is a field people never see; the timer is when the
-  // page loaded. Either one tripping gets a fake success, so a bot learns nothing.
-  if (b.website || !Number(b.t) || Date.now() - Number(b.t) < MIN_FILL_MS) {
+  // Bots: the honeypot is a field people never see; t is how long the form
+  // was open, timed on the visitor's own clock so a wrong device clock can't
+  // trip it. Either one tripping gets a fake success, so a bot learns nothing.
+  if (b.website || !(Number(b.t) >= MIN_FILL_MS)) {
     return res.status(200).json({ ok: true });
   }
 
@@ -45,11 +46,16 @@ module.exports = async (req, res) => {
   const origin = process.env.VERCEL_ENV === 'production' || !process.env.VERCEL_URL
     ? 'https://alanaziz.com'
     : `https://${process.env.VERCEL_URL}`;
-  const link = `${origin}/media-kit/full/?t=${signToken(email)}`;
   const expires = fmtDate(Date.now() + KIT_DAYS * 864e5);
   const notify = process.env.KIT_NOTIFY || 'inquiry@alanaziz.com';
+  // first name only, letters only: the greeting is the one piece of their
+  // text that reaches the inbox they typed, so it can't carry a sentence or a URL
+  const first = (name.split(' ')[0].match(/^[\p{L}\p{M}'’-]{1,24}$/u) || ['there'])[0];
 
   try {
+    // inside the try: signToken throws when KIT_SECRET is missing
+    const link = `${origin}/media-kit/full/?t=${signToken(email)}`;
+
     // Alan's copy first: if only one email gets out, it should be this one.
     await sendEmail({
       to: notify,
@@ -69,20 +75,20 @@ module.exports = async (req, res) => {
       ].join('\n'),
     });
 
-    // Their reply never echoes the message back, so the form can't be
-    // used to send arbitrary text to someone else's inbox.
+    // Their reply never echoes the message back and greets by first name
+    // only, so the form can't be used to send arbitrary text to someone else's inbox.
     await sendEmail({
       to: email,
       reply_to: notify,
       subject: 'Creator’s Media Kit - @alanazizreview',
       html: `<div style="font-family:Menlo,Consolas,monospace;font-size:14px;line-height:1.7;color:#222">
-<p>Hi ${esc(name)},</p>
+<p>Hi ${esc(first)},</p>
 <p>Thanks for reaching out. Here’s my media kit:</p>
 <p><a href="${link}" style="color:#000;font-weight:bold">Open the full media kit →</a></p>
 <p style="color:#666;font-size:12px">This link is for you and works until ${expires}.</p>
 <p>Alan Aziz<br>alanaziz.com · @alanazizreview</p>
 </div>`,
-      text: `Hi ${name},\n\nThanks for reaching out. Here's my media kit:\n${link}\n\nThis link is for you and works until ${expires}.\n\nAlan Aziz\nalanaziz.com · @alanazizreview`,
+      text: `Hi ${first},\n\nThanks for reaching out. Here's my media kit:\n${link}\n\nThis link is for you and works until ${expires}.\n\nAlan Aziz\nalanaziz.com · @alanazizreview`,
     });
   } catch (err) {
     console.error('kit-request failed', err);
