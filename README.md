@@ -310,6 +310,12 @@ and nothing static holds the rates. Bad token → 404, expired → 410 with a wa
 to the form. **Rates, stats and the brand list live at the top of `api/kit.js`**;
 update them there.
 
+The page is six 16:9 slides, the same design as the PDF kit: SF Pro Display
+Regular and Playfair Display Bold Italic only, sizes on one × body scale, and
+spacing on an 8px grid (4px half-steps). Brand logos are shown as white marks,
+so a logo with a solid box behind it needs a cut-out copy, like
+`assets/brand-logo/mr-kar-mono.webp`.
+
 Bots: a hidden `website` field and a page-load timestamp (`t`, under 3s is a bot).
 Both get a fake success, so they learn nothing. There is no per-sender rate limit;
 add a Vercel Firewall rule on `/api/kit-request` if spam gets through.
