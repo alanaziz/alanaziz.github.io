@@ -47,7 +47,8 @@
             form.elements[r.body.field].setAttribute('aria-invalid', 'true');
             form.elements[r.body.field].focus();
           }
-          throw new Error(r.body.error || 'Your message didn’t go through. Please email inquiry@alanaziz.com instead.');
+          // the firewall's 429 sends error as an object, not a sentence
+          throw new Error(typeof r.body.error === 'string' ? r.body.error : 'Your message didn’t go through. Please email inquiry@alanaziz.com instead.');
         }
         form.reset();
         started = Date.now();
