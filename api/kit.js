@@ -154,7 +154,7 @@ function fullKit(email, expires) {
 <section>
   <h2>SOCIALS</h2>
   <div class="stats">${SOCIALS.map((c) => `<a class="stat" href="${c.href}"${c.href[0] === '#' ? '' : ' target="_blank" rel="noopener"'}>
-    ${icon(c.icon, 26)}<b>${c.fig}</b><span class="label">${c.label}</span><span class="go">${c.go} ${c.href[0] === '#' ? '↓' : '↗'}</span>
+    <b>${c.fig}</b><span class="label">${c.label}</span><span class="go">${c.go} ${c.href[0] === '#' ? '↓' : '↗'}</span>
     ${icon(c.icon, 100, 'bg')}</a>`).join('')}</div>
 </section>
 <section id="brands">
