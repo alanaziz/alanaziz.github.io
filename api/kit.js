@@ -150,9 +150,13 @@ td a{text-decoration-color:var(--hair);text-underline-offset:.2em}
 .sub{margin-top:var(--s2);display:flex;align-items:center;flex-wrap:wrap;gap:var(--s2);font-size:var(--x15);letter-spacing:-.015em;line-height:1.2}
 .soc{display:inline-flex;align-items:center;gap:var(--s1)}
 .soc a{display:inline-flex;text-decoration:none}
-.covers{margin-top:var(--s10);display:grid;gap:var(--s2)}
-.covers .lead{font-size:var(--x125)}
-.covers ol{margin:0;padding:0;list-style:none;display:grid;gap:var(--s05);font-size:var(--x15);letter-spacing:-.015em;line-height:1.2;text-transform:uppercase}
+/* contents: rows run down 1–5 · number, section, page · ×1.25, 48px rows (hairline included) */
+.toc{margin-top:var(--s10);max-width:calc(var(--u)*48)} /* 384px: ends before the faded logo starts */
+.toc h2{margin:0 0 var(--s2)}
+.toc ol{margin:0;padding:0;list-style:none;border-top:1px solid var(--hair)}
+.toc a{display:grid;grid-template-columns:var(--s4) minmax(0,1fr) auto;align-items:center;gap:var(--s2);min-height:var(--s6);padding:var(--s1) 0;border-bottom:1px solid var(--hair);text-decoration:none;font-size:var(--x125);line-height:1.2}
+.toc .n,.toc .p{color:var(--soft);font-variant-numeric:tabular-nums}
+.toc a:hover .t{text-decoration:underline;text-underline-offset:.2em}
 .for{position:absolute;left:calc(var(--u)*15);right:calc(var(--u)*16);bottom:calc(var(--u)*16);z-index:2;margin:0;font-size:var(--x08);letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
 .tag{position:absolute;right:0;top:calc(var(--u)*33);z-index:2;background:var(--red);color:#fff;font-size:var(--x15);letter-spacing:-.015em;line-height:1.2;padding:var(--s1) var(--s3) var(--s1) var(--s2)}
 /* the logo sits dead centre in the spotlight, on the back layer */
@@ -190,6 +194,11 @@ td a{text-decoration-color:var(--hair);text-underline-offset:.2em}
 .contact .ico{width:var(--s3);height:var(--s3);padding:var(--s1);box-sizing:content-box;border:1px solid var(--rule);border-radius:var(--s1)}
 a:focus-visible{outline:2px solid var(--red);outline-offset:4px}
 
+/* the block under each title sits centred between the title and the footer.
+   CSS centres it; the script below rounds the offset down to the 8px grid. */
+.body{flex:1;display:grid;align-content:center;gap:var(--s5);min-height:0;scroll-padding-top:var(--u)}
+.body.snapped{align-content:start}
+
 /* link problems: one slide */
 .msg{gap:var(--s3)}
 .msg .go{margin-top:var(--s2)}
@@ -206,7 +215,7 @@ a:focus-visible{outline:2px solid var(--red);outline-offset:4px}
   .cover{padding:var(--s4) var(--px) var(--s10);min-height:520px}
   .cover .in{position:static}
   .brandline{font-size:var(--x25)}
-  .covers{margin-top:var(--s4)}
+  .toc{margin-top:var(--s4);max-width:none}
   .for{position:static;margin-top:var(--s4)}
   .tag{top:auto;bottom:var(--s10)}
   .conf{gap:var(--s2)}
@@ -239,7 +248,30 @@ function page(title, body) {
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 <style>${CSS}</style>
 </head>
-<body><main class="deck">${body}</main></body>
+<body><main class="deck">${body}</main>
+<script>
+// Centre each slide's .body on the 8px grid: half the free space, rounded to the nearest whole --u step.
+// scroll-padding-top carries --u resolved to px. Re-runs on resize and before printing.
+(function () {
+  function snap() {
+    document.querySelectorAll('.slide .body').forEach(function (b) {
+      b.classList.remove('snapped'); b.style.paddingTop = '';
+      var kids = b.children; if (!kids.length) return;
+      var u = parseFloat(getComputedStyle(b).scrollPaddingTop) || 8;
+      var used = kids[kids.length - 1].getBoundingClientRect().bottom - kids[0].getBoundingClientRect().top;
+      var free = b.clientHeight - used;
+      if (free < 2 * u) return;
+      // in grid units, not px, so the offset scales with the slide (screen, phone, 1600px print)
+      b.style.paddingTop = 'calc(var(--u) * ' + Math.round(free / 2 / u) + ')'; b.classList.add('snapped');
+    });
+  }
+  snap();
+  if (document.fonts) document.fonts.ready.then(snap);
+  addEventListener('load', snap); addEventListener('resize', snap); addEventListener('beforeprint', snap);
+  if (matchMedia) matchMedia('print').addListener(snap);
+})();
+</script>
+</body>
 </html>`;
 }
 
@@ -261,27 +293,28 @@ function fullKit(email, expires) {
   <div class="in">
     <h1 class="brandline">ALAN AZIZ <span class="serif">media kit</span></h1>
     <p class="sub"><span>Gadgets &amp; tech creator</span><span class="soc">${SOCIALS.map((s) => `<a href="${s.href}" target="_blank" rel="noopener">${icon(s.name === 'Instagram' ? 'ig' : 'tt', s.name)}</a>`).join('')}<span>@alanazizreview</span></span></p>
-    <div class="covers">
-      <p class="lead">Everything a brand needs in five pages:</p>
+    <nav class="toc" aria-label="Contents">
+      <h2 class="label">Contents</h2>
       <ol>
-        <li>1 → About &amp; socials</li>
-        <li>2 → Brands I’ve worked with</li>
-        <li>3 → What I make</li>
-        <li>4 → Rate card</li>
-        <li>5 → Working together</li>
+        <li><a href="#about"><span class="n">1</span><span class="t">About &amp; socials</span><span class="p">02</span></a></li>
+        <li><a href="#brands"><span class="n">2</span><span class="t">Brands I’ve worked with</span><span class="p">03</span></a></li>
+        <li><a href="#make"><span class="n">3</span><span class="t">What I make</span><span class="p">04</span></a></li>
+        <li><a href="#rates"><span class="n">4</span><span class="t">Rate card</span><span class="p">05</span></a></li>
+        <li><a href="#together"><span class="n">5</span><span class="t">Working together</span><span class="p">06</span></a></li>
       </ol>
-    </div>
+    </nav>
   </div>
   <p class="for">${forLine}</p>
   <span class="tag">${STATS_MONTH}</span>
   ${foot('Cover', 1)}
 </section>
 
-<section class="slide" style="--lx:78%;--ly:40%" aria-label="About and socials">
+<section class="slide" id="about" style="--lx:78%;--ly:40%" aria-label="About and socials">
   <div class="head">
     <h2 class="tbar">About Alan</h2>
     <p class="quote">“I don’t review for myself. I review for the person doing their <em>research</em> before they buy.”</p>
   </div>
+  <div class="body">
   <div class="cols">
     <div class="stack">
       <div>
@@ -302,6 +335,7 @@ function fullKit(email, expires) {
       <ul class="arrows">${NICHE.map(([k, v]) => `<li><b>${k}:</b> ${esc(v)}</li>`).join('')}</ul>
     </div>
   </div>
+  </div>
   ${foot('About &amp; socials', 2)}
 </section>
 
@@ -310,18 +344,21 @@ function fullKit(email, expires) {
     <h2 class="tbar">Brands I’ve Worked With</h2>
     <p class="quote">“Every product here was sent by the brand. Every <em>verdict</em> in the video is mine.”</p>
   </div>
+  <div class="body">
   <div>
     <h3 class="label">${BRANDS.length} brands · real products</h3>
     <div class="logos">${BRANDS.map(([n, f, tall]) => `<span><img${tall ? ' class="tall"' : ''} src="/assets/brand-logo/${f}" alt="${esc(n)}" loading="lazy"></span>`).join('')}</div>
   </div>
+  </div>
   ${foot('Brands', 3)}
 </section>
 
-<section class="slide" style="--lx:82%;--ly:60%" aria-label="What I make">
+<section class="slide" id="make" style="--lx:82%;--ly:60%" aria-label="What I make">
   <div class="head">
     <h2 class="tbar">What I Make</h2>
     <p class="quote">“Mics, lights and cameras tested side by side, same <em>setup</em> every time.”</p>
   </div>
+  <div class="body">
   <div class="cols">
     <div class="tbl"><table class="t-formats">
       <tr><th>Format</th><th>What it is</th></tr>
@@ -332,13 +369,15 @@ function fullKit(email, expires) {
       <ul class="arrows">${HOW_I_REVIEW.map((t) => `<li>${t}</li>`).join('')}</ul>
     </div>
   </div>
+  </div>
   ${foot('What I make', 4)}
 </section>
 
-<section class="slide rate" style="--lx:30%;--ly:30%" aria-label="Rate card">
+<section class="slide rate" id="rates" style="--lx:30%;--ly:30%" aria-label="Rate card">
   <div class="head">
     <h2 class="tbar">Rate Card</h2>
   </div>
+  <div class="body">
   <div class="cols">
     <div class="stack">
       <div class="tbl"><table class="t-rate">
@@ -357,13 +396,15 @@ function fullKit(email, expires) {
       <span class="serif">${esc(pkg.extra)}</span>
     </div>
   </div>
+  </div>
   ${foot('Rate card', 5)}
 </section>
 
-<section class="slide" style="--lx:50%;--ly:62%" aria-label="Working together">
+<section class="slide" id="together" style="--lx:50%;--ly:62%" aria-label="Working together">
   <div class="head">
     <h2 class="tbar">Working Together</h2>
   </div>
+  <div class="body">
   <div>
     <h3 class="label">The roadmap · from brief to report</h3>
     <ol class="road">${STEPS.map(([who, when, t, d], i) => `
@@ -377,6 +418,7 @@ function fullKit(email, expires) {
       <a href="https://wa.me/${CONTACT.whatsapp}" target="_blank" rel="noopener">${icon('wa', 'WhatsApp')}${CONTACT.whatsappLabel}</a>
       <a href="https://${CONTACT.site}/" target="_blank" rel="noopener">${icon('web', 'Website')}${CONTACT.site}</a>
     </div>
+  </div>
   </div>
   ${foot('Working together', 6)}
 </section>`);
@@ -403,3 +445,6 @@ module.exports = (req, res) => {
   if (v.expired) return res.status(410).send(noKit('Link expired', `This link expired on ${fmtDate(v.expires)}. Fill in the form again and a new one will be emailed to you.`));
   return res.status(200).send(fullKit(v.email, v.expires));
 };
+
+// The PDF kit (~/Documents/Claude/media-kit) is generated from this same template.
+module.exports.fullKit = fullKit;
