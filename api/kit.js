@@ -38,7 +38,7 @@ const STEPS = [
   ['SHARE & REPORT', 'The video goes live on Instagram & TikTok on the agreed date. Two weeks later you get a report on the video I made.'],
 ];
 const CONTACT = {
-  email: 'info@alanaziz.com',
+  email: 'inquiry@alanaziz.com',
   whatsapp: '60126472905',
   whatsappLabel: '+60126472905',
 };
