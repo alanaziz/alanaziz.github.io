@@ -1,6 +1,24 @@
 {
+  "redirects": [
+    {
+      "source": "/media-kit",
+      "destination": "/#contact",
+      "permanent": true
+    },
+    {
+      "source": "/media-kit/",
+      "destination": "/#contact",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/media-kit/full", "destination": "/api/kit" },
-    { "source": "/media-kit/full/", "destination": "/api/kit" }
+    {
+      "source": "/media-kit/full",
+      "destination": "/api/kit"
+    },
+    {
+      "source": "/media-kit/full/",
+      "destination": "/api/kit"
+    }
   ]
 }

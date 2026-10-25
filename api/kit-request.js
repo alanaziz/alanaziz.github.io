@@ -1,4 +1,4 @@
-// POST /api/kit-request — the form on /media-kit/ and the homepage.
+// POST /api/kit-request — the "Let's work together" form on the homepage.
 // Forwards the message to Alan, then emails the sender a "got it" reply
 // carrying a signed link to the full kit (rate card included). Only the
 // owner of the inbox can open that link, which is the whole verification.

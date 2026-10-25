@@ -111,7 +111,7 @@ function noKit(heading, text) {
 <div class="top"><a href="/">[ ALAN AZIZ REVIEW ]</a><span class="rec">FULL MEDIA KIT</span></div>
 <header><h1>${heading}</h1></header>
 <p>${text}</p>
-<p><a href="/media-kit/#contact">Request a fresh link on alanaziz.com/media-kit →</a></p>`);
+<p><a href="/#contact">Request a fresh link on alanaziz.com →</a></p>`);
 }
 
 module.exports = (req, res) => {
