@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=1750a1b9">
+<link rel="stylesheet" href="../style.css?v=d6a46904">
 <!-- motion gate: see the note in /index.html -->
 <script>
 (function (d) {
@@ -91,12 +91,15 @@
   <!-- newest first. Each article lives at /newsroom/<slug>/ -->
   <ol class="news-list">
     <li>
-      <a class="news-item" href="/newsroom/apple-iphone-duo-foldable/">
-        <img class="news-thumb" src="/assets/newsroom/iphone-duo-illustration.svg" alt="" width="1200" height="675" loading="lazy">
-        <span class="news-meta">25 OCT 2026 · PHONES</span>
-        <span class="news-title">Apple’s first foldable is here. Should Malaysians care yet?</span>
-        <span class="news-excerpt">The iPhone Duo is on sale at about US$2,000, stock is tight, and reviewers love the hinge but not the camera. No word on Malaysia yet. Here’s what happened.</span>
-        <span class="news-go">READ <span aria-hidden="true">→</span></span>
+      <!-- same card as the article's header -->
+      <a class="news-head news-head--link" href="/newsroom/apple-iphone-duo-foldable/">
+        <span class="news-head-text">
+          <span class="news-meta">25 OCT 2026 · PHONES</span>
+          <span class="news-headline">iPhone Duo: Apple’s first foldable is here, from RM9,499</span>
+          <span class="news-lede">Apple finally made a foldable. The iPhone Duo went on sale on 23 October, and Malaysia was in the first wave. Getting one is the hard part.</span>
+          <span class="news-go">READ <span aria-hidden="true">→</span></span>
+        </span>
+        <img class="news-head-phone" src="/assets/newsroom/iphone-duo-night-sky.png" alt="" width="390" height="551" loading="lazy">
       </a>
     </li>
   </ol>
@@ -104,19 +107,6 @@
   </div>
 
 </main>
-
-<div class="gear-modal" id="gear-modal" hidden>
-  <div class="gear-modal-backdrop" data-gear-close></div>
-  <div class="gear-modal-card" role="dialog" aria-modal="true" aria-labelledby="gear-modal-name">
-    <button class="gear-modal-close" type="button" data-gear-close aria-label="Close">✕</button>
-    <img class="gear-modal-media" id="gear-modal-media" src="" alt="">
-    <h3 class="gear-modal-name" id="gear-modal-name"></h3>
-    <p class="gear-modal-section-label">KEY TAKEAWAYS</p>
-    <ul class="gear-modal-takeaways" id="gear-modal-takeaways"></ul>
-    <p class="gear-modal-section-label">DRAWBACK</p>
-    <p class="gear-modal-drawback" id="gear-modal-drawback"></p>
-  </div>
-</div>
 
 <div class="shell">
 <footer class="foot">
