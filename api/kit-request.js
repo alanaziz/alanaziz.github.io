@@ -1,4 +1,4 @@
-// POST /api/kit-request — the form on /media-kit/.
+// POST /api/kit-request — the form on /media-kit/ and the homepage.
 // Forwards the message to Alan, then emails the sender a "got it" reply
 // carrying a signed link to the full kit (rate card included). Only the
 // owner of the inbox can open that link, which is the whole verification.
@@ -31,6 +31,8 @@ module.exports = async (req, res) => {
   const name = clean(b.name, 80);
   const email = clean(b.email, 200).toLowerCase();
   const subject = clean(b.subject, 150);
+  // the homepage form says so; anything else came from the media kit
+  const page = b.source === 'home' ? 'alanaziz.com' : 'alanaziz.com/media-kit';
   const message = typeof b.message === 'string' ? b.message.trim().slice(0, 4000) : '';
 
   if (!name) return res.status(400).json({ error: 'Add your name.', field: 'name' });
@@ -54,7 +56,7 @@ module.exports = async (req, res) => {
       reply_to: email,
       subject: `[${TOPICS[topic]}]${free ? ' [free email]' : ''} ${name}${subject ? ` — ${subject}` : ''}`,
       text: [
-        `${TOPICS[topic]} enquiry from alanaziz.com/media-kit`,
+        `${TOPICS[topic]} enquiry from ${page}`,
         '',
         `Name:    ${name}`,
         `Email:   ${email}${free ? '  (free mailbox — check who this is)' : `  (company domain: ${domain})`}`,

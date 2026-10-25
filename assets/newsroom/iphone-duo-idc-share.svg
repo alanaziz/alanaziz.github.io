@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="t d">
+  <title id="t">IDC forecast: Apple's share of the foldable market in 2026</title>
+  <desc id="d">44 percent of foldable market value and 31 percent of units.</desc>
+  <rect width="1200" height="520" fill="#222"/>
+  <g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" fill="#F7F7F7">
+    <text x="60" y="78" font-size="16" letter-spacing="4">APPLE'S SHARE OF FOLDABLES, 2026</text>
+    <text x="60" y="106" font-size="13" letter-spacing="3" fill-opacity=".5">IDC FORECAST</text>
+
+    <text x="60" y="190" font-size="14" letter-spacing="3" fill-opacity=".7">MARKET VALUE</text>
+    <rect x="60" y="208" width="1000" height="44" rx="8" fill="#fff" fill-opacity=".06"/>
+    <rect x="60" y="208" width="440" height="44" rx="8" fill="#F7F7F7"/>
+    <text x="520" y="240" font-size="30" font-weight="700">44%</text>
+
+    <text x="60" y="320" font-size="14" letter-spacing="3" fill-opacity=".7">UNITS SOLD</text>
+    <rect x="60" y="338" width="1000" height="44" rx="8" fill="#fff" fill-opacity=".06"/>
+    <rect x="60" y="338" width="310" height="44" rx="8" fill="#FF3B30"/>
+    <text x="390" y="370" font-size="30" font-weight="700">31%</text>
+
+    <text x="60" y="460" font-size="13" letter-spacing="2" fill-opacity=".5">A bigger slice of the money than of the phones: Apple sells fewer, at a higher price.</text>
+  </g>
+</svg>

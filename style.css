@@ -233,23 +233,6 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   position:relative;
   padding:74px 52px 78px;
   margin-top:6px;
-  /* corner brackets, 8 hairlines */
-  background-repeat:no-repeat;
-  background-image:
-    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
-    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
-    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line)),
-    linear-gradient(var(--line),var(--line)),linear-gradient(var(--line),var(--line));
-  background-size:
-    var(--corner) 1px,1px var(--corner),
-    var(--corner) 1px,1px var(--corner),
-    var(--corner) 1px,1px var(--corner),
-    var(--corner) 1px,1px var(--corner);
-  background-position:
-    left top,left top,
-    right top,right top,
-    left bottom,left bottom,
-    right bottom,right bottom;
 }
 
 .hero-grid{
@@ -304,11 +287,90 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
 }
 .hero-copy + .hero-copy{margin-top:15px}
 
+/* proof cards under the hero: Instagram, TikTok, brands. The figure counts
+   up on entrance (motion.js). */
+.hero-cards{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+  margin:54px 0 0;
+}
+
+/* glass cards: a frosted panel in one hairline colour, with a white light
+   that runs round the border on a loop. motion.js adds .is-on only while a
+   card is on screen, so off-screen cards don't animate; reduced motion
+   keeps the plain hairline. */
+@property --spin{syntax:'<angle>';inherits:false;initial-value:0deg}
+@keyframes glass-spin{to{--spin:360deg}}
+.glass{
+  --glow-c:rgba(255,255,255,.08);
+  border:1.5px solid transparent;
+  border-radius:22px;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.09),rgba(255,255,255,.02) 45%,rgba(0,0,0,.25)) padding-box,
+    linear-gradient(#262626,#262626) padding-box,
+    conic-gradient(from var(--spin),var(--line) 0 70%,rgba(255,255,255,.95) 85%,var(--line) 100%) border-box;
+  box-shadow:0 0 34px -10px var(--glow-c),0 18px 40px -18px rgba(0,0,0,.8);
+}
+.motion .glass.is-on{animation:glass-spin 4s linear infinite}
+/* the cards in a row start at different points, so the lights don't march in step */
+.motion .glass.is-on:nth-child(2){animation-delay:-1.3s}
+.motion .glass.is-on:nth-child(3){animation-delay:-2.6s}
+.motion .glass.is-on:nth-child(4){animation-delay:-.6s}
+.hero-card{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  min-width:0;
+  padding:22px 22px 18px;
+  transition:box-shadow .4s ease,transform .5s var(--ease-out);
+}
+.hero-card:hover,
+.hero-card:focus-visible{
+  transform:translateY(-5px);
+  box-shadow:0 0 48px -6px var(--glow-c),0 24px 48px -18px rgba(0,0,0,.85);
+}
+.hero-card-icon{color:var(--ink-hi);margin-bottom:10px}
+.hero-card-fig{
+  font-size:clamp(1.9rem,3vw,2.8rem);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.01em;
+  color:var(--ink-hi);
+  font-variant-numeric:tabular-nums;
+}
+.hero-card-label{
+  font-size:10.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted-2);
+}
+.hero-card-go{
+  margin-top:auto;
+  padding-top:12px;
+  border-top:1px solid var(--line-soft);
+  font-size:10.5px;
+  letter-spacing:.14em;
+  color:var(--muted-2);
+  transition:color .3s ease;
+}
+.hero-card:hover .hero-card-go,
+.hero-card:focus-visible .hero-card-go{color:var(--ink-hi)}
+
+.hero-stance{
+  margin:18px 0 0;
+  max-width:52ch;
+  font-size:12.5px;
+  line-height:1.7;
+  color:var(--muted);
+}
+
 .hero-actions{
   display:flex;
   flex-wrap:wrap;
   gap:24px;
-  margin-top:38px;
+  margin-top:34px;
 }
 .hero-actions .btn{min-width:200px}
 
@@ -791,6 +853,137 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   color:var(--muted);
 }
 
+/* ---------- newsroom ---------- */
+
+.news-list{
+  margin:0;
+  padding:0 0 72px;
+  list-style:none;
+  display:grid;
+  gap:18px;
+  max-width:860px;
+}
+.news-item{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--panel-2);
+  box-shadow:
+    7px 6px 14px 0 rgba(0,0,0,.55),
+    -4px -4px 10px 0 rgba(255,255,255,.06);
+  transition:border-color .3s ease,transform .5s var(--ease-out);
+}
+.news-item:hover,
+.news-item:focus-visible{border-color:var(--ink-hi);transform:translateY(-3px)}
+.news-meta{margin:0;font-size:10.5px;letter-spacing:.14em;color:var(--rec)}
+.news-meta a:hover{color:var(--ink-hi)}
+.news-title{font-size:clamp(1.1rem,1.8vw,1.5rem);font-weight:700;line-height:1.3;color:var(--ink-hi)}
+.news-excerpt{font-size:13px;line-height:1.75;color:var(--muted)}
+.news-go{font-size:11px;letter-spacing:.16em;color:var(--muted-2)}
+.news-item:hover .news-go{color:var(--ink-hi)}
+
+/* one readable column, same mono voice as the rest of the site */
+.news-article{max-width:720px;padding:48px 0 80px}
+.news-back{display:inline-block;margin-bottom:28px;font-size:11px;letter-spacing:.16em;color:var(--muted)}
+.news-back:hover{color:var(--ink-hi)}
+.news-headline{
+  margin:14px 0 0;
+  font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:800;
+  line-height:1.1;
+  color:var(--ink-hi);
+}
+.news-lede{margin:22px 0 0;font-size:16px;line-height:1.75;color:var(--ink)}
+.news-article h2{
+  margin:44px 0 0;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--line-soft);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--ink-hi);
+}
+.news-article p,
+.news-article li{font-size:14px;line-height:1.85;color:var(--muted)}
+.news-article ul{padding-left:20px}
+.news-article li + li{margin-top:6px}
+.news-article li::marker{color:var(--rec)}
+.news-figure{margin:32px 0 0}
+.news-figure img,
+.news-thumb{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid var(--line-soft);
+  border-radius:14px;
+}
+.news-figure figcaption{margin-top:10px;font-size:11.5px;letter-spacing:.04em;color:var(--muted-2)}
+.news-cta{
+  margin:48px 0 0;
+  padding:24px;
+  border:1px solid var(--line);
+  border-radius:14px;
+}
+.news-cta p{margin:0 0 18px;color:var(--ink)}
+.news-source{margin-top:36px;font-size:12px !important;color:var(--muted-2) !important}
+.news-source a{text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- homepage: what I cover ---------- */
+
+.cover{padding:8px 0 56px}
+.cover-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
+  padding-top:24px;
+}
+.cover-card{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:22px;
+  transition:box-shadow .4s ease,transform .5s var(--ease-out);
+}
+.cover-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 0 48px -6px var(--glow-c),0 24px 48px -18px rgba(0,0,0,.85);
+}
+.cover-card h3{margin:0;font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--ink-hi)}
+.cover-card p{margin:0;font-size:12.5px;line-height:1.7;color:var(--muted)}
+
+/* ---------- homepage: selected work ---------- */
+
+.home-work{padding:8px 0 56px;scroll-margin-top:var(--head-h,92px)}
+/* autoplaying tiles: muted on loop, no play disc; a tap toggles sound and
+   the chip in the corner says which state it's in (assets/kit-work.js) */
+.kit-work-clip.is-auto .kit-work-play::before{display:none}
+.kit-sound{
+  position:absolute;top:10px;right:10px;
+  display:grid;place-items:center;
+  width:32px;height:32px;
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:50%;
+  background:rgba(0,0,0,.45);
+  color:var(--ink-hi);
+}
+.kit-sound svg{width:15px;height:15px}
+.kit-sound .on{display:none}
+.is-unmuted .kit-sound{background:var(--ink-hi);color:#111;border-color:var(--ink-hi)}
+.is-unmuted .kit-sound .on{display:block}
+.is-unmuted .kit-sound .off{display:none}
+
+/* ---------- homepage: contact ---------- */
+
+.home-contact{padding:16px 0 72px;scroll-margin-top:var(--head-h,92px)}
+.home-contact .cta-title{margin:0 0 6px;font-size:clamp(1.8rem,4.4vw,3.6rem);line-height:1;color:var(--ink-hi)}
+.home-contact .kit-note--line{max-width:none}
+@media (min-width:561px){.home-contact .kit-note--line{white-space:nowrap}}
+.home-contact .cta-arrow{vertical-align:-.08em;width:.7em;height:.7em}
+
 /* ---------- collaborations ---------- */
 
 .collab{padding:8px 0 64px}
@@ -1272,7 +1465,9 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
 .kf-trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 .kf-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-.kf-privacy{margin:0;font-size:11.5px;letter-spacing:.06em;color:var(--muted-2);max-width:48ch}
+.kf-privacy{margin:0;font-size:11.5px;letter-spacing:.06em;color:var(--muted-2)}
+/* one line beside SEND; it wraps under it on phones */
+@media (min-width:621px){.kf-privacy{white-space:nowrap}}
 .kf-send{min-width:150px}
 .kf-send:disabled{opacity:.5;cursor:progress}
 .kf-status{margin:0;min-height:1.6em;font-size:13px;color:var(--muted)}
@@ -1296,6 +1491,19 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
      here instead of at the 980px breakpoint the other pages use */
   .head--full{flex-wrap:wrap;gap:18px}
   .head--full .nav{order:3;width:100%;margin:0;gap:26px}
+}
+
+/* wide screens: the Instagram & TikTok icons sit right beside the wordmark
+   and the text links (HOME first) go to the right. The nav's children join
+   the header row (display:contents) so they can be reordered without
+   touching the markup on every page. */
+@media (min-width:1181px){
+  .head--full{gap:10px}
+  .head--full .wordmark{margin-right:18px}
+  .head--full .nav{display:contents}
+  .head--full .nav-icon{order:1}
+  .head--full .head-home{order:2;margin-left:auto}
+  .head--full .nav a:not(.nav-icon){order:3}
 }
 
 @media (max-width:980px){
@@ -1351,10 +1559,24 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   .head{gap:12px;padding:20px 0}
   .wordmark{gap:10px;min-width:0}
 
+  /* two rows, not three: the wordmark already links home, so HOME goes, and
+     the nav's children join the header row directly (display:contents) —
+     the icons sit up beside the wordmark, the ::after is a full-width row
+     break, and the three text links share the second row */
+  .head--full .head-home{display:none}
+  .head--full .nav{display:contents}
+  .head--full .wordmark{margin-right:auto}
+  .head--full .nav-icon{order:1}
+  .head--full::after{content:"";order:2;flex-basis:100%;height:0;margin-top:-12px}
+  .head--full .nav a:not(.nav-icon){order:3;flex:1 1 auto;justify-content:center;padding:10px 12px}
+
   .hero{padding:36px 18px 42px}
   .hero-name{flex-wrap:wrap}
   .hero h1{white-space:normal}
   .hero-copy{font-size:13.5px;line-height:1.8}
+  .hero-cards{grid-template-columns:1fr;gap:16px;margin-top:36px}
+  .cover-grid{grid-template-columns:1fr 1fr}
+
   .hero-actions{gap:14px}
   .hero-actions .btn{min-width:0;flex:1 1 100%;gap:16px}
 
@@ -1397,6 +1619,8 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
 
 @media (max-width:380px){
   .nav{column-gap:14px;font-size:11.5px}
+  /* the brackets go so both icons still fit beside the wordmark */
+  .head--full .wordmark-text span{display:none}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -1480,7 +1704,7 @@ html.boot-on{overflow:hidden}
   letter-spacing:.2em;
   cursor:pointer;
   clip-path:inset(0 0 0 0);
-  transition:clip-path .7s var(--ease-io);
+  transition:clip-path .5s var(--ease-io);
 }
 /* the shutter: the frame closes to a slit across the middle, then it's gone */
 .boot.is-out{clip-path:inset(50% 0 50% 0)}
@@ -1527,25 +1751,12 @@ html.boot-on{overflow:hidden}
   letter-spacing:.32em;
   white-space:nowrap;
   clip-path:inset(0 100% 0 0);
-  animation:type-on .9s steps(26) .45s forwards;
+  animation:type-on .55s steps(26) .15s forwards;
 }
 .boot-line em{font-style:normal;color:var(--rec)}
 @keyframes type-on{to{clip-path:inset(0 0 0 0)}}
 
 /* ---------- hero entrance ---------- */
-
-/* corner brackets draw outward from each corner */
-.motion .hero{
-  background-size:0 1px,1px 0,0 1px,1px 0,0 1px,1px 0,0 1px,1px 0;
-  transition:background-size 1s var(--ease-out) .2s;
-}
-.motion .hero.is-in{
-  background-size:
-    var(--corner) 1px,1px var(--corner),
-    var(--corner) 1px,1px var(--corner),
-    var(--corner) 1px,1px var(--corner),
-    var(--corner) 1px,1px var(--corner);
-}
 
 /* each word is a mask; its letters rise out of it, staggered */
 .motion .hero h1 .w{
@@ -1593,6 +1804,21 @@ html.boot-on{overflow:hidden}
 }
 .motion .hero.is-in .hero-copy{color:var(--muted);transform:none}
 .motion .hero.is-in .hero-actions{opacity:1;transform:none}
+
+/* the cards rise in one after another, then the figures count up (motion.js) */
+.motion .hero-card,
+.motion .hero-stance{
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .7s ease,transform .8s var(--ease-out),border-color .3s ease,box-shadow .4s ease;
+}
+.motion .hero-card{transition-delay:calc(var(--i,0) * 90ms + .95s),calc(var(--i,0) * 90ms + .95s),0s,0s}
+.motion .hero-stance{transition-delay:1.15s}
+.motion .hero.is-in .hero-card,
+.motion .hero.is-in .hero-stance{opacity:1;transform:none}
+/* once in, hover lifts again without the entrance delay */
+.motion .hero.is-in .hero-card:hover,
+.motion .hero.is-in .hero-card:focus-visible{transform:translateY(-3px);transition-delay:0s}
 
 /* the reel opens like a shutter, then leans toward the cursor */
 .motion .hero .highlight{

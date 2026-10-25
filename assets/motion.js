@@ -114,12 +114,33 @@
     }
   }
 
+  // the readout figures roll up from zero to the value in the markup, keeping
+  // its decimals and suffix (39.8K, 552.5K, 20); the markup stays the source
+  var figs = (hero ? $$('.hero-card-fig', hero) : []).map(function (dd, k) {
+    dd.parentNode.style.setProperty('--i', k);
+    var m = dd.textContent.trim().match(/^([\d.]+)(.*)$/);
+    return m && { el: dd, to: parseFloat(m[1]), dp: (m[1].split('.')[1] || '').length, unit: m[2] };
+  }).filter(Boolean);
+  function setFig(f, v) { f.el.textContent = v.toFixed(f.dp) + f.unit; }
+  function countUp() {
+    var t0 = performance.now();
+    (function step(now) {
+      var t = clamp((now - t0) / 1400, 0, 1);
+      figs.forEach(function (f) { setFig(f, f.to * (1 - Math.pow(1 - t, 4))); });
+      if (t < 1) requestAnimationFrame(step);
+    })(t0);
+  }
+
   function startHero() {
     if (!hero) return;
     // two frames so the hidden state is painted before the transition starts
     requestAnimationFrame(function () {
       requestAnimationFrame(function () { hero.classList.add('is-in'); });
     });
+    if (!calm) {
+      figs.forEach(function (f) { setFig(f, 0); });
+      setTimeout(countUp, 950);
+    }
   }
 
   /* ---------- boot intro ---------- */
@@ -153,9 +174,11 @@
         d.classList.remove('boot-on');
         measureHead();
         onScroll();
-      }, 720);
+      }, 520);
     }
-    setTimeout(end, 2300);
+    // kept short: brands opening the link should be looking at the page, not
+    // the intro, within about a second and a half
+    setTimeout(end, 1000);
     boot.addEventListener('click', end);
     addEventListener('keydown', end, { once: true });
   }
@@ -281,6 +304,14 @@
         }, { threshold: .2 }).observe(rv);
       }
     }
+    // the hero's SHOWREEL card: the anchor scrolls here, and since that click
+    // is a user gesture the reel can start with its sound on
+    $$('[data-reel-play]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (calm) { play(rv); return; }
+        if (rv.muted && soundBtn) soundBtn.click();
+      });
+    });
   }
 
   /* ---------- gear wall ---------- */
@@ -349,6 +380,16 @@
       var r = cta.getBoundingClientRect();
       cta.style.setProperty('--f', clamp((innerHeight - r.top) / (innerHeight * .75), 0, 1).toFixed(3));
     });
+  }
+
+  /* ---------- glass cards ---------- */
+
+  // the light round each card's border only runs while the card is on screen
+  if (!calm && 'IntersectionObserver' in window) {
+    var glassIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('is-on', e.isIntersecting); });
+    });
+    $$('.glass').forEach(function (g) { glassIO.observe(g); });
   }
 
   /* ---------- go ---------- */
