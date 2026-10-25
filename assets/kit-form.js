@@ -51,7 +51,7 @@
         say('Got it! My full media kit is on its way to your inbox. No fluff and talk soon, ya.', 'ok');
       })
       .catch(function (err) {
-        say(err.message && err.message !== 'Failed to fetch' ? err.message : 'Couldn’t reach the server. Please email inquiry@alanaziz.com instead.', 'error');
+        say(err.message && err.message !== 'Failed to fetch' ? err.message : 'Couldn’t reach the server. Please email info@alanaziz.com instead.', 'error');
       })
       .then(function () { send.disabled = false; });
   });

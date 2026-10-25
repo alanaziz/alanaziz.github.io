@@ -47,7 +47,7 @@ module.exports = async (req, res) => {
     : `https://${process.env.VERCEL_URL}`;
   const link = `${origin}/media-kit/full/?t=${signToken(email)}`;
   const expires = fmtDate(Date.now() + KIT_DAYS * 864e5);
-  const notify = process.env.KIT_NOTIFY || 'inquiry@alanaziz.com';
+  const notify = process.env.KIT_NOTIFY || 'info@alanaziz.com';
 
   try {
     // Alan's copy first: if only one email gets out, it should be this one.
@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
     });
   } catch (err) {
     console.error('kit-request failed', err);
-    return res.status(502).json({ error: 'Your message didn’t go through. Please email inquiry@alanaziz.com instead.' });
+    return res.status(502).json({ error: 'Your message didn’t go through. Please email info@alanaziz.com instead.' });
   }
 
   return res.status(200).json({ ok: true });

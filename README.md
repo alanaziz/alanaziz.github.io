@@ -321,7 +321,7 @@ Environment variables (Vercel → Settings → Environment Variables):
 | `RESEND_API_KEY` | Resend key with sending access |
 | `KIT_SECRET` | 32+ random characters; signs the links. Changing it kills every link already sent |
 | `KIT_FROM` | sender, default `Alan Aziz <kit@alanaziz.com>` — the domain must be verified in Resend |
-| `KIT_NOTIFY` | where enquiries go, default `inquiry@alanaziz.com` |
+| `KIT_NOTIFY` | where enquiries go, default `info@alanaziz.com` |
 
 Local preview of the functions needs `vercel dev`; `python3 -m http.server`
 serves the page but not `/api`.
