@@ -1,13 +1,10 @@
-// GET / with Accept: text/markdown (rewritten here by vercel.json).
-// A Markdown version of the homepage for agents; browsers still get index.html.
-// Keep in step with index.html when its copy changes.
+// Markdown negotiation for the homepage. Runs before static files, so
+// GET / with Accept: text/markdown gets this body; everything else continues
+// to index.html. Keep the copy in step with index.html.
 
-module.exports = (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
-  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-  res.setHeader('Vary', 'Accept');
-  res.end(`# Alan Aziz Review
+export const config = { matcher: '/' };
+
+const MARKDOWN = ``# Alan Aziz Review
 
 Gadgets & tech creator based in Kuala Lumpur. Instagram & TikTok: [@alanazizreview](https://www.instagram.com/alanazizreview/) · [TikTok](https://www.tiktok.com/@alanazizreview).
 
@@ -34,5 +31,18 @@ Tell me about your brand and I'll send my media kit to your inbox: [partnership 
 - [Newsroom](https://alanaziz.com/newsroom/)
 - [llms.txt](https://alanaziz.com/llms.txt)
 - [Sitemap](https://alanaziz.com/sitemap.xml)
-`);
-};
+`;
+
+export default function middleware(request) {
+  if (!/text\/markdown/i.test(request.headers.get('accept') || '')) {
+    return new Response(null, { headers: { 'x-middleware-next': '1' } });
+  }
+  return new Response(MARKDOWN, {
+    status: 200,
+    headers: {
+      'Content-Type': 'text/markdown; charset=utf-8',
+      'Cache-Control': 'public, max-age=0, must-revalidate',
+      'Vary': 'Accept',
+    },
+  });
+}
