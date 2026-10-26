@@ -6,6 +6,9 @@
 
 - [Home](https://alanaziz.com/): who Alan is, brands he has reviewed, and the contact form
 - [Newsroom](https://alanaziz.com/newsroom/): tech news write-ups
+- [About](https://alanaziz.com/about/): who Alan is and how he reviews
+- [Contact](https://alanaziz.com/contact/): how to reach him for partnerships
+- [Privacy](https://alanaziz.com/privacy/): what the site collects
 - [My Gear](https://alanaziz.com/gear/): the gear Alan shoots with
 
 ## Brands

@@ -27,6 +27,9 @@ Tell me about your brand and I'll send my media kit to your inbox: [partnership 
 
 ## Pages
 
+- [About](https://alanaziz.com/about/)
+- [Contact](https://alanaziz.com/contact/)
+- [Privacy](https://alanaziz.com/privacy/)
 - [Gear](https://alanaziz.com/gear/)
 - [Newsroom](https://alanaziz.com/newsroom/)
 - [llms.txt](https://alanaziz.com/llms.txt)

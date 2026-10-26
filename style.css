@@ -1189,6 +1189,9 @@ html{scroll-padding-top:calc(var(--head-h, 92px) + 16px)}
   color:var(--muted-2);
 }
 
+.foot-links{display:flex;gap:18px}
+.foot-links a:hover,.foot-links a:focus-visible{color:var(--ink-hi)}
+
 /* ---------- media kit ---------- */
 
 /* shared 8-hairline bracket frame, factored out for new components rather
