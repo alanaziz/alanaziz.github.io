@@ -4,7 +4,7 @@
 
 export const config = { matcher: '/' };
 
-const MARKDOWN = ``# Alan Aziz Review
+const MARKDOWN = `# Alan Aziz Review
 
 Gadgets & tech creator based in Kuala Lumpur. Instagram & TikTok: [@alanazizreview](https://www.instagram.com/alanazizreview/) · [TikTok](https://www.tiktok.com/@alanazizreview).
 
