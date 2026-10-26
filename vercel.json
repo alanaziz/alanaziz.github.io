@@ -21,6 +21,17 @@
       "destination": "/api/kit"
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/api/home-md"
+    },
+    {
       "source": "/((?!api/).*)",
       "has": [
         {
@@ -30,6 +41,17 @@
         }
       ],
       "destination": "/api/not-found"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/",
+      "headers": [
+        {
+          "key": "Vary",
+          "value": "Accept"
+        }
+      ]
     }
   ]
 }
