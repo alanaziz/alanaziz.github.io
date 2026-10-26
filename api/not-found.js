@@ -10,9 +10,6 @@ module.exports = (req, res) => {
 
 The page you requested doesn't exist on alanaziz.com. It may have moved or the URL may be mistyped.
 
-- [Home](https://alanaziz.com/)
-- [Newsroom](https://alanaziz.com/newsroom/)
-- [Gear reviews](https://alanaziz.com/gear/)
-- [Sitemap](https://alanaziz.com/sitemap.xml)
+Find what's on the site in [llms.txt](https://alanaziz.com/llms.txt).
 `);
 };
