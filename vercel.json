@@ -19,6 +19,17 @@
     {
       "source": "/media-kit/full/",
       "destination": "/api/kit"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "has": [
+        {
+          "type": "header",
+          "key": "accept",
+          "value": ".*text/markdown.*"
+        }
+      ],
+      "destination": "/api/not-found"
     }
   ]
 }
