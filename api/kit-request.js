@@ -81,14 +81,14 @@ module.exports = async (req, res) => {
       to: email,
       reply_to: notify,
       subject: 'Creator’s Media Kit - @alanazizreview',
-      html: `<div style="font-family:Menlo,Consolas,monospace;font-size:14px;line-height:1.7;color:#222">
-<p>Hi ${esc(first)},</p>
-<p>Thanks for reaching out. Here’s my media kit:</p>
-<p><a href="${link}" style="color:#000;font-weight:bold">Download the full media kit (PDF) →</a></p>
-<p style="color:#666;font-size:12px">This link is for you and works until ${expires}.</p>
-<p>Alan Aziz<br>alanaziz.com · @alanazizreview</p>
+      html: `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.7;color:#222;max-width:520px">
+<p style="margin:0 0 16px">Hi ${esc(first)},</p>
+<p style="margin:0 0 20px">Thanks for reaching out. Here’s my media kit, and I’m looking forward to working together.</p>
+<p style="margin:0 0 24px"><a href="${link}" style="display:inline-block;background:#111;color:#fff;font-weight:600;text-decoration:none;padding:12px 22px;border-radius:999px">Download the media kit (PDF) →</a></p>
+<p style="margin:0 0 24px;color:#555;font-size:13px">p/s: This link is strictly confidential and valid until ${expires}.</p>
+<p style="margin:0">Godspeed,<br><strong>@alanazizreview</strong></p>
 </div>`,
-      text: `Hi ${first},\n\nThanks for reaching out. Here's my media kit (PDF download):\n${link}\n\nThis link is for you and works until ${expires}.\n\nAlan Aziz\nalanaziz.com · @alanazizreview`,
+      text: `Hi ${first},\n\nThanks for reaching out. Here's my media kit, and I'm looking forward to working together.\n\nDownload the media kit (PDF):\n${link}\n\np/s: This link is strictly confidential and valid until ${expires}.\n\nGodspeed,\n@alanazizreview`,
     });
   } catch (err) {
     console.error('kit-request failed', err);
