@@ -84,11 +84,11 @@ module.exports = async (req, res) => {
       html: `<div style="font-family:Menlo,Consolas,monospace;font-size:14px;line-height:1.7;color:#222">
 <p>Hi ${esc(first)},</p>
 <p>Thanks for reaching out. Here’s my media kit:</p>
-<p><a href="${link}" style="color:#000;font-weight:bold">Open the full media kit →</a></p>
+<p><a href="${link}" style="color:#000;font-weight:bold">Download the full media kit (PDF) →</a></p>
 <p style="color:#666;font-size:12px">This link is for you and works until ${expires}.</p>
 <p>Alan Aziz<br>alanaziz.com · @alanazizreview</p>
 </div>`,
-      text: `Hi ${first},\n\nThanks for reaching out. Here's my media kit:\n${link}\n\nThis link is for you and works until ${expires}.\n\nAlan Aziz\nalanaziz.com · @alanazizreview`,
+      text: `Hi ${first},\n\nThanks for reaching out. Here's my media kit (PDF download):\n${link}\n\nThis link is for you and works until ${expires}.\n\nAlan Aziz\nalanaziz.com · @alanazizreview`,
     });
   } catch (err) {
     console.error('kit-request failed', err);

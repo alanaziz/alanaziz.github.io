@@ -1,9 +1,15 @@
 // GET /media-kit/full/?t=TOKEN (rewritten here by vercel.json).
-// The full kit, rate card included, rendered only for a valid signed link.
+// A valid signed link downloads the PDF kit (rate card included); add &view=1
+// to see the HTML page the PDF is rendered from. Re-export the PDF to
+// api/_lib/ whenever the rates or stats below change.
 // Rates live in this file, not in any static page, so there's no URL to
 // guess. Update PACKAGES, ADD_ONS and SOCIALS here when they change.
 
+const fs = require('fs');
+const path = require('path');
 const { verifyToken, esc, fmtDate } = require('./_lib/shared');
+
+const PDF = path.join(__dirname, '_lib', 'alanaziz-media-kit.pdf');
 
 const STATS_AS_OF = '25 Oct 2026';
 // Cards follow the homepage proof cards, Instagram first; keep the figures in step with index.html.
@@ -207,5 +213,8 @@ module.exports = (req, res) => {
   const v = verifyToken(req.query.t);
   if (!v) return res.status(404).send(noKit('LINK NOT FOUND', 'This media kit link isn’t valid. It may have been copied incompletely.'));
   if (v.expired) return res.status(410).send(noKit('LINK EXPIRED', `This link expired on ${fmtDate(v.expires)}. Fill in the form again and a new one will be emailed to you.`));
-  return res.status(200).send(fullKit(v.email, v.expires));
+  if (req.query.view) return res.status(200).send(fullKit(v.email, v.expires));
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename="alanaziz-media-kit.pdf"');
+  return res.status(200).send(fs.readFileSync(PDF));
 };
