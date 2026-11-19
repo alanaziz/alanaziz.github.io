@@ -9,6 +9,16 @@
       "source": "/media-kit/",
       "destination": "/#contact",
       "permanent": true
+    },
+    {
+      "source": "/newsroom",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/newsroom/:path*",
+      "destination": "/",
+      "permanent": false
     }
   ],
   "rewrites": [
