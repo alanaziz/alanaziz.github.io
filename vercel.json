@@ -16,7 +16,7 @@
       "permanent": false
     },
     {
-      "source": "/newsroom/:path*",
+      "source": "/newsroom/(.*)",
       "destination": "/",
       "permanent": false
     }
